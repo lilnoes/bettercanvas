@@ -60,9 +60,67 @@
                 pointBorderColor: "red"
             }]
         };
-        const options = {scales: {y: {min: 0, max: 100}}}
-        const config = {type: "line", data: data, options: options};
+        const options = { scales: { y: { min: 0, max: 100 } } }
+        const config = { type: "line", data: data, options: options };
         const chart = new Chart(document.getElementById("gradesChart"), config);
+    </script>
+
+    <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] block" id="coursesmodal">
+        <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
+        <div class="overflow-y-scroll w-full h-full">
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+
+            <div class="bg-white m-3 p-3 rounded-xl">
+                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                <p>Course shortword</p>
+            </div>
+        </div>
+    </div>
+    <button class="float-right" id="togglebutton">toggle</button>
+    <script>
+        const toggle = document.getElementById("togglebutton");
+        const coursesModal = document.getElementById("coursesmodal");
+        toggle.addEventListener("click", (evt) => {
+            coursesModal.style.display = coursesModal.style.display == "block" ? "none" : "block";
+        });
     </script>
 </h:body>
 
