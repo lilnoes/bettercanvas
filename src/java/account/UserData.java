@@ -5,7 +5,6 @@
  */
 package account;
 
-import com.sun.rowset.CachedRowSetImpl;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -14,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.sql.rowset.CachedRowSet;
 import org.apache.derby.client.am.DateTime;
 import utils.DatabaseUtils;
 import utils.UserUtils;
@@ -23,8 +23,8 @@ import utils.UserUtils;
  * @author leon
  */
 @SessionScoped
-@ManagedBean(name = "registrationData")
-public class RegistrationData {
+@ManagedBean(name = "userData")
+public class UserData {
 
     private String name = "";
     private String surName = "";
