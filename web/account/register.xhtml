@@ -47,7 +47,6 @@
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="email"
                             value="#{registrationData.email}"
                             validator="#{validators.validateEmail}">
-                            <f:validateLength maximum="30" />
                             <f:ajax render="emailmessage"/>
                         </h:inputText>
                         <h:message id="emailmessage" for="email" class="text-white text-sm relative top-[-5px]" />
@@ -57,15 +56,17 @@
                         <label for="birthdate" class="block text-white font-bold">Birthdate
                         </label>
                         <input class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" type="date"
-                               id="birthdate" value="#{registrationData.birthDate}"/>
+                               id="birthdate" value="#{registrationData.birthDate}" max="#{localConfig.minDate}"/>
                         <h:message for="birthdate" />
                     </div>
 
                     <div class="text-red-700 mt-3">
                         <label for="country" class="block text-white font-bold">Country
                         </label>
-                        <input class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" type="text"
-                               id="country" value="#{registrationData.country}"/>
+                        <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" type="text"
+                                         id="country" value="#{registrationData.country}">
+                            <f:selectItems value="#{globalConfig.countries}" var="item"/>
+                        </h:selectOneMenu>
                         <h:message for="country" />
                     </div>
 
