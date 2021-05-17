@@ -31,4 +31,11 @@ public class Validators {
         if (!res)
             throw new ValidatorException(new FacesMessage("email should belong to iuc.edu.tr"));
     }
+    
+    public void validatePasswordConfirmation(FacesContext context, UIComponent component, Object confpassword) {
+        RegistrationData data = (RegistrationData)context.getExternalContext().getSessionMap().get("registrationData");
+        if(data == null) return;
+        if(data.getNewPassword().equals(confpassword)) return;
+        throw new ValidatorException(new FacesMessage("Passwords should match"));
+    }
 }

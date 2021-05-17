@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import models.User;
 import org.apache.derby.client.am.DateTime;
 
 /**
@@ -17,9 +18,10 @@ import org.apache.derby.client.am.DateTime;
  * @author leon
  */
 @ManagedBean(name = "localConfig")
-@RequestScoped
+@SessionScoped
 public class LocalConfig {
     private String minDate;
+    public User user;
 
     public String getMinDate() {
         if(minDate != null) return minDate;
