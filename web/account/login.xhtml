@@ -24,14 +24,14 @@
                         <label for="email" class="block text-white font-bold">Email
                         </label>
                         <h:inputText required="true" class="w-full h-9 text-xl text-black" id="email"
-                                     value="#{registrationData.email}" requiredMessage="Email is required"/>
+                                     value="#{userData.email}" requiredMessage="Email is required"/>
                         <h:message for="email" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
                     <div class="text-red-700">
                         <h:outputLabel for="password" class="block text-white font-bold" value="Password" />
                         <h:inputSecret required="true" class="w-full h-9 text-xl text-black" id="password"
-                                       value="#{registrationData.newPassword}" requiredMessage="Password is required"/>
+                                       value="#{userData.newPassword}" requiredMessage="Password is required"/>
                         <h:message for="password" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
@@ -46,7 +46,7 @@
                         <div class="float-right">
                             <h:commandLink
                                 class="float-right p-2 px-24 bg-white text-red-800 font-bold text-3xl rounded-lg border-0 mt-1"
-                                value="Login" action="#{registrationData.login}">
+                                value="Login" action="#{userData.login}">
                             </h:commandLink>
                         </div>
                         <div class="clear-both"></div>

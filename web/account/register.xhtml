@@ -26,7 +26,7 @@
                         <label for="name" class="block text-white font-bold">Name
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="name"
-                            validatorMessage="Name should not exceed 30 characters" value="#{registrationData.name}">
+                            validatorMessage="Name should not exceed 30 characters" value="#{userData.name}">
                             <f:validateLength maximum="30" />
                         </h:inputText>
                         <h:message id="namemessage" for="name" class="text-white text-sm relative top-[-5px]" />
@@ -37,7 +37,7 @@
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="surname"
                             validatorMessage="Surname should not exceed 30 characters"
-                            value="#{registrationData.surName}">
+                            value="#{userData.surName}">
                             <f:validateLength maximum="30" />
                         </h:inputText>
                         <h:message for="surname" class="text-white text-sm relative top-[-5px]" />
@@ -47,7 +47,7 @@
                         <label for="email" class="block text-white font-bold">Email
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="email"
-                            value="#{registrationData.email}" validator="#{validators.validateEmail}">
+                            value="#{userData.email}" validator="#{validators.validateEmail}">
                             <f:ajax render="emailmessage" />
                         </h:inputText>
                         <h:message id="emailmessage" for="email" class="text-white text-sm relative top-[-5px]" />
@@ -57,7 +57,7 @@
                         <label for="birthdate" class="block text-white font-bold">Birthdate
                         </label>
                         <h:inputText p:type="date" class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
-                                     id="birthdate" value="#{registrationData.birthDate}" p:max="#{localConfig.minDate}">
+                                     id="birthdate" value="#{userData.birthDate}" p:max="#{localConfig.minDate}">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                         </h:inputText>
                         <h:message for="birthdate" class="text-white text-sm relative top-[-5px]" />
@@ -67,7 +67,7 @@
                         <label for="country" class="block text-white font-bold">Country
                         </label>
                         <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
-                            type="text" id="country" value="#{registrationData.country}">
+                            id="country" value="#{userData.country}">
                             <f:selectItems value="#{globalConfig.countries}" var="item" />
                         </h:selectOneMenu>
                     </div>
@@ -79,7 +79,7 @@
                         <h:inputSecret class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
                             id="newpassword"
                             validatorMessage="Password should be more than 6 characters and include a number"
-                            value="#{registrationData.newPassword}">
+                            value="#{userData.newPassword}">
                             <f:validateRegex pattern="(?=.*\d)(?=.*[a-zA-Z])\w{6,}"/>
                             <f:ajax render="newpasswordmessage confpasswordmessage" />
                         </h:inputSecret>
@@ -90,7 +90,7 @@
                         <label for="confpassword" class="block text-white font-bold">Confirm Password
                         </label>
                         <h:inputSecret class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
-                                       id="confpassword" value="#{registrationData.confPassword}" validator="#{validators.validatePasswordConfirmation}">
+                                       id="confpassword" value="#{userData.confPassword}" validator="#{validators.validatePasswordConfirmation}">
                             <f:ajax render="confpasswordmessage" />
                         </h:inputSecret>
                         <h:message id="confpasswordmessage" for="confpassword" class="text-white text-sm relative top-[-5px]" />
@@ -102,7 +102,7 @@
                             <p><a class="text-white underline" href="#">Login</a></p>
                         </div>
                         <div class="float-right">
-                            <h:commandLink value="Register" action="#{registrationData.registerStudent}"
+                            <h:commandLink value="Register" action="#{userData.registerStudent}"
                                 class="float-right p-2 px-24 bg-white rounded-xl text-red-800 font-bold text-xl border-0 mt-1 cursor-pointer">
                             </h:commandLink>
                         </div>

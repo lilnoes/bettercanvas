@@ -27,13 +27,14 @@ import org.xml.sax.SAXException;
 @ManagedBean(name = "validators")
 public class Validators {
     public void validateEmail(FacesContext context, UIComponent component, Object email){
+        System.out.println("here here"+email);
         Boolean res = Pattern.matches(".*iuc.edu.tr", email.toString().trim());
         if (!res)
             throw new ValidatorException(new FacesMessage("email should belong to iuc.edu.tr"));
     }
     
     public void validatePasswordConfirmation(FacesContext context, UIComponent component, Object confpassword) {
-        RegistrationData data = (RegistrationData)context.getExternalContext().getSessionMap().get("registrationData");
+        UserData data = (UserData)context.getExternalContext().getSessionMap().get("userData");
         if(data == null) return;
         if(data.getNewPassword().equals(confpassword)) return;
         throw new ValidatorException(new FacesMessage("Passwords should match"));
