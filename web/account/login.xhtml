@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>BetterCanvas - Login</title>
     <!-- <h:outputStylesheet library="css" name="tails.css" /> -->
@@ -10,45 +11,48 @@
 <h:body>
     <div class="w-full h-full fixed z-[-99999]">
         <div class="w-[40%] py-3 m-auto mt-10 rounded-lg shadow-lg bg-red-800">
-            <div class="mb-3">
-                <p class="text-5xl text-white font-bold text-center p-3">
-                    Better Canvas
-                </p>
-                <hr class="border-red-700 mx-1" />
-            </div>
-
-            <div class="px-3">
-                <div class="text-red-700">
-                    <label for="email" class="block text-white font-bold">Email
-                    </label>
-                    <input class="w-full h-9 text-xl text-black" type="email" id="email" />
-                    <p>Error for email</p>
+            <h:form id="loginform">
+                <div class="mb-3">
+                    <p class="text-5xl text-white font-bold text-center p-3">
+                        Better Canvas
+                    </p>
+                    <hr class="border-red-700 mx-1" />
                 </div>
 
-                <div class="text-red-700">
-                    <label for="password" class="block text-white font-bold">Password
-                    </label>
-                    <input class="w-full h-9 text-xl text-black" type="password" id="password" />
-                    <p>Error for password</p>
-                </div>
-
-                <div>
-                    <div class="float-left">
-                        <p class="mt-3 text-sm text-white font-bold">No account?</p>
-                        <p><a class="text-white underline" href="#">Register here</a></p>
-                        <p class="mt-3 text-sm text-white font-bold">Forgot password?</p>
-                        <p><a class="text-white underline" href="#">Reset it here </a></p>
+                <div class="px-3">
+                    <div class="text-red-700">
+                        <label for="email" class="block text-white font-bold">Email
+                        </label>
+                        <h:inputText required="true" class="w-full h-9 text-xl text-black" id="email"
+                                     value="#{userData.email}" requiredMessage="Email is required"/>
+                        <h:message for="email" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
-                    <div class="float-right">
-                        <button
-                            class="float-right p-2 px-24 bg-white text-red-800 font-bold text-3xl rounded-lg border-0 mt-1">
-                            Login
-                        </button>
+                    <div class="text-red-700">
+                        <h:outputLabel for="password" class="block text-white font-bold" value="Password" />
+                        <h:inputSecret required="true" class="w-full h-9 text-xl text-black" id="password"
+                                       value="#{userData.newPassword}" requiredMessage="Password is required"/>
+                        <h:message for="password" class="text-white text-sm relative top-[-5px]" />
                     </div>
-                    <div class="clear-both"></div>
+
+                    <div>
+                        <div class="float-left">
+                            <p class="mt-3 text-sm text-white font-bold">No account?</p>
+                            <p><a class="text-white underline" href="#">Register here</a></p>
+                            <p class="mt-3 text-sm text-white font-bold">Forgot password?</p>
+                            <p><a class="text-white underline" href="#">Reset it here </a></p>
+                        </div>
+
+                        <div class="float-right">
+                            <h:commandLink
+                                class="float-right p-2 px-24 bg-white text-red-800 font-bold text-3xl rounded-lg border-0 mt-1"
+                                value="Login" action="#{userData.login}">
+                            </h:commandLink>
+                        </div>
+                        <div class="clear-both"></div>
+                    </div>
                 </div>
-            </div>
+            </h:form>
         </div>
     </div>
 </h:body>
