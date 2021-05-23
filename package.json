@@ -1,0 +1,28 @@
+{
+  "name": "bettercanvas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind": "TAILWIND_MODE=watch NODE_ENV=development postcss index.css -o ./web/resources/css/tails.css -w --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lilnoes/bettercanvas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lilnoes/bettercanvas/issues"
+  },
+  "homepage": "https://github.com/lilnoes/bettercanvas#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.14",
+    "tailwindcss": "^2.1.2"
+  },
+  "dependencies": {
+    "postcss-cli": "^8.3.1"
+  }
+}
