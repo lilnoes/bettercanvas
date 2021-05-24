@@ -1,8 +1,9 @@
-/build
 /node_modules
-/*.css
-/*.json
-/*.js
-/dist/
-/nbproject
-/notrack
+**/nbproject/private/
+**/nbproject/Makefile-*.mk
+**/nbproject/Package-*.bash
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
