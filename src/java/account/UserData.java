@@ -7,6 +7,7 @@ package account;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.Date;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
@@ -65,6 +66,10 @@ public class UserData {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -115,20 +120,23 @@ public class UserData {
         this.confPassword = confPassword;
     }
 
-    public String registerStudent() {
+    public String register() {
         String outcome = "#";
         String sql = "insert into users\n"
-                + "(name, surname, email, password, type, birthDate, country)\n"
+                + "(name, surname, email, password, type, title, sinif, birthDate, country)\n"
                 + "values\n"
-                + "(?, ?, ?, ?, 'student', ?, ?)";
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
             statement.setString(1, name);
             statement.setString(2, surName);
             statement.setString(3, email);
             statement.setString(4, UserUtils.hashPassword(newPassword));
-            statement.setDate(5, new java.sql.Date(birthDate.getTime()));
-            statement.setString(6, country.toLowerCase());
+            statement.setString(5, type);
+            statement.setString(6, title);
+            statement.setInt(7, year);
+            statement.setTimestamp(8, new Timestamp(birthDate.getTime()));
+            statement.setString(9, country.toLowerCase());
             int res = statement.executeUpdate();
             if (res == 0) {
                 FacesContext.getCurrentInstance().addMessage("registerform:confpassword", new FacesMessage("Try registering again, error occured"));
@@ -136,7 +144,7 @@ public class UserData {
             statement.close();
             return "login";
         } catch (Exception e) {
-            return "#";
+            return null;
         }
 
     }
