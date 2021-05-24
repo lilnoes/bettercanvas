@@ -22,9 +22,16 @@ import org.apache.derby.client.am.DateTime;
 public class GlobalConfig {
 
     private String countries[] = {"Afghanistan", "Angola", "Rwanda", "Turkey"};
+    private int years[] = {1, 2, 3, 4};
 
     public String[] getCountries() {
         return countries;
     }
+
+    public int[] getYears() {
+        return years;
+    }
+    
+    
 
 }

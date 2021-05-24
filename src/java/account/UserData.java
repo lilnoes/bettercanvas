@@ -29,6 +29,9 @@ public class UserData {
     private String name = "";
     private String surName = "";
     private String email = "";
+    private String type = "";
+    private String title = "";
+    private int year = 1;
     private Date birthDate;
     private String country = "Turkey";
     private String newPassword = "";
@@ -57,6 +60,28 @@ public class UserData {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+    
+    
 
     public Date getBirthDate() {
         return birthDate;
