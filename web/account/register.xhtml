@@ -11,9 +11,9 @@
     <link href="../resources/css/tails.css" rel="stylesheet" />
 </h:head>
 <h:body>
-    <div class="w-full h-full relative z-[-99999]">
+    <div class="w-full h-full relative">
         <h:form id="registerform">
-            <div class="w-[40%] mx-auto mt-3 rounded-lg shadow-lg bg-gradient-to-br from-red-600 to-red-900">
+            <div class="w-[40%] mx-auto mt-5 rounded-lg mb-5 shadow-lg bg-gradient-to-br from-red-600 to-red-900">
                 <div class="mb-3">
                     <p class="text-5xl text-white font-bold text-center p-2">
                         Better Canvas
@@ -52,6 +52,28 @@
                         </h:inputText>
                         <h:message id="emailmessage" for="email" class="text-white text-sm relative top-[-5px]" />
                     </div>
+
+                    <h:panelGroup id="titlediv">
+                        <h:panelGroup class="text-red-700 mt-3" rendered="#{userData.type eq 'student'}">
+                        <label for="year" class="block text-white font-bold">Year
+                        </label>
+                        <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
+                            id="year" value="#{userData.year}">
+                            <f:selectItems value="#{globalConfig.years}" var="item" />
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="yeardiv">
+                        <h:panelGroup class="text-red-700 mt-3" rendered="#{userData.type eq 'student'}">
+                        <label for="year" class="block text-white font-bold">Year
+                        </label>
+                        <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
+                            id="year" value="#{userData.year}">
+                            <f:selectItems value="#{globalConfig.years}" var="item" />
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                    </h:panelGroup>
 
                     <div class="text-red-700 mt-3">
                         <label for="birthdate" class="block text-white font-bold">Birthdate
@@ -109,29 +131,6 @@
                             </h:commandLink>
                         </div>
                         <div class="clear-both"></div>
-                    </div>
-
-                    <div>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
-                        <p>Emma</p>
                     </div>
                 </div>
             </div>
