@@ -2,30 +2,153 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+
     <h:head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
+        crossorigin="anonymous"></script>
+        <!--font awesome and google icon-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="tails.css" />
+
+
+
         <title>Leon Emmanuel ISHIMWE - BetterCanvas</title>
+
+        <style>
+            h3 {
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .courses {
+                padding: 20px;
+
+            }
+
+            .mainContent {
+                margin-bottom: 80px;
+            }
+
+            .courses a {
+                color: #008299;
+                text-decoration: none;
+            }
+
+
+            .card-img-top {
+                display: block;
+                width: 100%;
+                height: 15vw;
+                object-fit: cover;
+            }
+
+            .todo {
+                padding-bottom: 10px;
+            }
+
+            ul {
+                list-style-type: none;
+            }
+            a{
+                color: blue;
+            }
+        </style>
     </h:head>
-    <h:body class="">
-        <ui:composition template="common.xhtml">
-            <ui:define name="title">
-                <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Leon Emmanuel ISHIMWE - Dashboard</h1>
-            </ui:define>
-            <ui:define name="content">
-                <div class="w-[500px] h-[200px]">
-                    <canvas id="gradesChart" width="500" height="200"></canvas>
+
+
+    <body>
+        <div class="container-fluid">
+            <div class="row mainContent">
+                <!--courses-->
+                <div class="col-md-9 ">
+                    <h3 class=" text-center text-2xl p-3">Courses</h3>
+                    <hr />
+
+                    <div class="courses">
+                        <!--listing all courses-->
+
+                        <a href="#">
+                            <div class="card mb-3">
+                                <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
+                                     alt="..." />
+                                <div class="card-body">
+                                    <h4 class="card-title text-center text-xl">Introduction to Computer Engineering</h4>
+                                    <p class="card-text text-center "><span>Message</span> &nbsp; <span>next session</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a href="#">
+                            <div class="card mb-3">
+                                <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
+                                     alt="..."></img>
+                                <div class="card-body">
+                                    <h4 class="card-title text-center text-xl">Introduction to Computer Engineering</h4>
+                                    <p class="card-text text-center "><span>Message</span> &nbsp; <span>next session</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                <script>
-                    window.onload = () => loadData();
-                </script>
-            </ui:define>
+                <!--to do-->
+                <div class="col-md-3">
+                    <h3 class=" text-center text-2xl p-3">To do</h3>
+                    <hr />
 
-        </ui:composition>
+                    <div>
+                        <div class="container todo p-2 mb-6">
+                            <i class="fas fa-volume-up"></i> <a href="#" class="text-blue-700 underline">Title here, for sure</a><br />
+                            <ul>
+                                <li><span>Summary is going to be here</span></li>
+                                <li>Apr 27 at 12:23pm</li>
+                            </ul>
+                        </div>
 
+                        <div class="container todo p-2 mb-6">
+                            <i class="fas fa-volume-up"></i> <a href="#" class="text-blue-700 underline">Title here, for sure</a><br />
+                            <ul>
+                                <li><span>Summary is going to be here</span></li>
+                                <li>Apr 27 at 12:23pm</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+        </div>
 
+        <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
+            <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
+            <div class="overflow-y-auto w-full">
+                <div class="bg-white m-3 p-3 rounded-xl">
+                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                    <p>Course shortword</p>
+                </div>
 
-    </h:body>
+                <div class="bg-white m-3 p-3 rounded-xl">
+                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
+                    <p>Course shortword</p>
+                </div>
+
+            </div>
+        </div>
+        <ui:include src="footer.xhtml" />
+        <h:outputScript library="js" name="functions.js" />
+    </body>
 
 </html>

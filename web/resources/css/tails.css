@@ -870,6 +870,9 @@ video {
 .border-0 {
 	border-width: 0px;
 }
+.border {
+	border-width: 1px;
+}
 .border-r {
 	border-right-width: 1px;
 }
@@ -1052,6 +1055,10 @@ video {
 .text-gray-500 {
 	--tw-text-opacity: 1;
 	color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+.text-blue-700 {
+	--tw-text-opacity: 1;
+	color: rgba(29, 78, 216, var(--tw-text-opacity));
 }
 .underline {
 	text-decoration: underline;
