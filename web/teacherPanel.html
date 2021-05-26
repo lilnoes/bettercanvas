@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -235,4 +236,243 @@
 
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
+        crossorigin="anonymous"></script>
+    <!--font awesome and google icon-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+    <title>Student Painel</title>
+
+    <style>
+        /*Gyus, after we will move it to an .css file*/
+        /*For icon, we can use the google icon or the font awesome*/
+         /*WE ARE MISSING THE LOGO*/
+
+
+        body {
+            padding-top: 2%;
+
+        }
+
+
+        /*for the navBar*/
+        .nav{
+            position: fixed;
+            z-index: 100; /*bring it to the front*/
+            bottom: 0;
+            width: 100%;
+            height: 100px;
+            box-shadow: 0 0 3px rgb(0, 0, 0.2);
+            background-color: rgb(255, 0, 0);
+            display: flex;
+            overflow-x: auto;
+
+        }
+        .nav__link{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            min-width: 50px;
+            overflow:hidden;
+            white-space: nowrap; /*avoid the text to go to other line*/
+            font-family: sans-serif;
+            font-size: 13px;
+            color: #ffffff;
+            text-decoration: none;
+            -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.1s ease-in-out;
+
+        }
+
+        .nav__link:hover {
+            color:black;
+            background-color: #ffffff;
+        }
+        .nav__link--active{
+            color:black;
+            background-color:#ffffff ;
+
+        }
+
+        .nav__icon{
+            font-size: 80px;
+        }
+
+
+
+
+
+        /*for all body*/
+
+        h3 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+        .courses {
+            padding: 20px;
+            
+        }
+        .mainContent{
+            margin-bottom: 80px;
+        }
+        .courses a {
+            color:#008299;
+            text-decoration: none;
+        }
+        
+
+        .card-img-top {
+            display: block;
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+
+        .todo {
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <nav class="nav">
+        <a href="#" class="nav__link nav__link--active ">
+            <i class="material-icons nav__icon "> dashboard</i>
+            <span class="nav__text">Dashboard</span>
+        </a>
+
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon">cast_for_education</i>
+            <span class="nav__text">Courses</span>
+        </a>
+
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon"> inbox</i>
+            <span class="nav__text">Inbox</span>
+        </a>
+
+        <a href="#" class="nav__link">
+            <i class="material-icons nav__icon"> person</i>
+            <span class="nav__text">Profile</span>
+        </a>
+
+
+
+    </nav>
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+        <div class="row mainContent">
+            <!--courses-->
+            <div class="col-md-9 ">
+                <h3 class=" text-center">Courses</h3>
+                <hr>
+
+                <div class="courses">
+                    <!--listing all courses-->
+
+                    <a href="#">
+                        <div class="card mb-3">
+                            <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">Introduction to Computer Engineering</h4>
+                                <p class="card-text text-center "><span>Message</span> &nbsp <span>next session</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="#">
+                        <div class="card mb-3">
+                            <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
+                                alt="...">
+                            <div class="card-body">
+                                <h4 class="card-title text-center">Introduction to Computer Engineering</h4>
+                                <p class="card-text text-center "><span>Message</span> &nbsp <span>next session</span>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+
+
+
+
+
+            </div>
+            <!--to do-->
+            <div class="col-md-3">
+                <h3 class=" text-center">To do</h3>
+                <hr>
+
+                <div class="container todo">
+
+                    <div class="todoTitle">
+                        <i class="fas fa-volume-up"></i> <a href="#">Title here, for sure</a><br>
+                        <ul>
+                            <li><span>Summary is going to be here</span></li>
+                            <li>Apr 27 at 12:23pm</li>
+                        </ul>
+                    </div>
+
+                    <div class="todoTitle">
+                        <i class="fas fa-volume-up"></i> <a href="#">Title here, for sure</a><br>
+                        <ul>
+                            <li><span>Summary is going to be here</span></li>
+                            <li>Apr 27 at 12:23pm</li>
+                        </ul>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</body>
+
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
 </html>

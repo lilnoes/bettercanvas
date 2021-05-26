@@ -11,9 +11,15 @@
     <link href="../resources/css/tails.css" rel="stylesheet" />
 </h:head>
 <h:body>
+<<<<<<< HEAD
     <div class="w-full h-full relative z-[-99999]">
         <h:form id="registerform">
             <div class="w-[40%] mx-auto mt-3 rounded-lg shadow-lg bg-gradient-to-br from-red-600 to-red-900">
+=======
+    <div class="w-full h-full relative">
+        <h:form id="registerform">
+            <div class="w-[40%] mx-auto mt-5 rounded-lg mb-5 shadow-lg bg-gradient-to-br from-red-600 to-red-900">
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                 <div class="mb-3">
                     <p class="text-5xl text-white font-bold text-center p-2">
                         Better Canvas
@@ -48,11 +54,38 @@
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="email"
                             value="#{userData.email}" validator="#{validators.validateEmail}">
+<<<<<<< HEAD
                             <f:ajax render="emailmessage" />
+=======
+                            <f:ajax render="emailmessage titlediv yeardiv" />
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                         </h:inputText>
                         <h:message id="emailmessage" for="email" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
+<<<<<<< HEAD
+=======
+                    <h:panelGroup id="titlediv">
+                        <h:panelGroup class="text-red-700 mt-3" rendered="#{userData.type eq 'teacher'}">
+                        <label for="title" class="block text-white font-bold">Academic Title
+                        </label>
+                        <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="title"
+                            value="#{userData.title}" />
+                    </h:panelGroup>
+                    </h:panelGroup>
+
+                    <h:panelGroup id="yeardiv">
+                        <h:panelGroup class="text-red-700 mt-3" rendered="#{userData.type eq 'student'}">
+                        <label for="year" class="block text-white font-bold">Year
+                        </label>
+                        <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
+                            id="year" value="#{userData.year}">
+                            <f:selectItems value="#{globalConfig.years}" var="item" />
+                        </h:selectOneMenu>
+                    </h:panelGroup>
+                    </h:panelGroup>
+
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                     <div class="text-red-700 mt-3">
                         <label for="birthdate" class="block text-white font-bold">Birthdate
                         </label>
@@ -101,15 +134,23 @@
                     <div>
                         <div class="float-left text-red-800">
                             <p class="mt-3 text-sm text-white font-bold">Have an account?</p>
+<<<<<<< HEAD
                             <p><a class="text-white underline" href="#">Login</a></p>
                         </div>
                         <div class="float-right">
                             <h:commandLink value="Register" action="#{userData.registerStudent}"
+=======
+                            <h:link outcome="/account/login" value="Login" class="text-white underline"/>
+                        </div>
+                        <div class="float-right">
+                            <h:commandLink value="Register" action="#{userData.register}"
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                                 class="float-right p-2 px-24 bg-white rounded-xl text-red-800 font-bold text-xl border-0 mt-1 cursor-pointer">
                             </h:commandLink>
                         </div>
                         <div class="clear-both"></div>
                     </div>
+<<<<<<< HEAD
 
                     <div>
                         <p>Emma</p>
@@ -133,6 +174,8 @@
                         <p>Emma</p>
                         <p>Emma</p>
                     </div>
+=======
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                 </div>
             </div>
         </h:form>

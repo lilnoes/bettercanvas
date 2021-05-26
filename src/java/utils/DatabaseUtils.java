@@ -5,7 +5,10 @@
  */
 package utils;
 
+<<<<<<< HEAD
 import com.github.javafaker.Faker;
+=======
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -65,6 +68,7 @@ public class DatabaseUtils {
     }
 
     public static void createUsersTable() {
+<<<<<<< HEAD
 //        create table users(
 //                userID INT NOT NULL GENERATED ALWAYS AS IDENTITY
 //        ,
@@ -92,6 +96,33 @@ public class DatabaseUtils {
                 + "type varchar(10) not null,\n"
                 + "title varchar(50),\n"
                 + "birthDate date,\n"
+=======
+//create table users
+//(
+//userID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//name varchar (20),
+//surname varchar (20),
+//email varchar (50),
+//password varchar (32),
+//type varchar (10) not null,
+//title varchar (50),
+//sinif smallint,
+//birthDate timestamp,
+//country varchar(15)
+//)
+
+        String sql = "create table users\n"
+                + "(\n"
+                + "userID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "name varchar (20),\n"
+                + "surname varchar (20),\n"
+                + "email varchar (50),\n"
+                + "password varchar (32),\n"
+                + "type varchar (10) not null,\n"
+                + "title varchar (50),\n"
+                + "sinif smallint,\n"
+                + "birthDate timestamp,\n"
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
                 + "country varchar(15)\n"
                 + ")";
         execute(sql);

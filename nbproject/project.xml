@@ -10,10 +10,13 @@
                     <file>${libs.JAVADB_DRIVER_LABEL.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+<<<<<<< HEAD
                 <library dirs="200">
                     <file>${libs.javafaker.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
+=======
+>>>>>>> 92b72685839bc9521d953c93c9a5fa0bfda778fc
             </web-module-libraries>
             <web-module-additional-libraries/>
             <source-roots>
