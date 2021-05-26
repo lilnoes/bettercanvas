@@ -20,5 +20,5 @@ function loadData() {
 function toggle(selector) {
   const elt = document.getElementById(selector);
   console.log("found", elt);
-  elt.style.display = elt.style.display == "none" ? "block" : "none";
+  elt.classList.toggle("hidden");
 }

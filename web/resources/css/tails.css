@@ -659,6 +659,9 @@ video {
 .top-\[70px\] {
 	top: 70px;
 }
+.top-\[73px\] {
+	top: 73px;
+}
 .z-\[-99999\] {
 	z-index: -99999;
 }
@@ -685,6 +688,9 @@ video {
 }
 .m-3 {
 	margin: 0.75rem;
+}
+.m-\[-10px\] {
+	margin: -10px;
 }
 .mx-1 {
 	margin-left: 0.25rem;
@@ -735,6 +741,9 @@ video {
 }
 .ml-\[-20\%\] {
 	margin-left: -20%;
+}
+.mb-1 {
+	margin-bottom: 0.25rem;
 }
 .block {
 	display: block;
