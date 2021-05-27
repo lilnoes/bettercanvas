@@ -22,3 +22,8 @@ function toggle(selector) {
   console.log("found", elt);
   elt.classList.toggle("hidden");
 }
+
+function scrollToBottom(){
+  const elt = document.getElementById("allSms");
+  elt.scrollTop = elt.scrollHeight;
+}

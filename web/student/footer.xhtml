@@ -2,33 +2,32 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-    <h:body class="">
-        <ui:composition>
-            <nav class="nav">
-                <h:outputStylesheet library="css" name="navbar.css" />
-                <h:link outcome="/student/index.xhtml" class="nav__link nav__link--active ">
-                    <i class="material-icons nav__icon "> dashboard</i>
-                    <span class="nav__text">Dashboard</span>
-                </h:link>
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body class="">
+    <ui:composition>
+        <nav class="nav">
+            <h:link outcome="/student/index.xhtml" class="nav__link nav__link--active ">
+                <i class="material-icons nav__icon "> dashboard</i>
+                <span class="nav__text">Dashboard</span>
+            </h:link>
 
-                <a href="#" class="nav__link" onclick="toggle('coursesmodal')">
-                    <i class="material-icons nav__icon">cast_for_education</i>
-                    <span class="nav__text">Courses</span>
-                </a>
+            <a href="#" class="nav__link" onclick="toggle('coursesmodal')">
+                <i class="material-icons nav__icon">cast_for_education</i>
+                <span class="nav__text">Courses</span>
+            </a>
 
-                <a href="#" class="nav__link">
-                    <i class="material-icons nav__icon"> inbox</i>
-                    <span class="nav__text">Inbox</span>
-                </a>
+            <h:link outcome="/student/inbox.xhtml" class="nav__link">
+                <i class="material-icons nav__icon"> inbox</i>
+                <span class="nav__text">Inbox</span>
+            </h:link>
 
-                <a href="#" class="nav__link">
-                    <i class="material-icons nav__icon"> person</i>
-                    <span class="nav__text">Profile</span>
-                </a>
+            <h:link outcome="/student/account.xhtml" class="nav__link">
+                <i class="material-icons nav__icon"> person</i>
+                <span class="nav__text">Profile</span>
+            </h:link>
 
-            </nav>
-        </ui:composition>
-    </h:body>
+        </nav>
+    </ui:composition>
+</h:body>
 
 </html>
