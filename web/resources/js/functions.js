@@ -27,3 +27,23 @@ function scrollToBottom(){
   const elt = document.getElementById("allSms");
   elt.scrollTop = elt.scrollHeight;
 }
+
+function closeGrades(){
+  const elts = document.getElementsByClassName("newgrades");
+  for(let elt of elts) elt.style.display = "none";
+}
+
+function openGrades(){
+  const elts = document.getElementsByClassName("newgrades");
+  for(let elt of elts) elt.style.display = "block";
+}
+
+function closeQuiz(){
+  const elts = document.getElementsByClassName("newquiz");
+  for(let elt of elts) elt.style.display = "none";
+}
+
+function openQuiz(){
+  const elts = document.getElementsByClassName("newquiz");
+  for(let elt of elts) elt.style.display = "block";
+}

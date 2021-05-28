@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <title>Teacher Dashboard - BetterCanvas</title>
+</h:head>
+<h:body>
+    <ui:composition template="common.xhtml">
+        <ui:define name="title">
+            <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Dashboard</h1>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div>
+                            <h5>
+                                Recent activity
+                            </h5>
+                            <hr />
+                        </div>
+
+
+                        <div>
+                            <h6><b>Latest messages from students</b></h6>
+                            <ul>
+                                <li>Edson casimiro's sms</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h6>
+                                <b>Announcements</b>
+                            </h6>
+                            <ul>
+                                <li>2021 graduate cerimony</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3">
+
+                        <p><button type="button" class="btn btn-lg button">New course</button></p>
+                        <p><button type="button" class="btn btn-lg button">Accept/denay student Requirement</button></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </ui:define>
+
+        <ui:define name="style">
+            <style>
+                header {
+                    padding-top: 20px;
+                }
+
+                .button {
+                    color: white;
+                    background-color: red;
+                    width: 100%;
+                }
+            </style>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

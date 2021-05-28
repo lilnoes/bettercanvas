@@ -1,90 +1,92 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Quizzes</title>
-        <link rel="stylesheet" href="../resources/css/tails.css" />
-        <style>
-            .newquiz{
-                display: none;
-            }
-        </style>
-    </h:head>
-    <h:body class="">
-        <div>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <title>Facelet Title</title>
+</h:head>
+<h:body>
+    <ui:composition template="common.xhtml">
+        <ui:define name="title">
             <h1 class="text-5xl font-bold text-center p-2">List of past Quizzes
-                <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openQuiz()">+ Create New Quiz</button></h1>
+                <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openQuiz()">+ Create New
+                    Quiz</button>
+            </h1>
+        </ui:define>
 
+        <ui:define name="content">
             <div>
-                <table>
-                    <tr class="font-bold text-2xl p-3 border-b border-gray-600">
-                        <td class="p-3">Name</td>
-                        <td class="p-3">Created at</td>
-                        <td class="p-3">Start at</td>
-                        <td class="p-3">Duration</td>
-                    </tr>
-
-                    <tr class="">
-                        <td class="p-3">Name</td>
-                        <td class="p-3">Created at</td>
-                        <td class="p-3">Start at</td>
-                        <td class="p-3">Duration</td>
-                    </tr>
-                </table>
-            </div>
-
-
-            <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newquiz"></div>
-            
-            <div class="newquiz absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
-                <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeQuiz()">X</div>
-                <h2 class="font-bold text-3xl text-center text-red-800">New Quiz</h2>
-                <div class="text-red-700 font-bold text-sm mb-3">
-                    <label class="block" for="quizname">Name</label>
-                    <input type="text" id="quizname" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                </div>
-
-                <div class="text-red-700 font-bold text-sm mb-3">
-                    <label class="block" for="quizstartdate">Start Date</label>
-                    <input type="date" id="quizstartdate" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                </div>
-
-                <div class="text-red-700 font-bold text-sm mb-3">
-                    <label class="block" for="quizstarttime">Start Time</label>
-                    <input type="time" id="quizstarttime" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                </div>
-
-                <div class="text-red-700 font-bold text-sm mb-3">
-                    <label class="block" for="quizduration">Duration <span class="text-xs">(minutes)</span></label>
-                    <input type="number" id="quizduration" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                </div>
-
-                <div class="relative text-red-700 font-bold text-sm mb-3 w-full bg-red-50">
-                    <div class="relative left-1/2 right-1/2 m-auto text-gray-500 text-6xl">+</div>
-                </div> 
-                
-                <div>
-                    <p><span>Upload file or drag it above</span><button class="ml-10 p-2 bg-red-50 text-gray-600 font-bold text-xl rounded-lg">Upload file</button></p>
-                </div>
 
                 <div>
-                    <button class="bg-red-800 text-white p-3 rounded-lg">Create Quiz</button>
+                    <table>
+                        <tr class="font-bold text-2xl p-3 border-b border-gray-600">
+                            <td class="p-3">Name</td>
+                            <td class="p-3">Created at</td>
+                            <td class="p-3">Start at</td>
+                            <td class="p-3">Duration</td>
+                        </tr>
+
+                        <tr class="">
+                            <td class="p-3">Name</td>
+                            <td class="p-3">Created at</td>
+                            <td class="p-3">Start at</td>
+                            <td class="p-3">Duration</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newquiz"></div>
+
+                <div class="newquiz absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
+                    <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeQuiz()">X</div>
+                    <h2 class="font-bold text-3xl text-center text-red-800">New Quiz</h2>
+                    <div class="text-red-700 font-bold text-sm mb-3">
+                        <label class="block" for="quizname">Name</label>
+                        <input type="text" id="quizname" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                    </div>
+
+                    <div class="text-red-700 font-bold text-sm mb-3">
+                        <label class="block" for="quizstartdate">Start Date</label>
+                        <input type="date" id="quizstartdate" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                    </div>
+
+                    <div class="text-red-700 font-bold text-sm mb-3">
+                        <label class="block" for="quizstarttime">Start Time</label>
+                        <input type="time" id="quizstarttime" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                    </div>
+
+                    <div class="text-red-700 font-bold text-sm mb-3">
+                        <label class="block" for="quizduration">Duration <span class="text-xs">(minutes)</span></label>
+                        <input type="number" id="quizduration" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                    </div>
+
+                    <div class="relative text-red-700 font-bold text-sm mb-3 w-full bg-red-50">
+                        <div class="relative left-1/2 right-1/2 m-auto text-gray-500 text-6xl">+</div>
+                    </div>
+
+                    <div>
+                        <p><span>Upload file or drag it above</span><button
+                                class="ml-10 p-2 bg-red-50 text-gray-600 font-bold text-xl rounded-lg">Upload
+                                file</button></p>
+                    </div>
+
+                    <div>
+                        <button class="bg-red-800 text-white p-3 rounded-lg">Create Quiz</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <script>
-            function closeQuiz(){
-                const elts = document.getElementsByClassName("newquiz");
-                for(let elt of elts) elt.style.display = "none";
-            }
+        </ui:define>
 
-            function openQuiz(){
-                const elts = document.getElementsByClassName("newquiz");
-                for(let elt of elts) elt.style.display = "block";
-            }
-        </script>
+        <ui:define name="style">
+            <style>
+                .newquiz {
+                    display: none;
+                }
+            </style>
+        </ui:define>
+    </ui:composition>
+</h:body>
 
-    </h:body>
 </html>
-
