@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+<h:head>
+    <title>Facelet Title</title>
+</h:head>
+<h:body>
+    <ui:composition template="common.xhtml">
+        <ui:define name="title">
+            <h4 class="ml-10 p-3 text-4xl font-bold text-red-800"><span class="shortName">BILMU24</span> - <span
+                    class="courseName">BILGISAYAR MUHENDISLIGINE GIRIS</span></h4>
+        </ui:define>
+
+        <ui:define name="content">
+            <div class=" container-fluid">
+
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <div id="mainContent">
+                            <h4>
+                                BILGISAYAR MUHENDISLIGINE GIRIS
+                            </h4>
+                            <span style="padding-bottom: 20px;">BILMU24</span>
+                            <p>Signed students: <span id="joinedStudent"> 1432 </span></p>
+
+                            <div class="description">
+                                <h5>Description</h5>
+                                <p> Angola (/ænˈɡoʊlə/ (About this soundlisten); Portuguese: [ɐ̃ˈɡɔlɐ]), officially the
+                                    Republic of Angola (Portuguese: República de Angola), is a country located on the
+                                    west coast of Southern Africa. It is the second-largest lusophone
+                                    (Portuguese-speaking)
+                                    country in both total area and population (behind Brazil), and it is the
+                                    seventh-largest
+                                    country in Africa, bordered by Namibia to the south, the Democratic Republic of the
+                                    Congo
+                                    to the north, Zambia to the east, and the Atlantic Ocean to the west. Angola has an
+                                    exclave province, the province of Cabinda that borders the Republic of the Congo
+                                    and the Democratic Republic of the Congo. The capital and largest city is Luanda.
+                                </p>
+
+
+                            </div>
+                            <div class="description">
+                                <h5>Requirement</h5>
+                                <ul>
+                                    <li>
+                                        had taken the introduction to computer engineering
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-3 text-center ">
+                        <h4>NEW FEATURE</h4>
+                        <hr />
+                        <p><button type="button" class="btn btn-lg button">New announcement</button></p>
+                        <p><button type="button" class="btn btn-lg button">New quizz</button></p>
+                    </div>
+
+                </div>
+
+            </div>
+        </ui:define>
+
+        <ui:define name="style">
+            <style>
+                header {
+                    padding-top: 20px;
+
+                }
+
+                #mainContent {
+                    margin-top: 2%;
+
+                }
+
+                .description {
+                    margin-top: 2%;
+                }
+
+                .button {
+                    color: white;
+                    background-color: red;
+                    width: 100%;
+                }
+            </style>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
