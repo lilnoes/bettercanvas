@@ -708,6 +708,9 @@ video {
 .block {
 	display: block;
 }
+.inline {
+	display: inline;
+}
 .flex {
 	display: flex;
 }
@@ -732,6 +735,9 @@ video {
 .h-\[200px\] {
 	height: 200px;
 }
+.h-10 {
+	height: 2.5rem;
+}
 .w-full {
 	width: 100%;
 }
@@ -752,6 +758,9 @@ video {
 }
 .w-1\/5 {
 	width: 20%;
+}
+.w-10 {
+	width: 2.5rem;
 }
 .flex-grow {
 	flex-grow: 1;
