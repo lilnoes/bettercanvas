@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 import javax.sql.rowset.CachedRowSet;
 import org.apache.derby.client.am.DateTime;
 import utils.DatabaseUtils;
@@ -35,6 +36,8 @@ public class UserData {
     private int year = 1;
     private Date birthDate;
     private String country = "Turkey";
+    private String faculty = "";
+    private Part picture;
     private String newPassword = "";
     private String confPassword = "";
 
@@ -84,6 +87,22 @@ public class UserData {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
+    }
+
+    public Part getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Part picture) {
+        this.picture = picture;
     }
     
     

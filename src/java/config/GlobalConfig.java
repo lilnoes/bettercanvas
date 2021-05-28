@@ -23,6 +23,8 @@ public class GlobalConfig {
 
     private String countries[] = {"Afghanistan", "Angola", "Rwanda", "Turkey"};
     private int years[] = {1, 2, 3, 4};
+    private String faculties[] = {"Computer Engineering", "Electrical Engineering",
+        "Control Engineering", "Mechanical Engineering"};
 
     public String[] getCountries() {
         return countries;
@@ -30,6 +32,10 @@ public class GlobalConfig {
 
     public int[] getYears() {
         return years;
+    }
+
+    public String[] getFaculties() {
+        return faculties;
     }
     
     

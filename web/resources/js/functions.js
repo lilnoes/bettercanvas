@@ -23,27 +23,32 @@ function toggle(selector) {
   elt.classList.toggle("hidden");
 }
 
-function scrollToBottom(){
+function scrollToBottom() {
   const elt = document.getElementById("allSms");
   elt.scrollTop = elt.scrollHeight;
 }
 
-function closeGrades(){
+function closeGrades() {
   const elts = document.getElementsByClassName("newgrades");
-  for(let elt of elts) elt.style.display = "none";
+  for (let elt of elts) elt.style.display = "none";
 }
 
-function openGrades(){
+function openGrades() {
   const elts = document.getElementsByClassName("newgrades");
-  for(let elt of elts) elt.style.display = "block";
+  for (let elt of elts) elt.style.display = "block";
 }
 
-function closeQuiz(){
+function closeQuiz() {
   const elts = document.getElementsByClassName("newquiz");
-  for(let elt of elts) elt.style.display = "none";
+  for (let elt of elts) elt.style.display = "none";
 }
 
-function openQuiz(){
+function openQuiz() {
   const elts = document.getElementsByClassName("newquiz");
-  for(let elt of elts) elt.style.display = "block";
+  for (let elt of elts) elt.style.display = "block";
+}
+
+function showUpload() {
+  const elt = document.getElementById("registerform:picture");
+  elt.click();
 }
