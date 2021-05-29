@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Facelet Title</title>
+</h:head>
+<h:body>
+    <ui:composition>
+        <div id="newcourse" class="container mainForm fixed top-0 bg-white h-full w-full z-10">
+            <h:form class="mt-12 w-[75%]">
+                <div class="mb-3">
+                    <label for="courseName" class="form-label">Course name</label>
+                    <h:inputText class="form-control" id="coursename" />
+                    <!--div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div-->
+                </div>
+
+
+
+                <div class=" row smInput">
+                    <div class="col-md-6 md-3">
+                        <label for="shortName" class="form-label">Course Short name</label>
+                        <h:inputText class="form-control" id="shortName" />
+                    </div>
+                </div>
+
+
+
+
+                <div class="md-3">
+                    <div class="col-md-6  md-3">
+                        <label for="year" class="block font-bold">Year
+                        </label>
+                        <h:selectOneMenu class="form-select form-select-mb"
+                                         id="year">
+                            <f:selectItems value="#{globalConfig.years}" var="item" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                
+                <div class="md-3">
+                    <div class="col-md-6  md-3">
+                        <label for="faculty" class="block font-bold">Faculty
+                        </label>
+                        <h:selectOneMenu class="form-select form-select-mb"
+                                         id="faculty">
+                            <f:selectItems value="#{globalConfig.faculties}" var="item" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="md-3">
+                    <label for="description" class="form-label">Description</label>
+                    <h:inputTextarea class="form-control" id="description" />
+                </div>
+                <div class="md-3">
+                    <label for="Requirement" class="form-label"> Requirement</label>
+                    <h:inputTextarea class="form-control" id="Requirement" />
+                </div>
+
+
+                <br />
+
+                <div class="flex flex-row text-2xl justify-between">
+                <button type="submit" class="bg-red-600 text-white w-[48%] p-2 rounded-lg">Submit</button>
+                <button type="button" class="bg-red-600 text-white w-[48%] p-2 rounded-lg" onclick="hideNewCourse()">Cancel</button>
+                </div>
+            </h:form>
+        </div>
+    </ui:composition>
+</h:body>
+
+</html>

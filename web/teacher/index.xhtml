@@ -13,6 +13,7 @@
         </ui:define>
 
         <ui:define name="content">
+            <ui:include src="course.xhtml"/>
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-9">
@@ -44,7 +45,7 @@
 
                     <div class="col-md-3">
 
-                        <p><button type="button" class="btn btn-lg button">New course</button></p>
+                        <p><button type="button" class="btn btn-lg button" onclick="showNewCourse()">New course</button></p>
                         <p><button type="button" class="btn btn-lg button">Accept/denay student Requirement</button></p>
                     </div>
 
@@ -64,6 +65,7 @@
                     background-color: red;
                     width: 100%;
                 }
+                
             </style>
         </ui:define>
     </ui:composition>
