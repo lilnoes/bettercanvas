@@ -19,7 +19,7 @@ import utils.UserUtils;
  */
 public class User {
     public long userID;
-    public String name = "";
+    public String name = "EM";
     public String surName = "";
     public String email = "";
     private String password = "";
@@ -30,6 +30,58 @@ public class User {
     public String picture = "";
     public Timestamp birthDate;
     public String country = "";
+
+    public long getUserID() {
+        return userID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getSinif() {
+        return sinif;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public Timestamp getBirthDate() {
+        return birthDate;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+    
+    public String getFullname(){return this.name + " " + this.surName;}
+    
+    
     
     public Boolean verifyPassword(String password){
         if(UserUtils.hashPassword(password).equals(this.password)) return true;

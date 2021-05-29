@@ -61,3 +61,13 @@ function showImage(){
   const file = elt.files[0];
   target.src = URL.createObjectURL(file);
 }
+
+function hideNewCourse(){
+  const elt = document.getElementById("newcourse");
+  elt.style.display = "none";
+}
+
+function showNewCourse(){
+  const elt = document.getElementById("newcourse");
+  elt.style.display = "block";
+}
