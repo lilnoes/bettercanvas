@@ -52,3 +52,12 @@ function showUpload() {
   const elt = document.getElementById("registerform:picture");
   elt.click();
 }
+
+function showImage(){
+  console.log("yuup");
+  const elt = document.getElementById("registerform:picture");
+  if(elt.files.length < 1) return;
+  const target = document.getElementById("registerform:uploaded");
+  const file = elt.files[0];
+  target.src = URL.createObjectURL(file);
+}

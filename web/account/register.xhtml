@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 <h:head>
     <title>BetterCanvas - New Account</title>
     <!-- <h:outputStylesheet library="css" name="tails.css" /> -->
     <link href="../resources/css/tails.css" rel="stylesheet" />
-    <h:outputScript library="js" name="functions.js"/>
+    <h:outputScript library="js" name="functions.js" />
 </h:head>
 <h:body>
     <div class="w-full h-full relative">
-        <h:form id="registerform" enctype="multipart/form-data">
+        <h:form id="registerform">
             <div class="w-[40%] mx-auto mt-5 rounded-lg mb-5 shadow-lg bg-gradient-to-br from-red-600 to-red-900">
                 <div class="mb-3">
                     <p class="text-5xl text-white font-bold text-center p-2">
@@ -21,12 +21,13 @@
                 </div>
 
                 <div class="px-3">
+
                     <div class="text-red-700 relative mt-3">
                         <label for="name" class="block text-white font-bold">Name
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="name"
-                            validatorMessage="Name should not exceed 30 characters" value="#{userData.name}">
-                            <f:validateLength maximum="30" />
+                            validatorMessage="Surname should be between 4 and 30 characters" value="#{userData.name}">
+                            <f:validateLength maximum="30" minimum="4" />
                         </h:inputText>
                         <h:message id="namemessage" for="name" class="text-white text-sm relative top-[-5px]" />
                     </div>
@@ -35,8 +36,8 @@
                         <label for="surname" class="block text-white font-bold">Surname
                         </label>
                         <h:inputText class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide" id="surname"
-                            validatorMessage="Surname should not exceed 30 characters" value="#{userData.surName}">
-                            <f:validateLength maximum="30" />
+                            validatorMessage="Surname should be between 4 and 30 characters" value="#{userData.surName}">
+                            <f:validateLength maximum="30" minimum="4" />
                         </h:inputText>
                         <h:message for="surname" class="text-white text-sm relative top-[-5px]" />
                     </div>
@@ -49,6 +50,18 @@
                             <f:ajax render="emailmessage titlediv yeardiv" />
                         </h:inputText>
                         <h:message id="emailmessage" for="email" class="text-white text-sm relative top-[-5px]" />
+                    </div>
+
+
+
+                    <div class="text-red-700 mt-3">
+                        <label for="birthdate" class="block text-white font-bold">Birthdate
+                        </label>
+                        <h:inputText p:type="date" class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
+                            id="birthdate" value="#{userData.birthDate}" p:max="#{localConfig.minDate}">
+                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                        </h:inputText>
+                        <h:message for="birthdate" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
                     <h:panelGroup id="titlediv">
@@ -81,16 +94,6 @@
                     </h:panelGroup>
 
                     <div class="text-red-700 mt-3">
-                        <label for="birthdate" class="block text-white font-bold">Birthdate
-                        </label>
-                        <h:inputText p:type="date" class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
-                            id="birthdate" value="#{userData.birthDate}" p:max="#{localConfig.minDate}">
-                            <f:convertDateTime pattern="yyyy-MM-dd" />
-                        </h:inputText>
-                        <h:message for="birthdate" class="text-white text-sm relative top-[-5px]" />
-                    </div>
-
-                    <div class="text-red-700 mt-3">
                         <label for="country" class="block text-white font-bold">Country
                         </label>
                         <h:selectOneMenu class="w-full h-7 text-black rounded-lg px-1 font-bold tracking-wide"
@@ -98,14 +101,6 @@
                             <f:selectItems value="#{globalConfig.countries}" var="item" />
                         </h:selectOneMenu>
                     </div>
-
-                    <div class="text-red-700 mt-3">
-                        <h:inputFile value="#{userData.picture}" class="hidden" id="picture"/>
-                        <p><button type="button" class="text-white font-bold" onclick="showUpload()">+ Add Profile picture</button>
-                            <img src="/resources/images/ishimwe.JPG" class="ml-5 inline w-10 h-10"/>
-                        </p>
-                    </div>
-
 
                     <div class="text-red-700 relative mt-3">
                         <label for="newpassword" class="block text-white font-bold">Password
@@ -135,15 +130,17 @@
                             class="text-white text-sm relative top-[-5px]" />
                     </div>
 
+
+
                     <div>
                         <div class="float-left text-red-800">
                             <p class="mt-3 text-sm text-white font-bold">Have an account?</p>
                             <h:link outcome="/account/login" value="Login" class="text-white underline" />
                         </div>
-                        <div class="float-right">
-                            <h:commandLink value="Register" action="#{userData.register}"
+                        <div class="">
+                            <h:commandButton value="Register" action="#{userData.register}"
                                 class="float-right p-2 px-24 bg-white rounded-xl text-red-800 font-bold text-xl border-0 mt-1 cursor-pointer">
-                            </h:commandLink>
+                            </h:commandButton>
                         </div>
                         <div class="clear-both"></div>
                     </div>
