@@ -5,17 +5,26 @@
  */
 package account;
 
+import config.SessionData;
+import java.io.File;
+import java.io.Serializable;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Date;
-import javax.enterprise.context.RequestScoped;
+import java.util.Properties;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import javax.sql.rowset.CachedRowSet;
+import models.User;
 import org.apache.derby.client.am.DateTime;
 import utils.DatabaseUtils;
 import utils.UserUtils;
@@ -26,7 +35,7 @@ import utils.UserUtils;
  */
 @SessionScoped
 @ManagedBean(name = "userData")
-public class UserData {
+public class UserData implements Serializable {
 
     private String name = "";
     private String surName = "";
@@ -37,9 +46,9 @@ public class UserData {
     private Date birthDate;
     private String country = "Turkey";
     private String faculty = "";
-    private Part picture;
     private String newPassword = "";
     private String confPassword = "";
+    private static String UPLOADS = "/mnt/leon/leon/projects/BetterCanvas/web/resources/images";
 
     public String getName() {
         return name;
@@ -97,16 +106,6 @@ public class UserData {
         this.faculty = faculty;
     }
 
-    public Part getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Part picture) {
-        this.picture = picture;
-    }
-    
-    
-
     public Date getBirthDate() {
         return birthDate;
     }
@@ -139,12 +138,22 @@ public class UserData {
         this.confPassword = confPassword;
     }
 
+//    public void upload(AjaxBehaviorEvent evt){
+//        System.out.println("event ajax upload");
+//        String filename = Paths.get(picture.getSubmittedFileName()).toString();
+//        System.out.println(filename);
+//        try{
+//        File file = new File(UPLOADS, filename);
+//        Files.copy(picture.getInputStream(), file.toPath());
+//        }catch(Exception e){e.printStackTrace();}
+//    }
+//    
     public String register() {
         String outcome = "#";
         String sql = "insert into users\n"
-                + "(name, surname, email, password, type, title, sinif, birthDate, country)\n"
+                + "(name, surname, email, password, type, title, sinif, faculty, birthDate, country)\n"
                 + "values\n"
-                + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
             statement.setString(1, name);
@@ -154,8 +163,9 @@ public class UserData {
             statement.setString(5, type);
             statement.setString(6, title);
             statement.setInt(7, year);
-            statement.setTimestamp(8, new Timestamp(birthDate.getTime()));
-            statement.setString(9, country.toLowerCase());
+            statement.setString(8, faculty);
+            statement.setTimestamp(9, new Timestamp(birthDate.getTime()));
+            statement.setString(10, country.toLowerCase());
             int res = statement.executeUpdate();
             if (res == 0) {
                 FacesContext.getCurrentInstance().addMessage("registerform:confpassword", new FacesMessage("Try registering again, error occured"));
@@ -163,33 +173,36 @@ public class UserData {
             statement.close();
             return "login";
         } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
 
     }
 
     public String login() {
-        String outcome = null;
-        String sql = "select * from users\n"
-                + "where email=? and password=?\n"
-                + "fetch first 1 rows only";
-        try {
-            PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
-            statement.setString(1, email);
-            statement.setString(2, UserUtils.hashPassword(newPassword));
-            ResultSet res = statement.executeQuery();
-            if (!res.next()) {
-                outcome = null;
-                FacesContext.getCurrentInstance().addMessage("loginform:password", new FacesMessage("Email or Password is invalid"));
-            } else {
-                outcome = "dashboard";
-            }
-            statement.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        User user = User.fetch(email);
+        if (user == null || !user.verifyPassword(newPassword)) {
+            FacesContext.getCurrentInstance().addMessage("loginform:password", new FacesMessage("Email or Password is invalid"));
+            return null;
         }
-        return outcome;
 
+        SessionData session = new SessionData();
+        session.setUser(user);
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("session", session);
+        if (user.type.equals("teacher")) {
+            return "/teacher/index";
+        } else {
+            return "/student/index";
+        }
+    }
+
+    public String logout() {
+        SessionData session = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("session");
+        if (session == null) {
+            return null;
+        }
+        session.setUser(null);
+        return null;
     }
 
 }

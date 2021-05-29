@@ -74,6 +74,8 @@ public class DatabaseUtils {
 //type varchar (10) not null,
 //title varchar (50),
 //sinif smallint,
+//faculty varchar(50),
+//picture varchar(50),
 //birthDate timestamp,
 //country varchar(15)
 //)
@@ -88,6 +90,8 @@ public class DatabaseUtils {
                 + "type varchar (10) not null,\n"
                 + "title varchar (50),\n"
                 + "sinif smallint,\n"
+                + "faculty varchar(50),\n"
+                + "picture varchar(50),\n"
                 + "birthDate timestamp,\n"
                 + "country varchar(15)\n"
                 + ")";
