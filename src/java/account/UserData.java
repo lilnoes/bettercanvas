@@ -153,7 +153,7 @@ public class UserData implements Serializable {
         String sql = "insert into users\n"
                 + "(name, surname, email, password, type, title, sinif, faculty, birthDate, country)\n"
                 + "values\n"
-                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
             statement.setString(1, name);
@@ -180,7 +180,7 @@ public class UserData implements Serializable {
     }
 
     public String login() {
-        User user = User.fetch(email);
+        User user = User.fetchByEmail(email);
         if (user == null || !user.verifyPassword(newPassword)) {
             FacesContext.getCurrentInstance().addMessage("loginform:password", new FacesMessage("Email or Password is invalid"));
             return null;

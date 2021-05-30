@@ -23,7 +23,7 @@ public class SessionData implements Serializable{
     public String getEm(){return em;}
 
     public User getUser() {
-        if(user == null) user = User.fetch("ishimwe@ogr.iuc.edu.tr");
+        if(user == null) user = User.fetchByEmail("ishimwe@ogr.iuc.edu.tr");
         return user;
     }
     
