@@ -7,6 +7,7 @@ package models;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -88,7 +89,24 @@ public class User {
         return false;
     }
     
-    public static User fetch(String email){
+    public static User getUser(ResultSet res) throws SQLException{
+        User user = new User();
+        user.userID = res.getInt(1);
+        user.name = res.getString(2);
+        user.surName = res.getString(3);
+        user.email = res.getString(4);
+        user.password = res.getString(5);
+        user.type = res.getString(6);
+        user.title = res.getString(7);
+        user.sinif = res.getString(8);
+        user.faculty = res.getString(9);
+        user.picture = res.getString(10);
+        user.birthDate = res.getTimestamp(11);
+        user.country = res.getString(12);
+        return user;
+    }
+    
+    public static User fetchByEmail(String email){
         User user = null;
         String sql = "select * from users\n"
                 + "where email = ?"
@@ -98,19 +116,7 @@ public class User {
             statement.setString(1, email);
             ResultSet res = statement.executeQuery();
             if (!res.next()) return user;
-            user = new User();
-            user.userID = res.getShort(1);
-            user.name = res.getString(2);
-            user.surName = res.getString(3);
-            user.email = res.getString(4);
-            user.password = res.getString(5);
-            user.type = res.getString(6);
-            user.title = res.getString(7);
-            user.sinif = res.getString(8);
-            user.faculty = res.getString(9);
-            user.picture = res.getString(10);
-            user.birthDate = res.getTimestamp(11);
-            user.country = res.getString(12);
+            user = getUser(res);
             statement.close();
         } catch (Exception e) {
             e.printStackTrace();

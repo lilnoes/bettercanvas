@@ -102,7 +102,35 @@ public class DatabaseUtils {
         createUsersTable();
     }
 
-//    public static Boolean createUsersTable(){
-//        
-//    }
+    public static void createCoursesTable() {
+//        create table courses
+//(
+//ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//name varchar(50),
+//shortName varchar(50),
+//sinif smallint,
+//faculty varchar(50),
+//description varchar(100),
+//requirements varchar(100),
+//creationDate timestamp,
+//locked boolean,
+//createdBy int,
+//students int
+//)
+        String sql = "create table courses\n"
+                + "(\n"
+                + "ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "name varchar(50),\n"
+                + "shortName varchar(50),\n"
+                + "sinif smallint,\n"
+                + "faculty varchar(50),\n"
+                + "description varchar(100),\n"
+                + "requirements varchar(100),\n"
+                + "creationDate timestamp,\n"
+                + "locked boolean,\n"
+                + "createdBy int,\n"
+                + "students int\n"
+                + ")";
+        execute(sql);
+    }
 }
