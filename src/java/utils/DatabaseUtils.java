@@ -133,6 +133,27 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
+
+    public static void createStudentCoursesTable() {
+//create table studentCourses
+//(
+//id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//courseID int,
+//studentID int,
+//pass Boolean with default false,
+//status varchar(10) with default 'waiting'
+//)
+
+        String sql = "create table studentCourses\n"
+                + "(\n"
+                + "id INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "courseID int,\n"
+                + "studentID int,\n"
+                + "pass Boolean with default false,\n"
+                + "status varchar(10) with default 'waiting'\n"
+                + ")";
+        execute(sql);
+    }
     
     
     
