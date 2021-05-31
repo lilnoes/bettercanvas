@@ -66,6 +66,10 @@ function hideNewCourse(){
   const elt = document.getElementById("newcourse");
   elt.style.display = "none";
 }
+function hideNewCourseAjax(evt){
+  if(evt.status == "success") hideNewCourse();
+  console.log(evt);
+}
 
 function showNewCourse(){
   const elt = document.getElementById("newcourse");

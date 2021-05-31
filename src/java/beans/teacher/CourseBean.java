@@ -11,6 +11,8 @@ import java.time.Instant;
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
@@ -22,8 +24,8 @@ import utils.UserUtils;
  *
  * @author leon
  */
-@ViewScoped
 @ManagedBean(name = "courseBean")
+@ViewScoped
 public class CourseBean {
 
     private String name = "";
@@ -55,6 +57,7 @@ public class CourseBean {
             if (res == 0) {
                 throw new AbortProcessingException();
             }
+            FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
             statement.close();
         } catch (Exception e) {
             e.printStackTrace();

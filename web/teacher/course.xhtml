@@ -2,18 +2,21 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
     <title>Facelet Title</title>
 </h:head>
 <h:body>
     <ui:composition>
-        <div id="newcourse" class="container mainForm fixed top-0 bg-white h-full w-full z-10">
-            <h:form class="mt-12 w-[75%]">
+        <div id="newcourse" class="container mainForm fixed top-0 bg-white h-full w-full z-10" style="display: none;">
+            <h:form class="mt-12 w-[75%]" id="form">
                 <div class="mb-3">
                     <label for="courseName" class="form-label">Course name</label>
-                    <h:inputText class="form-control" id="coursename" value="#{courseBean.name}"/>
+                    <h:inputText required="true" class="form-control" id="coursename" value="#{courseBean.name}">
+                        <f:validateLength minimum="6"/>
+                    </h:inputText>
+                    <h:message for="coursename" id="emma"/>
                 </div>
 
 
@@ -21,7 +24,10 @@
                 <div class=" row smInput">
                     <div class="col-md-6 md-3">
                         <label for="shortName" class="form-label">Course Short name</label>
-                        <h:inputText class="form-control" id="shortName" value="#{courseBean.shortName}"/>
+                        <h:inputText required="true" class="form-control" id="shortName" value="#{courseBean.shortName}">
+                            <f:validateLength minimum="3" maximum="3"/>
+                        </h:inputText>
+                        <h:message for="shortName"/>
                     </div>
                 </div>
 
@@ -52,7 +58,8 @@
 
                 <div class="md-3">
                     <label for="description" class="form-label">Description</label>
-                    <h:inputTextarea class="form-control" id="description" value="#{courseBean.description}"/>
+                    <h:inputTextarea class="form-control" id="description"
+                                     value="#{courseBean.description}"/>
                 </div>
                 <div class="md-3">
                     <label for="Requirement" class="form-label"> Requirements</label>
@@ -63,8 +70,8 @@
                 <br />
 
                 <div class="flex flex-row text-2xl justify-between">
-                    <h:commandButton type="button" class="bg-red-600 text-white w-[48%] p-2 rounded-lg" value="Submit">
-                        <f:ajax listener="#{courseBean.register}"/>
+                    <h:commandButton class="bg-red-600 text-white w-[48%] p-2 rounded-lg" value="Submit">
+                        <f:ajax listener="#{courseBean.register}" onevent="hideNewCourseAjax" render="@form" execute="@form"/>
                     </h:commandButton>
                 <button type="button" class="bg-red-600 text-white w-[48%] p-2 rounded-lg" onclick="hideNewCourse()">Cancel</button>
                 </div>

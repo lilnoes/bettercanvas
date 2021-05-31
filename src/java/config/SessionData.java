@@ -15,7 +15,7 @@ import models.User;
  * @author leon
  */
 @SessionScoped
-@ManagedBean(name = "sessionData")
+@ManagedBean(name = "sessionData", eager = true)
 public class SessionData implements Serializable{
     private User user = null;
     private String em = "em";
