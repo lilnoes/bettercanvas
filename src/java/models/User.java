@@ -19,7 +19,7 @@ import utils.UserUtils;
  * @author leon
  */
 public class User {
-    public long userID;
+    public int userID;
     public String name = "EM";
     public String surName = "";
     public String email = "";
@@ -32,7 +32,7 @@ public class User {
     public Timestamp birthDate;
     public String country = "";
 
-    public long getUserID() {
+    public int getUserID() {
         return userID;
     }
 

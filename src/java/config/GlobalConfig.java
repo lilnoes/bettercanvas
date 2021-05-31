@@ -21,9 +21,9 @@ import org.apache.derby.client.am.DateTime;
 @ApplicationScoped
 public class GlobalConfig {
 
-    private String countries[] = {"Afghanistan", "Angola", "Rwanda", "Turkey"};
+    private String countries[] = {"", "Afghanistan", "Angola", "Rwanda", "Turkey"};
     private int years[] = {1, 2, 3, 4};
-    private String faculties[] = {"Computer Engineering", "Electrical Engineering",
+    private String faculties[] = {"", "Computer Engineering", "Electrical Engineering",
         "Control Engineering", "Mechanical Engineering"};
 
     public String[] getCountries() {

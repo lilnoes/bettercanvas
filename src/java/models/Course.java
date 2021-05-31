@@ -82,4 +82,50 @@ public class Course {
         }
         return courses;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public int getSinif() {
+        return sinif;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getRequirements() {
+        return requirements;
+    }
+
+    public Timestamp getCreationDate() {
+        return creationDate;
+    }
+
+    public Boolean getLocked() {
+        return locked;
+    }
+
+    public int getCreatedBy() {
+        return createdBy;
+    }
+
+    public int getStudents() {
+        return students;
+    }
+    
+    
 }

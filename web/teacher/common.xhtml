@@ -53,16 +53,13 @@
 
     <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
         <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
-        <div class="overflow-y-auto w-full">
-            <div class="bg-white m-3 p-3 rounded-xl">
-                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
-                <p>Course shortword</p>
-            </div>
-
-            <div class="bg-white m-3 p-3 rounded-xl">
-                <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
-                <p>Course shortword</p>
-            </div>
+        <div class="overflow-y-auto w-full h-[98%]">
+            <ui:repeat value="#{teacherBean.courses}" var="course">
+                <div class="bg-white m-3 p-3 rounded-xl">
+                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">#{course.name}</a></h1>
+                    <p>#{course.shortName}</p>
+                </div>
+            </ui:repeat>
 
         </div>
     </div>
