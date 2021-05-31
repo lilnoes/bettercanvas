@@ -133,4 +133,25 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
+    
+    
+    
+    /*public static void createStudentCoursesTable() {
+//create table student courses
+//(
+//ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//courseID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//studentID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//semester varchar (20),
+//passStatus NUMBER(0)
+
+        String sql = "create table studentcourses\n"
+                + "(\n"
+                + "courseID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "studentID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "semester varchar (20),\n"
+                + "passStatus NUMBER(0),\n"
+                + ")";
+        execute(sql);
+    }*/
 }

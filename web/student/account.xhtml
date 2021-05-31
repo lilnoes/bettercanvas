@@ -2,7 +2,8 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      >
 
     <h:head>
 
@@ -28,10 +29,18 @@
                     .btn{
                         color:white;
                         background-color: red;
+                        margin-bottom: 30px;
                     }
                     .btn:hover{
                         color:white;
                     }
+                    .inputPassword{
+                        border: 1px solid red;
+                        margin-top:2px;
+                        color:black;
+                        border-radius: 2px;
+                    }
+                    
                 </style>
             </ui:define>
 
@@ -66,13 +75,55 @@
                                             <!--change the pw-->
                                             <div class="col-md-6">
                                                 <button class="btn" type="submit">CHANGE PASSWORD</button>
+                                                
+                                                <h:form>
+                                                    <h:panelGrid columns="1" style="height: 100%; width:456px;">
+                                                        <h:outputText value="Actual Password"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                                        requiredMessage="password is required"/></p>
+                                                        <h:message for="Actual password" />
+                                                        
+                                                        <h:outputText value="New Password"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                                        requiredMessage=" New password is required"/></p>
+                                                        <h:message for="new password" />
+                                                        
+                                                        <h:outputText value="Confirm Password"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.confPassword}"
+                                                                        requiredMessage="New password is required"/></p>
+                                                        <h:message for="Confirm password" />
+                                                    </h:panelGrid>
+                                                    <h:commandButton class="text-center btn" value="Submit"></h:commandButton>
+                                    
+                                                </h:form>
 
                                             </div>
                                             <!--change the email-->
                                             <div class="col-md-6">
                                                 <button class="btn" type="submit">CHANGE EMAIL ADRESS</button>
+                                                <h:form>
+                                                    <h:panelGrid columns="1" style="height: 100%; width:456px;">
+                                                        <h:outputText value="Actual Email"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                                        requiredMessage="Email is required"/></p>
+                                                        <h:message for="Actual Email" />
+                                                        
+                                                        <h:outputText value="New Email"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                                        requiredMessage=" New Email is required"/></p>
+                                                        <h:message for="new Email" />
+                                                        
+                                                        <h:outputText value="Confirm Email"/>
+                                                        <p><h:inputText required="true"  class="inputPassword" value="#{userData.confPassword}"
+                                                                        requiredMessage="New Email is required"/></p>
+                                                        <h:message for="Confirm Email" />
+                                                    </h:panelGrid>
+                                                    <h:commandButton class="text-center btn" value="Submit"></h:commandButton>
+                                    
+                                                </h:form>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
 
