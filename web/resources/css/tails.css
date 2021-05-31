@@ -137,6 +137,9 @@
 .mt-12 {
     margin-top: 3rem
 }
+.ml-2 {
+    margin-left: 0.5rem
+}
 .ml-\[-20\%\] {
     margin-left: -20%
 }
@@ -258,6 +261,10 @@
 .bg-red-800 {
     --tw-bg-opacity: 1;
     background-color: rgba(153, 27, 27, var(--tw-bg-opacity))
+}
+.bg-green-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(6, 95, 70, var(--tw-bg-opacity))
 }
 .bg-red-600 {
     --tw-bg-opacity: 1;
