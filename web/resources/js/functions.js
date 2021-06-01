@@ -75,3 +75,19 @@ function showNewCourse(){
   const elt = document.getElementById("newcourse");
   elt.style.display = "block";
 }
+
+function showAllowStudents(){
+  const elt = document.getElementById("allowstudents");
+  elt.style.display = "block";
+}
+
+function hideAllowStudents(){
+  const elt = document.getElementById("allowstudents");
+  elt.style.display = "none";
+}
+
+function hideStudent(evt, elt){
+  if(evt.status != "success") return false;
+  evt.source.parentElement.parentElement.style.display = "none";
+  return false;
+}

@@ -118,6 +118,7 @@ public class User {
             if (!res.next()) return user;
             user = getUser(res);
             statement.close();
+            statement.getConnection().close();
         } catch (Exception e) {
             e.printStackTrace();
         }

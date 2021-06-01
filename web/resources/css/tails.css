@@ -143,6 +143,9 @@
 .ml-\[-20\%\] {
     margin-left: -20%
 }
+.mr-\[25\%\] {
+    margin-right: 25%
+}
 .block {
     display: block
 }
