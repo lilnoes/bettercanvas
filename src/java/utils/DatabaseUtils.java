@@ -178,7 +178,7 @@ public class DatabaseUtils {
 //summary varchar(100),
 //content varchar(200),
 //createdAt TimeStamp,
-//type varchar(10),
+//type varchar(15),
 //readStatus boolean
 //)
 
@@ -192,7 +192,7 @@ public class DatabaseUtils {
                 + "summary varchar(100),\n"
                 + "content varchar(200),\n"
                 + "createdAt TimeStamp,\n"
-                + "type varchar(10),\n"
+                + "type varchar(15),\n"
                 + "readStatus boolean\n"
                 + ")";
         execute(sql);

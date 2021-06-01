@@ -2,72 +2,74 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--bootstrap-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+                integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js"
+                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
         crossorigin="anonymous"></script>
-    <!--font awesome and google icon-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
+        <!--font awesome and google icon-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
 
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-    <h:outputStylesheet library="css" name="tails.css" />
-    <h:outputStylesheet library="css" name="navbar.css" />
-    <ui:insert name="style"></ui:insert>
-</h:head>
-<h:body class="">
-    <div class="w-full fixed h-[70px]">
-        <ui:insert name="title">
-            <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Name of the course</h1>
-        </ui:insert>
-        <hr class="border-red-800 m-[-10px]" />
-    </div>
-    <div class="fixed top-[73px] left-0 w-[20%]">
-        <div class="space-y-6 border-r border-red-800 mx-2">
-            <a class="text-blue-800 text-2xl underline block" href="home.xhtml">Home</a>
-            <a class="text-blue-800 text-2xl block" href="announcement.xhtml">Announcements</a>
-            <a class="text-blue-800 text-2xl block" href="inbox.xhtml">Messages</a>
-            <a class="text-blue-800 text-2xl block" href="grades.xhtml">Grades</a>
-            <a class="text-blue-800 text-2xl block" href="people.xhtml">People</a>
-            <a class="text-blue-800 text-2xl block" href="quizzes.xhtml">Quizzes</a>
-        </div>
-    </div>
-
-    <div class="fixed top-[73px] right-0 w-[80%] bottom-[80px] overflow-y-auto">
-        <ui:insert name="content">
-            <p>Paragaraph 1</p>
-            <p>Paragaraph 1</p>
-            <p>Paragaraph 1</p>
-            <p>Paragaraph 1</p>
-        </ui:insert>
-    </div>
-
-    <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
-        <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
-        <div class="overflow-y-auto w-full h-[98%]">
-            <ui:repeat value="#{teacherBean.courses}" var="course">
-                <div class="bg-white m-3 p-3 rounded-xl">
-                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">#{course.name}</a></h1>
-                    <p>#{course.shortName}</p>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <h:outputStylesheet library="css" name="tails.css" />
+        <h:outputStylesheet library="css" name="navbar.css" />
+        <ui:insert name="style"></ui:insert>
+    </h:head>
+    <h:body class="">
+        <f:view>
+            <ui:insert name="metadata" />
+            <div class="w-full fixed h-[70px]">
+                <ui:insert name="title">
+                    <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Name of the course</h1>
+                </ui:insert>
+                <hr class="border-red-800 m-[-10px]" />
+            </div>
+            <h:panelGroup rendered="#{not empty teacherBean.currentCourse}">
+                <c:set value="#{teacherBean.currentCourse}" var="ccourse"/>
+            <div class="fixed top-[73px] left-0 w-[20%] sidebar">
+                <div class="space-y-6 border-r border-red-800 mx-2">
+                    <a class="text-blue-800 text-2xl underline block" href="home.xhtml?course=#{ccourse.id}">Home</a>
+                    <a class="text-blue-800 text-2xl block" href="announcement.xhtml?course=#{ccourse.id}">Announcements</a>
+                    <a class="text-blue-800 text-2xl block" href="inbox.xhtml?course=#{ccourse.id}">Messages</a>
+                    <a class="text-blue-800 text-2xl block" href="grades.xhtml?course=#{ccourse.id}">Grades</a>
+                    <a class="text-blue-800 text-2xl block" href="people.xhtml?course=#{ccourse.id}">People</a>
+                    <a class="text-blue-800 text-2xl block" href="quizzes.xhtml?course=#{ccourse.id}">Quizzes</a>
                 </div>
-            </ui:repeat>
+            </div>
+            </h:panelGroup>
 
-        </div>
-    </div>
+            <div class="fixed top-[73px] right-0 w-[80%] bottom-[80px] overflow-y-auto content">
+                <ui:insert name="content" />
+            </div>
 
-    <ui:include src="footer.xhtml" />
-    <h:outputScript library="js" name="functions.js" />
+            <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
+                <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
+                <div class="overflow-y-auto w-full h-[98%]">
+                    <ui:repeat value="#{teacherBean.courses}" var="course" varStatus="status">
+                        <div class="bg-white m-3 p-3 rounded-xl">
+                            <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="home.xhtml?course=#{course.id}">#{course.name}</a></h1>
+                            <p>#{course.shortName}</p>
+                        </div>
+                    </ui:repeat>
 
+                </div>
+            </div>
 
-</h:body>
+            <ui:include src="footer.xhtml" />
+            <h:outputScript library="js" name="functions.js" />
+
+        </f:view>
+    </h:body>
 
 </html>
