@@ -197,4 +197,58 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
+    
+     public static void createMessagesTable() {
+     //create table messages
+//(
+//messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//from int,
+//to int,
+//content varchar(50),
+//date TimeStamp,
+//)
+
+
+        String sql = "create table messages\n"
+                + "(\n"
+                + "messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "from int,\n"
+                + "to int,\n"
+                + "content varchar(50),\n"
+                + "date TimeStamp,\n "
+                + ")";
+        execute(sql);
+    }
+     
+     public static void createGradesTable() {
+
+
+        String sql = "create table grades\n"
+                + "(\n"
+                + "userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "courseId int,\n"
+                + "grades double,\n"
+                + "range int,\n"
+                +")";
+        execute(sql);
+    }
+     
+     
+     public static void createQuizzTable() {
+
+
+        String sql = "create table grades\n"
+                + "(\n"
+                + "teacherId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "quizzname varchar(30),\n"
+                + "file varchar(300),\n"
+                + "startDate TimeStamp,\n"
+                + "courseId int,\n"
+                + "durantion int,\n"
+                +")";
+        execute(sql);
+    }
+     
+     
 }
+
