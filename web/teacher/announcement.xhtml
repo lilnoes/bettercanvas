@@ -22,11 +22,13 @@
             <div class="container-fluid row">
                 <div class="col-md-9">
                     <div class="ancmt">
+                        <ui:repeat value="#{teacherBean.announcements}" var="announcement">
                         <div class=" ">
-                            <h4>Bilgisayar mughendisligine giris</h4>
-                            <p>summary is going to be here </p>
-                            <span>23/07/2021 16pm</span>
+                            <h4>#{announcement.getColumnObject(1)}</h4>
+                            <p>#{announcement.getColumnObject(2)} </p>
+                            <span>#{announcement.getColumnObject(2)}</span>
                         </div>
+                        </ui:repeat>
                         <div class=" ">
                             <hr />
                             <h4>Bilgisayar mughendisligine giris</h4>

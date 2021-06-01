@@ -71,8 +71,8 @@ public class AllowStudentsBean {
             _students = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from studentcourses");
             _students.populate(stmt.executeQuery());
-//            stmt.close();
-//            stmt.getConnection().close();
+            stmt.close();
+            stmt.getConnection().close();
             Collection<Row> rows = (Collection<Row>) _students.toCollection();
             students.addAll(rows);
         } catch (Exception e) {
