@@ -5,9 +5,11 @@
  */
 package beans.teacher;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.Map;
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -26,7 +28,7 @@ import utils.UserUtils;
  */
 @ManagedBean(name = "courseBean")
 @ViewScoped
-public class CourseBean {
+public class CourseBean implements Serializable{
 
     private String name = "";
     private String shortName = "";
@@ -113,6 +115,4 @@ public class CourseBean {
     public void setRequirements(String requirements) {
         this.requirements = requirements;
     }
-    
-    
 }

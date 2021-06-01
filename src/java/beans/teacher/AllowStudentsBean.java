@@ -8,6 +8,7 @@ package beans.teacher;
 import com.sun.faces.facelets.el.TagValueExpression;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,7 @@ import utils.DatabaseUtils;
  */
 @SessionScoped
 @ManagedBean(name = "allowStudentsBean")
-public class AllowStudentsBean {
+public class AllowStudentsBean implements Serializable{
 
     CachedRowSetImpl _students;
     List<Row> students;
