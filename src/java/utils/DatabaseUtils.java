@@ -166,4 +166,35 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
+
+    public static void createAnnouncementsTable() {
+//create table announcements
+//(
+//id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//courseID int,
+//createdBY int,
+//userID int,
+//title varchar(50),
+//summary varchar(100),
+//content varchar(200),
+//createdAt TimeStamp,
+//type varchar(10),
+//readStatus boolean
+//)
+
+        String sql = "create table announcements\n"
+                + "(\n"
+                + "id INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "courseID int,\n"
+                + "createdBY int,\n"
+                + "userID int,\n"
+                + "title varchar(50),\n"
+                + "summary varchar(100),\n"
+                + "content varchar(200),\n"
+                + "createdAt TimeStamp,\n"
+                + "type varchar(10),\n"
+                + "readStatus boolean\n"
+                + ")";
+        execute(sql);
+    }
 }
