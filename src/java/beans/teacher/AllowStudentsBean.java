@@ -5,6 +5,7 @@
  */
 package beans.teacher;
 
+import com.sun.faces.facelets.el.TagValueExpression;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
 import java.sql.PreparedStatement;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.TreeMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 import utils.DatabaseUtils;
 
 /**
@@ -28,16 +30,36 @@ public class AllowStudentsBean {
 
     CachedRowSetImpl _students;
     List<Row> students;
+    private int currentUserID;
 
-    public void accept() {
-        try {
-            _students = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from studentcourses where status = 'waiting'");
-            _students.populate(stmt.executeQuery());
-            stmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setCurrentUserID(int currentUserID) {
+        this.currentUserID = currentUserID;
+    }
+
+    public int getCurrentUserID() {
+        return currentUserID;
+    }
+    
+    
+    
+    
+
+    public void accept(int index) throws SQLException{
+        _students.absolute(index);
+        _students.updateString(5, "accepted");
+        _students.updateRow();
+        DatabaseUtils.acceptChanges(_students);
+        
+        System.out.println(_students.getObject(5));
+    }
+
+    public void deny(int index) throws SQLException{
+        _students.absolute(index);
+        _students.updateString(5, "rejected");
+        _students.updateRow();
+        DatabaseUtils.acceptChanges(_students);
+        
+        System.out.println(_students.getObject(5));
     }
 
     public List<Row> getStudents() {
@@ -45,21 +67,27 @@ public class AllowStudentsBean {
             return students;
         }
         students = new ArrayList<>();
-        accept();
         try {
-            Collection<Row> rows = (Collection<Row>)_students.toCollection();
+            _students = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from studentcourses");
+            _students.populate(stmt.executeQuery());
+//            stmt.close();
+//            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) _students.toCollection();
             students.addAll(rows);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return students;
     }
-    
-    public int getID(Row row){
+
+    public String getID(Row row) {
         int outcome = 0;
-        try{
-            outcome = (int)row.getColumnObject(1);
-        }catch(Exception e){e.printStackTrace();}
-        return outcome;
+        try {
+            outcome = (int) row.getColumnObject(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return String.valueOf(outcome);
     }
 }

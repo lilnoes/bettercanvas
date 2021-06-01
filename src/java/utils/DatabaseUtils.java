@@ -5,6 +5,7 @@
  */
 package utils;
 
+import com.sun.rowset.CachedRowSetImpl;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -41,11 +42,22 @@ public class DatabaseUtils {
 
     }
 
+    public static Boolean acceptChanges(CachedRowSetImpl res) {
+        try {
+            res.acceptChanges(getConnection());
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     public static Boolean execute(String sql) {
         try {
             Connection conn = getConnection();
             Statement statement = conn.createStatement();
             statement.execute(sql);
+            conn.close();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -154,25 +166,4 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
-    
-    
-    
-    /*public static void createStudentCoursesTable() {
-//create table student courses
-//(
-//ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
-//courseID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
-//studentID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
-//semester varchar (20),
-//passStatus NUMBER(0)
-
-        String sql = "create table studentcourses\n"
-                + "(\n"
-                + "courseID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
-                + "studentID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
-                + "semester varchar (20),\n"
-                + "passStatus NUMBER(0),\n"
-                + ")";
-        execute(sql);
-    }*/
 }

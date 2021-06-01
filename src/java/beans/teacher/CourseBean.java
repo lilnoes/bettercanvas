@@ -59,6 +59,7 @@ public class CourseBean {
             }
             FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
             statement.close();
+            statement.getConnection().close();
         } catch (Exception e) {
             e.printStackTrace();
         }

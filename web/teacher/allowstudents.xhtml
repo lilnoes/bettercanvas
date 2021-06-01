@@ -2,76 +2,92 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <title>Facelet Title</title>
-</h:head>
-<h:body>
-    <ui:composition>
-        <h:outputStylesheet library="css" name="allowstudents.css" />
-        <div id="allowstudents" class="container mainForm fixed top-0 bg-white h-full w-full z-10" style="display: none;">
-            <table class="mt-12 w-[75%]">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition>
+            <h:outputStylesheet library="css" name="allowstudents.css" />
+            <div id="allowstudents" class="container mainForm fixed top-0 bg-white h-full w-full z-10" style="display: none;">
 
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Year</th>
-                    <th>Faculty</th>
-                    <th>Action</th>
-                </tr>
+                <table class="mt-12 w-[75%] relative">
+                    <button class="bg-red-600 text-white p-2 rounded-lg absolute top-0 right-0 mr-[25%]" onclick="hideAllowStudents()">Close</button>
 
-                <div class="student">
                     <tr>
-                        <td>
-                            <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                class="float-start" alt="" />
-                        </td>
-                        <td>Centro joao </td>
-                        <td>1</td>
-                        <td>Computer Engineering</td>
-                        <td><button class="text-white bg-green-800 p-2">Allow</button>
-                        <button class="ml-2 text-white bg-red-600 p-2">Deny</button></td>
-
+                        <th></th>
+                        <th>Name</th>
+                        <th>Year</th>
+                        <th>Faculty</th>
+                        <th>Action</th>
                     </tr>
 
-                </div>
-                
-                <ui:repeat value="#{allowStudentsBean.students}" var="student">
+                    <h:form class="student">
+                        <tr>
+                            <td>
+                                <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
+                                     class="float-start" alt="" />
+                            </td>
+                            <td>Centro joao </td>
+                            <td>1</td>
+                            <td>Computer Engineering</td>
+                            <td>
+                                <h:commandButton class="text-white bg-green-800 p-2" value="Allow">
+                                    <f:ajax listener="#{allowStudentsBean.accept}" />
+                                    <f:attribute name="student" value="1" />
+                                </h:commandButton>
+                                <h:commandButton class="ml-2 text-white bg-red-600 p-2" value="Deny">
+                                    <f:ajax listener="#{allowStudentsBean.deny}" />
+                                </h:commandButton>
+                            </td>
+
+                        </tr>
+
+                    </h:form>
+
+                    <ui:repeat value="#{allowStudentsBean.students}" var="student" varStatus="status">
+                        <h:form class="student">
+                            <tr id="student#{status.index}">
+                                <td>
+                                    <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
+                                         class="float-start" alt="" />
+                                </td>
+                                <td>Centro joao </td>
+                                <td>1</td>
+                                <td>Computer Engineering - #{status.index}</td>
+                                <td>
+                                    <h:commandButton class="text-white bg-green-800 p-2" value="Allow">
+                                        <f:ajax listener="#{allowStudentsBean.accept(status.index)}" onevent="hideStudent"/>
+                                    </h:commandButton>
+                                    <h:commandButton class="ml-2 text-white bg-red-600 p-2" value="Deny">
+                                        <f:ajax listener="#{allowStudentsBean.deny(status.index)}" onevent="hideStudent"/>
+                                    </h:commandButton>
+                                </td>
+
+                            </tr>
+
+                        </h:form>
+                    </ui:repeat>
+
                     <div class="student">
                         <tr>
                             <td>
                                 <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
                                      class="float-start" alt="" />
                             </td>
-                            <td>Centro joao #{allowStudentsBean.getID(student)}</td>
+                            <td>Centro joao </td>
                             <td>1</td>
                             <td>Computer Engineering</td>
-                            <td><button class="text-white bg-green-800 p-2">Allow</button>
-                                <button class="ml-2 text-white bg-red-600 p-2">Deny</button></td>
+                            <td>Deny</td>
 
                         </tr>
 
                     </div>
-                </ui:repeat>
 
-                <div class="student">
-                    <tr>
-                        <td>
-                            <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                class="float-start" alt="" />
-                        </td>
-                        <td>Centro joao </td>
-                        <td>1</td>
-                        <td>Computer Engineering</td>
-                        <td>Deny</td>
-
-                    </tr>
-
-                </div>
-
-            </table>
-        </div>
-    </ui:composition>
-</h:body>
+                </table>
+            </div>
+        </ui:composition>
+    </h:body>
 
 </html>

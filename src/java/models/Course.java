@@ -61,6 +61,7 @@ public class Course {
             }
             course = getCourse(res);
             statement.close();
+            statement.getConnection().close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,6 +78,7 @@ public class Course {
             ResultSet res = statement.executeQuery();
             while(res.next()) courses.add(getCourse(res));
             statement.close();
+            statement.getConnection().close();
         } catch (Exception e) {
             e.printStackTrace();
         }

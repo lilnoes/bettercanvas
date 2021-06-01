@@ -171,6 +171,7 @@ public class UserData implements Serializable {
                 FacesContext.getCurrentInstance().addMessage("registerform:confpassword", new FacesMessage("Try registering again, error occured"));
             }
             statement.close();
+            statement.getConnection().close();
             return "login";
         } catch (Exception e) {
             e.printStackTrace();
