@@ -5,12 +5,16 @@
  */
 package models;
 
+import beans.teacher.TeacherBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.Instant;
 import javax.annotation.Resource;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
 import javax.sql.DataSource;
 
 /**
@@ -21,48 +25,25 @@ import javax.sql.DataSource;
 @Dependent
 public class message {
     
-
     public int messageId = 0;
     public int userTo = 0;
-    public double userTo = 0;
-    public int range = 0;
-
+    public String conetnt = "";
+    
+    
     /**
      * Creates a new instance of Grades
      */
     @Resource(name = "jdbc/lms")
     DataSource dataSource;
-    public void setUserId(int userId) {
-        this.userId = userId;
+    
+    public void setContent(String conetnt) {
+        this.conetnt = conetnt;
     }
-
-    public int getUserId() {
-        return userId;
+    public String getContent() {
+        return conetnt;
     }
-
-    public void setCourseId(int courseId) {
-        this.courseId = courseId;
-    }
-
-    public int getCourseId() {
-        return courseId;
-    }
-
-    public void setGrades(int grades) {
-        this.grades = grades;
-    }
-
-    public double getGrades() {
-        return grades;
-    }
-
-    public void setRange(int range) {
-        this.range = range;
-    }
-
-    public int getRange() {
-        return range;
-    }
+    
+    
 
     public String save() throws SQLException {
         if (dataSource == null) {
@@ -74,18 +55,19 @@ public class message {
             throw new SQLException("Unable to connect to DataSource");
         }
         try {
-            
+            TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
+
             PreparedStatement addEntry
                     = connection.prepareStatement("INSERT INTO messages "
-                            + "(mMESSAGEID,USERFROM,USERTO,CONTENT, DATE)"
+                            + "(MESSAGEID,USERFROM,USERTO,CONTENT, DATE)"
                             + "VALUES ( ?, ?, ?, ?, ?, ? )");
 
-            addEntry.setInt(1, get());
-            addEntry.setInt(2, getCourseId());
-            addEntry.setDouble(3, getGrades());
-            addEntry.setInt(4, getRange());
-
-            addEntry.executeUpdate(); // insert the entry
+            addEntry.setInt(1, messageId());
+            addEntry.setInt(2, teacherBean.getSession().getUser().userID);
+            addEntry.setDouble(3, getUserTo());
+            addEntry.setString(4, getContent());
+            addEntry.setTimestamp(5, Timestamp.from(Instant.now()));
+            addEntry.executeUpdate();
 
         } finally {
             connection.close();
