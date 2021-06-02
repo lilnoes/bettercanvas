@@ -202,8 +202,8 @@ public class DatabaseUtils {
      //create table messages
 //(
 //messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
-//from int,
-//to int,
+//userfrom int,
+//userto int,
 //content varchar(50),
 //date TimeStamp,
 //)
@@ -212,8 +212,8 @@ public class DatabaseUtils {
         String sql = "create table messages\n"
                 + "(\n"
                 + "messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
-                + "from int,\n"
-                + "to int,\n"
+                + "userfrom int,\n"
+                + "userto int,\n"
                 + "content varchar(50),\n"
                 + "date TimeStamp,\n "
                 + ")";
@@ -221,23 +221,38 @@ public class DatabaseUtils {
     }
      
      public static void createGradesTable() {
-
+//create table grades
+//(
+//userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//courseId int,
+//grades double,
+//range int
+//)
 
         String sql = "create table grades\n"
                 + "(\n"
                 + "userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
                 + "courseId int,\n"
                 + "grades double,\n"
-                + "range int,\n"
+                + "range int\n"
                 +")";
         execute(sql);
     }
      
      
      public static void createQuizzTable() {
+//create table quizz
+//(
+//teacherId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//quizzname varchar(30),
+//file varchar(300),
+//startDate TimeStamp,
+//courseId int,
+//durantion int
+//)
 
 
-        String sql = "create table grades\n"
+        String sql = "create table quizz\n"
                 + "(\n"
                 + "teacherId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
                 + "quizzname varchar(30),\n"
@@ -247,8 +262,12 @@ public class DatabaseUtils {
                 + "durantion int,\n"
                 +")";
         execute(sql);
-    }
+    }    
+
      
      
-}
+     
+} 
+     
+
 
