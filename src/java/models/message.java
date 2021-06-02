@@ -62,9 +62,9 @@ public class message {
                             + "(MESSAGEID,USERFROM,USERTO,CONTENT, DATE)"
                             + "VALUES ( ?, ?, ?, ?, ?, ? )");
 
-            addEntry.setInt(1, messageId());
+//            addEntry.setInt(1, messageId());
             addEntry.setInt(2, teacherBean.getSession().getUser().userID);
-            addEntry.setDouble(3, getUserTo());
+//            addEntry.setDouble(3, getUserTo());
             addEntry.setString(4, getContent());
             addEntry.setTimestamp(5, Timestamp.from(Instant.now()));
             addEntry.executeUpdate();
