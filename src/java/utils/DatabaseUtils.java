@@ -248,7 +248,7 @@ public class DatabaseUtils {
 //file varchar(300),
 //startDate TimeStamp,
 //courseId int,
-//durantion int
+//duration int
 //)
 
 
@@ -259,7 +259,7 @@ public class DatabaseUtils {
                 + "file varchar(300),\n"
                 + "startDate TimeStamp,\n"
                 + "courseId int,\n"
-                + "durantion int,\n"
+                + "duration int,\n"
                 +")";
         execute(sql);
     }    

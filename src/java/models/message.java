@@ -59,12 +59,11 @@ public class message {
 
             PreparedStatement addEntry
                     = connection.prepareStatement("INSERT INTO messages "
-                            + "(MESSAGEID,USERFROM,USERTO,CONTENT, DATE)"
-                            + "VALUES ( ?, ?, ?, ?, ?, ? )");
+                            + "(USERFROM,USERTO,CONTENT, DATE)"
+                            + "VALUES (?, ?, ?, ? )");
 
-            addEntry.setInt(1, messageId());
-            addEntry.setInt(2, teacherBean.getSession().getUser().userID);
-            addEntry.setDouble(3, getUserTo());
+            addEntry.setInt(1, teacherBean.getSession().getUser().userID);
+            addEntry.setDouble(3, 1);  // here is the reciver user!
             addEntry.setString(4, getContent());
             addEntry.setTimestamp(5, Timestamp.from(Instant.now()));
             addEntry.executeUpdate();

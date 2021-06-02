@@ -19,7 +19,9 @@
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="keepgenerated" value="true">
-      <description>Keep a copy of the generated servlet class' java code.</description>
+      <description>Keep a copy of the generated servlet class' java code.
+       <keep-state>true</keep-state>
+      </description>
     </property>
   </jsp-config>
 </glassfish-web-app>

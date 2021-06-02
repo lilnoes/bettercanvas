@@ -128,6 +128,10 @@ public class Course {
     public int getStudents() {
         return students;
     }
+
+    int id() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
 }

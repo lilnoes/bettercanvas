@@ -67,6 +67,8 @@ public class AnnouncementBean implements Serializable {
             e.printStackTrace();
             throw new AbortProcessingException();
         }
+        
+        
         return null;
     }
 
