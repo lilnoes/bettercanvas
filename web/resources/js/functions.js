@@ -91,3 +91,15 @@ function hideStudent(evt, elt){
   evt.source.parentElement.parentElement.style.display = "none";
   return false;
 }
+function hideElement(id){
+  document.getElementById(id).style.display = "none";
+}
+
+function hideElementAjax(evt, id){
+  if(evt.status != "success") return false;
+  hideElement(id);
+  return false;
+}
+function showElement(id){
+  document.getElementById(id).style.display = "block";
+}
