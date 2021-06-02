@@ -2,67 +2,94 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-<h:head>
-    <title>Grades - Course</title>
-</h:head>
-<h:body>
-    <ui:composition template="common.xhtml">
-        <ui:define name="title">
-            <h1 class="text-5xl font-bold text-center p-2">All Grades
-                <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openGrades()">+ Add/Edit
-                    Grades</button>
-            </h1>
-        </ui:define>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Grades - Course</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="common.xhtml">
+            <ui:define name="metadata">
+<!--                <f:metadata>
+                    <f:viewAction action="" />
+                </f:metadata>-->
+            </ui:define>
+            <ui:define name="title">
+                <h1 class="text-5xl font-bold text-center p-2">All Grades
+                    <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openGrades()">+ Add/Edit
+                        Grades</button>
+                </h1>
+            </ui:define>
 
-        <ui:define name="content">
-            <div>
+            <ui:define name="content" id="view100">
                 <div>
-                    <table>
-                        <tr class="font-bold text-2xl p-3 border-b border-gray-600">
-                            <td class="p-3">Student name</td>
-                            <td class="p-3">Quiz name</td>
-                            <td class="p-3">Date</td>
-                            <td class="p-3">Points</td>
-                            <td class="p-3">Out of</td>
-                        </tr>
+                    <h:panelGroup id="gradestable">
+                        <h:form>
+                        <table>
+                            <tr class="font-bold text-2xl p-3 border-b border-gray-600">
+                                <td class="p-3">Student name</td>
+                                <td class="p-3">Quiz name</td>
+                                <td class="p-3">Date</td>
+                                <td class="p-3">Points</td>
+                                <td class="p-3">Out of</td>
+                            </tr>
 
-                        <tr class="text-gray-600 p-3 border-b border-gray-600">
-                            <td class="p-3">Leon Emma</td>
-                            <td class="p-3">Quiz 1</td>
-                            <td class="p-3">May 21, 2021</td>
-                            <td class="p-3">65</td>
-                            <td class="p-3">100</td>
-                        </tr>
-                    </table>
+
+                            <ui:repeat value="#{gradesBean.quizzes}" var="quiz">
+                                <tr class="text-gray-600 p-3 border-b border-gray-600">
+                                    <td class="p-3">Leon Emma #{quiz}</td>
+                                    <td class="p-3">Quiz 1</td>
+                                    <td class="p-3">May 21, 2021</td>
+                                    <td class="p-3">
+                                        <h:inputText value="#{quiz}" disabled="#{param.action == 'view'}" >
+                                            <!--<f:passThroughAttribute name="student" value="1" />-->
+                                            <!--<f:passThroughAttribute name="field" value="points" />-->
+                                            <f:ajax event="change" execute="@this"  listener="#{gradesBean.updatePoints}"/>
+                                        </h:inputText>
+                                    </td>
+                                    <td class="p-3">
+                                        <h:inputText value="#{gradesBean.point}" />
+                                    </td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+                        </h:form>
+                    </h:panelGroup>
+
+
+                    <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newgrades"></div>
+
+                    <h:form class="newgrades absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
+                        <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeGrades()">X</div>
+                        <h2 class="font-bold text-3xl text-center text-red-800">Choose Quiz</h2>
+                        <div class="text-red-700 font-bold text-sm mb-3">
+                            <label class="block" for="quizname">Quiz name</label>
+                            <h:selectOneMenu class="bg-red-50 w-full p-1.5 rounded-lg" value="#{gradesBean.currentQuiz}">
+                                <f:selectItems value="#{gradesBean.quizzes}" var="quiz" itemLabel="#{quiz}" itemValue="1"/>
+                            </h:selectOneMenu>
+                        </div>
+                        <div id="view101"></div>
+                        <div>
+                            <h:commandButton action="#{gradesBean.getLink}" class="bg-red-800 text-white p-3 rounded-lg" value="View">
+                                <f:param name="action" value="view" />
+                            </h:commandButton>
+
+                            <h:commandButton action="#{gradesBean.getLink}" class="bg-red-800 text-white p-3 rounded-lg" value="Add/Edit">
+                                <f:param name="action" value="edit" />
+                            </h:commandButton>
+                        </div>
+                    </h:form>
                 </div>
+            </ui:define>
 
-
-                <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newgrades"></div>
-
-                <div class="newgrades absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
-                    <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeGrades()">X</div>
-                    <h2 class="font-bold text-3xl text-center text-red-800">Choose Quiz</h2>
-                    <div class="text-red-700 font-bold text-sm mb-3">
-                        <label class="block" for="quizname">Quiz name</label>
-                        <input type="text" id="quizname" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                    </div>
-
-                    <div>
-                        <button class="bg-red-800 text-white p-3 rounded-lg">Add/Edit </button>
-                    </div>
-                </div>
-            </div>
-        </ui:define>
-
-        <ui:define name="style">
-            <style>
-                .newgrades {
-                    display: none;
-                }
-            </style>
-        </ui:define>
-    </ui:composition>
-</h:body>
+            <ui:define name="style">
+                <style>
+                    .newgrades {
+                        display: none;
+                    }
+                </style>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 
 </html>
