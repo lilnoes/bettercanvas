@@ -7,4 +7,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-images/*
+**/images/*
