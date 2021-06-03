@@ -3,101 +3,110 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-    <title>Quizzes - Course</title>
-</h:head>
-<h:body>
-    <ui:composition template="common.xhtml">
-        <ui:define name="title">
-            <h1 class="text-5xl font-bold text-center p-2">List of past Quizzes
-                <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openQuiz()">+ Create New
-                    Quiz</button>
-            </h1>
-        </ui:define>
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Quizzes - Course</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="common.xhtml">
+            <ui:define name="title">
+                <h1 class="text-5xl font-bold text-center p-2">List of past Quizzes
+                    <button class="text-2xl text-white bg-red-800 p-3 rounded-lg" onclick="openQuiz()">+ Create New
+                        Quiz</button>
+                </h1>
+            </ui:define>
 
-        <ui:define name="content">
-            <div>
-
+            <ui:define name="content">
                 <div>
-                    <table>
-                        <tr class="font-bold text-2xl p-3 border-b border-gray-600">
-                            <td class="p-3">Name</td>
-                            <td class="p-3">Created at</td>
-                            <td class="p-3">Start at</td>
-                            <td class="p-3">Duration</td>
-                        </tr>
 
-                        <tr class="">
-                            <td class="p-3">Name</td>
-                            <td class="p-3">Created at</td>
-                            <td class="p-3">Start at</td>
-                            <td class="p-3">Duration</td>
-                        </tr>
-                    </table>
-                </div>
+                    <div>
+                        <table>
+                            <tr class="font-bold text-2xl p-3 border-b border-gray-600">
+                                <td class="p-3">Name</td>
+                                <td class="p-3">Start at</td>
+                                <td class="p-3">File</td>
+                                <td class="p-3">Duration</td>
+                            </tr>
+
+                            <ui:repeat value="#{quizz.quizzes}" var='quiz'>
+                                <tr class="">
+                                    <td class="p-3">
+                                        <h:link value="#{quiz.getColumnObject(3)}" outcome="grades">
+                                            <f:param name="action" value="view" />
+                                            <f:param name="course" value="#{quiz.getColumnObject(6)}" />
+                                            <f:param name="quiz" value="#{quiz.getColumnObject(1)}" />
+                                        </h:link>
+                                    </td>
+                                    <td class="p-3">#{quiz.getColumnObject(5)}</td>
+                                    <td class="p-3">#{quiz.getColumnObject(4)}</td>
+                                    <td class="p-3">#{quiz.getColumnObject(7)}</td>
+                                </tr>
+                            </ui:repeat>
+                        </table>
+                    </div>
 
 
-                <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newquiz"></div>
-                
-                <h:form>
-                    
+                    <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newquiz"></div>
+
+                    <h:form enctype="multipart/form-data">
+
 
                         <div class="newquiz absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
                             <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeQuiz()">X</div>
                             <h2 class="font-bold text-3xl text-center text-red-800">New Quiz</h2>
-                            <h:panelGrid style="width:100%;">
                             <div class="text-red-700 font-bold text-sm mb-3">
                                 <label class="block" for="quizname">Name</label>
-                                <h:inputText value="#{quizz.quizzName}" id="quizname" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                                <h:inputText value="#{quizz.quizzName}" id="quizname"
+                                             class="bg-red-50 w-full p-1.5 rounded-lg" />
                             </div>
 
                             <div class="text-red-700 font-bold text-sm mb-3">
                                 <label class="block" for="quizstartdate">Start Date</label>
 
-                                <h:inputText value="#{quizz.startDate}" id="quizstartdate" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                                <h:inputText p:type="datetime-local" value="#{quizz.startDate}" id="quizstartdate"
+                                             class="bg-red-50 w-full p-1.5 rounded-lg">
+                                    <f:convertDateTime pattern="yyyy-MM-dd'T'HH:mm" type="both"/>
+                                </h:inputText>
                             </div>
-
-                            <!--div class="text-red-700 font-bold text-sm mb-3">
-                                <label class="block" for="quizstarttime">Start Time</label>
-                                <inputText id="quizstarttime" value="#{quizz.startDate}" class="bg-red-50 w-full p-1.5 rounded-lg" />
-                            </div-->
                             <div class="text-red-700 font-bold text-sm mb-3">
-                                <label class="block" for="quizduration">Duration <span class="text-xs">(minutes)</span></label>
-                                <h:inputText value="#{quizz.duration}" id="quizduration" class="bg-red-50 w-full p-1.5 rounded-lg" />
+                                <label class="block" for="quizduration">Duration <span
+                                        class="text-xs">(minutes)</span></label>
+                                <h:inputText value="#{quizz.duration}" id="quizduration"
+                                             class="bg-red-50 w-full p-1.5 rounded-lg" />
                             </div>
 
                             <div class="relative text-red-700 font-bold text-sm mb-3 w-full bg-red-50">
                                 <div class="relative left-1/2 right-1/2 m-auto text-gray-500 text-6xl">+</div>
                             </div>
 
+                            <h:inputFile value="#{quizz.file}"/>
                             <div>
-                                <span>Upload file or drag it above</span><p style="text-align:center;"><h:commandButton value="Upload"
-                                                                                          class="ml-10 p-2 bg-red-50 text-gray-600 font-bold text-xl rounded-lg">
-
-                                    </h:commandButton></p>
+                                <p><span>Upload file or drag it above</span>
+                                    <button class="ml-10 p-2 bg-red-50 text-gray-600 font-bold text-xl rounded-lg inline">Upload
+                                    </button>
+                                </p>
                             </div>
 
                             <div>
-                                <h:commandButton value="Submit" class="bg-red-800 text-white p-3 rounded-lg"></h:commandButton>
+                                <h:commandButton value="Submit" class="bg-red-800 text-white p-3 rounded-lg" action="#{quizz.save}">
+                                </h:commandButton>
                             </div>
-                             </h:panelGrid>
                         </div>
-                   
 
-                </h:form>
-                
-            </div>
-        </ui:define>
 
-        <ui:define name="style">
-            <style>
-                .newquiz {
-                    display: none;
-                }
-            </style>
-        </ui:define>
-    </ui:composition>
-</h:body>
+                    </h:form>
+
+                </div>
+            </ui:define>
+
+            <ui:define name="style">
+                <style>
+                    .newquiz {
+                        display: none;
+                    }
+                </style>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 
 </html>
