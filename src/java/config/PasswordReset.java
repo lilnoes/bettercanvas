@@ -5,9 +5,11 @@
  */
 package config;
 
+import beans.teacher.TeacherBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
+import config.SessionData;
 import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -32,6 +34,9 @@ import utils.UserUtils;
 @ViewScoped
 public class PasswordReset {
     private String email = "";
+    private String newEmail = "";
+    private String confEmail = "";
+     private String actualpassword = "";
     private String newpassword = "";
     private String confpassword = "";
     private String confirmationCode;
@@ -50,6 +55,33 @@ public class PasswordReset {
     public void setEmail(String email) {
         System.out.println("setting email "+email);
         this.email = email;
+    }
+    
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    public void setNewEmail(String newEmail) {
+        
+        this.newEmail = newEmail;
+    }
+     public String getconfEmail() {
+        return confEmail;
+    }
+
+    public void setconfEmail(String confEmail) {
+        
+        this.confEmail = confEmail;
+    }
+    
+    
+    
+    public String getActualpassword() {
+        return actualpassword;
+    }
+
+    public void setActualpassword(String actualpassword) {
+        this.actualpassword = actualpassword;
     }
 
     public String getNewpassword() {
@@ -100,6 +132,10 @@ public class PasswordReset {
         this.confirmationCode = confirmationCode;
     }
     
+    public String errorSMS(){
+        return"The entered information does not match!";
+    }
+    
     public String changePassword() {
         String outcome = null;
         String sql = "select * from users\n"
@@ -125,4 +161,58 @@ public class PasswordReset {
 
     }
     
+    
+    public String updatePassword() {
+        TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
+
+        try { //teacherBean.getSession().getUser().getPassword()
+            if(UserUtils.hashPassword(teacherBean.getSession().getUser().getPassword()).equals(UserUtils.hashPassword(getActualpassword())) ){
+                if(getNewpassword().equals(getConfpassword() )){
+                    String sql = "UPADATE  USERS SET PASSWORD=? WHERE EMAIL=?";
+
+                    PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
+                    addEntry.setString(1, getNewpassword());  //teacherBean.getSession().getUser().userID
+                    addEntry.setString(2, teacherBean.getSession().getUser().email);  // here is the reciver user!
+                } else {
+                    return errorSMS();
+                }
+            }else{
+                return errorSMS();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+    
+    
+    
+    public String updateEmail() {
+        TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
+
+        try {
+            if ((teacherBean.getSession().getUser().email).equals(getEmail())) {
+                if ((getNewEmail()).equals(getconfEmail())) {
+                    String sql = "UPADATE  USERS SET EMAIL=? WHERE EMAIL=?";
+
+                    PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
+                    addEntry.setString(1, getNewEmail());  //teacherBean.getSession().getUser().userID
+                    addEntry.setString(2, teacherBean.getSession().getUser().email);  // here is the reciver user!
+                } else {
+                    return errorSMS();
+                }
+            } else {
+                return errorSMS();
+            }
+
+  
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+
+    }
+
 }

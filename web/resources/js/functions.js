@@ -108,3 +108,9 @@ function joinedClass(evt){
   evt.source.value = "Joined";
   evt.source.disabled = true;
 }
+
+
+function changePassWord() {
+    var changePassword = document.getElementsById("changepassword");
+    changePassword.style.display = "block";
+}

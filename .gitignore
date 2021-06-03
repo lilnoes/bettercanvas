@@ -8,3 +8,4 @@ dist/
 nbdist/
 .nb-gradle/
 **/images/*
+web.xml

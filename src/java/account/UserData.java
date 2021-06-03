@@ -39,6 +39,8 @@ public class UserData implements Serializable {
     private String name = "";
     private String surName = "";
     private String email = "";
+    private String newEmail = "";
+    private String newEmailConf = "";
     private String type = "";
     private String title = "";
     private int year = 1;
@@ -68,6 +70,24 @@ public class UserData implements Serializable {
     public String getEmail() {
         return email;
     }
+
+    
+    
+    public void setNewEmail(String newEmail) {
+        this.newEmail = newEmail;
+    }
+    public String getNewEmail() {
+        return newEmail;
+    }
+
+    public void setNewEmailConf(String newEmailConf) {
+        this.newEmailConf = newEmailConf;
+    }
+    public String getNewEmailConf() {
+        return newEmailConf;
+    }
+    
+    
 
     public void setEmail(String email) {
         this.email = email;
@@ -204,5 +224,5 @@ public class UserData implements Serializable {
         session.setUser(null);
         return null;
     }
-
+    
 }
