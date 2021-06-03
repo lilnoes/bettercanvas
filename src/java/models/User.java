@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ import utils.UserUtils;
  *
  * @author leon
  */
-public class User {
+public class User implements Serializable{
     public int userID;
     public String name = "EM";
     public String surName = "";

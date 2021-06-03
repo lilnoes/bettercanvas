@@ -5,6 +5,7 @@
  */
 package models;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import utils.DatabaseUtils;
  *
  * @author leon
  */
-public class Course {
+public class Course implements Serializable{
 
     public int id = 1;
     public String name = "";

@@ -62,8 +62,14 @@ public class message {
                             + "(USERFROM,USERTO,CONTENT, DATE)"
                             + "VALUES (?, ?, ?, ? )");
 
+<<<<<<< HEAD
             addEntry.setInt(1, teacherBean.getSession().getUser().userID);
             addEntry.setDouble(3, 1);  // here is the reciver user!
+=======
+//            addEntry.setInt(1, messageId());
+            addEntry.setInt(2, teacherBean.getSession().getUser().userID);
+//            addEntry.setDouble(3, getUserTo());
+>>>>>>> 22bee282a3027a0c669bc2e53b71a609bc889c8d
             addEntry.setString(4, getContent());
             addEntry.setTimestamp(5, Timestamp.from(Instant.now()));
             addEntry.executeUpdate();
