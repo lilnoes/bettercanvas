@@ -197,30 +197,8 @@ public class DatabaseUtils {
                 + ")";
         execute(sql);
     }
-    
-     public static void createMessagesTable() {
-     //create table messages
-//(
-//messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
-//userfrom int,
-//userto int,
-//content varchar(50),
-//date TimeStamp,
-//)
 
-
-        String sql = "create table messages\n"
-                + "(\n"
-                + "messageId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
-                + "userfrom int,\n"
-                + "userto int,\n"
-                + "content varchar(50),\n"
-                + "date TimeStamp,\n "
-                + ")";
-        execute(sql);
-    }
-     
-     public static void createGradesTable() {
+    public static void createGradesTable() {
 //create table grades
 //(
 //userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -235,12 +213,11 @@ public class DatabaseUtils {
                 + "courseId int,\n"
                 + "grades double,\n"
                 + "range int\n"
-                +")";
+                + ")";
         execute(sql);
     }
-     
-     
-     public static void createQuizzTable() {
+
+    public static void createQuizzTable() {
 //create table quizz
 //(
 //ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -251,7 +228,6 @@ public class DatabaseUtils {
 //courseId int,
 //duration int
 //)
-
 
         String sql = "create table quizz\n"
                 + "(\n"
@@ -264,12 +240,31 @@ public class DatabaseUtils {
                 + "duration int\n"
                 + ")";
         execute(sql);
-    }    
+    }
 
-     
-     
-     
-} 
-     
+    public static void createMessagesTable() {
+//create table messages
+//(
+//ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//fromUser int,
+//toUser int,
+//message varchar(300),
+//date TimeStamp with default current_timestamp,
+//courseId int,
+//readStatus boolean with default false
+//)
 
+        String sql = "create table messages\n"
+                + "(\n"
+                + "ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "fromUser int,\n"
+                + "toUser int,\n"
+                + "message varchar(300),\n"
+                + "date TimeStamp with default current_timestamp,\n"
+                + "courseId int,\n"
+                + "readStatus boolean with default false\n"
+                + ")";
+        execute(sql);
+    }
 
+}

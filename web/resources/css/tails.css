@@ -86,6 +86,9 @@
 .clear-both {
     clear: both
 }
+.clear-right {
+    clear: right
+}
 .m-auto {
     margin: auto
 }
@@ -173,11 +176,11 @@
 .h-\[70px\] {
     height: 70px
 }
-.h-\[200px\] {
-    height: 200px
-}
 .h-\[98\%\] {
     height: 98%
+}
+.h-\[200px\] {
+    height: 200px
 }
 .w-full {
     width: 100%
@@ -431,4 +434,8 @@
 input:focus {
     outline: 2px solid transparent;
     outline-offset: 2px
+}
+
+.hover\:cursor-pointer:hover {
+    cursor: pointer
 }
