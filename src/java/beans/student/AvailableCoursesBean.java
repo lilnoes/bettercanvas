@@ -36,12 +36,12 @@ public class AvailableCoursesBean implements Serializable {
         courses = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name, u.title, cc.* from (select c.CREATEDBY, c.ID, c.NAME, s.status from courses as c\n"
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name, u.title, cc.* from (select c.CREATEDBY, c.ID, c.NAME, s.status, c.SINIF from courses as c\n"
                     + "left outer join studentcourses as s\n"
                     + "on c.ID=s.COURSEID and s.STUDENTID=?) as cc\n"
                     + "join users as u\n"
                     + "on cc.createdBY=u.USERID\n"
-                    + "");
+                    + "where cc.sinif=u.SINIF");
             stmt.setInt(1, 2);
             crs.populate(stmt.executeQuery());
             stmt.close();

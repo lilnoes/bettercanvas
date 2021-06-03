@@ -57,13 +57,7 @@
                     </h:panelGroup>
 
 
-<<<<<<< HEAD
-                <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newgrades">
-                    
-                </div>
-=======
                     <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newgrades"></div>
->>>>>>> 22bee282a3027a0c669bc2e53b71a609bc889c8d
 
                     <h:form class="newgrades absolute w-[40%]  z-10 bg-white shadow-lg top-10 p-3 px-7 left-1/2 ml-[-20%]">
                         <div class="absolute top-0 right-0 text-red-800 text-4xl" onclick="closeGrades()">X</div>
@@ -71,7 +65,7 @@
                         <div class="text-red-700 font-bold text-sm mb-3">
                             <label class="block" for="quizname">Quiz name</label>
                             <h:selectOneMenu class="bg-red-50 w-full p-1.5 rounded-lg" value="#{gradesBean.currentQuiz}">
-                                <f:selectItems value="#{gradesBean.quizNames}" var="quiz" itemLabel="#{quiz}" itemValue="1"/>
+                                <f:selectItems value="#{quizz.quizzes}" var="quiz" itemLabel="#{quiz.getColumnObject(3)}" itemValue="#{quiz.getColumnObject(1)}"/>
                             </h:selectOneMenu>
                         </div>
                         <div id="view101"></div>

@@ -243,7 +243,8 @@ public class DatabaseUtils {
      public static void createQuizzTable() {
 //create table quizz
 //(
-//teacherId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//teacherID int,
 //quizzname varchar(30),
 //file varchar(300),
 //startDate TimeStamp,
@@ -254,13 +255,14 @@ public class DatabaseUtils {
 
         String sql = "create table quizz\n"
                 + "(\n"
-                + "teacherId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "teacherID int,\n"
                 + "quizzname varchar(30),\n"
                 + "file varchar(300),\n"
                 + "startDate TimeStamp,\n"
                 + "courseId int,\n"
-                + "duration int,\n"
-                +")";
+                + "duration int\n"
+                + ")";
         execute(sql);
     }    
 
