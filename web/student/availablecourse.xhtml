@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Available courses</title>
     </h:head>
@@ -12,7 +13,7 @@
             <ui:define name="title">
                 <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Leon Emmanuel ISHIMWE</h1>
             </ui:define>
-            
+
             <ui:define name="content">
                 <div class="container-fluid text-center">
                     <div class="row">
@@ -21,16 +22,39 @@
                                 Available courses
                             </h2> 
                         </div>
-                        
+
                         <!--div class="col-md-5">
                             <h:form>
                                 <h:inputText value="" > 
                             </h:form> 
                         </div-->
-                        
+
                     </div>           
                 </div>
-                
+
+                <ui:repeat value="#{availableCoursesBean.courses}" var="avcourse">
+                    <div class="course">
+                        <h:form>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h4 class="coursename">#{avcourse.getColumnObject(5)}</h4>
+                                    <h6>#{avcourse.getColumnObject(2)} #{avcourse.getColumnObject(1)}</h6>
+                                </div>
+                                <div class="col-md-4">
+                                    <h:panelGroup rendered="#{empty avcourse.getColumnObject(6)}">
+                                        <h:commandButton class="btn btn-lg" value="Join">
+                                            <f:ajax listener="#{availableCoursesBean.join(avcourse.getColumnObject(4))}" onevent="joinedClass"/>
+                                        </h:commandButton>
+                                    </h:panelGroup>
+                                    <h:panelGroup rendered="#{not empty avcourse.getColumnObject(6)}">
+                                        <button disabled="true" class="btn btn-lg">Joined already</button>
+                                    </h:panelGroup>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </ui:repeat>
+
                 <div class="course">
                     <div class="row">
                         <div class="col-md-8">
@@ -42,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="course">
                     <div class="row">
                         <div class="col-md-8">
@@ -54,22 +78,10 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="course">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h4 class="coursename">Design and Implementation of IoT systems</h4>
-                            <h6>professor: Edson casimiro</h6>
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-lg">Join</button>
-                        </div>
-                    </div>
-                </div>
-                
-                
+
+
             </ui:define>
-            
+
             <ui:define name="style">
                 <style>
                     .coursename{
@@ -78,16 +90,16 @@
                     .course{
                         margin-top:30px;
                         margin-top:30px;
-                        
+
                     }
                     .btn{
                         width: 100%;
                         color:white;
                         background-color:red;
                     }
-                    
+
                 </style>
-                
+
             </ui:define>
         </ui:composition>
     </h:body>

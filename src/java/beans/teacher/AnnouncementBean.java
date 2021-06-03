@@ -6,10 +6,16 @@
 package beans.teacher;
 
 import com.sun.faces.context.SessionMap;
+import com.sun.rowset.CachedRowSetImpl;
+import com.sun.rowset.internal.Row;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -24,8 +30,27 @@ import utils.DatabaseUtils;
 @ViewScoped
 public class AnnouncementBean implements Serializable {
 
+    private List<Row> announcements;
+
     private String title = "";
     private String content = "";
+
+    public List<Row> getAnnouncements() {
+        announcements = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select title, summary, content, createdAt from announcements where courseID = ?");
+            stmt.setInt(1, 1);
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            announcements.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return announcements;
+    }
 
     public String getTitle() {
         return title;
@@ -53,7 +78,7 @@ public class AnnouncementBean implements Serializable {
                     + "values\n"
                     + "(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, teacherBean.currentCourse.id);
+            stmt.setInt(1, 1); //current course ID
             stmt.setInt(2, teacherBean.getSession().getUser().userID);
             stmt.setString(3, title);
             stmt.setString(4, content.substring(0, content.length() > 40 ? 40 : content.length()));

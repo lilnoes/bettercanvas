@@ -2,53 +2,75 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-    <h:head>
-        <title>Announcements</title>
-        <style>
-            .ancmt span {
-                color: rgb(90, 88, 88);
-            }
-        </style>
-    </h:head>
+<h:head>
+    <title>Announcements</title>
+    <style>
+        .ancmt span {
+            color: rgb(90, 88, 88);
+        }
+    </style>
+</h:head>
 
-    <body>
-        <ui:composition template="common.xhtml">
-            <ui:define name="title">
-                <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Announcements</h1>
-            </ui:define>
-            <ui:define name="content">
+<body>
+    <ui:composition template="common.xhtml">
+        <ui:define name="metadata">
+        </ui:define>
+        <ui:define name="title">
+            <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Announcements</h1>
+        </ui:define>
+        <ui:define name="content">
+            <div class="fixed w-full h-full bg-white " id="newannouncement" style="display: none">
+                <h:form>
+                    <h:outputLabel for="title" value="Title" class="block" />
+                    <h:inputText value="#{announcementBean.title}" class="block" />
+
+                    <h:outputLabel for="title" value="Content" class="block" />
+                    <h:inputTextarea value="#{announcementBean.content}" class="block" />
+                    <h:commandButton value="Create" class="bg-green-600 text-white p-2 rounded-lg">
+                        <f:ajax listener="#{announcementBean.create}" execute="@form"
+                            onevent="function(evt) {hideElementAjax(evt, 'newannouncement')}" />
+                    </h:commandButton>
+                    <button type="button" class="bg-red-600 text-white p-2 rounded-lg"
+                        onclick="hideElement('newannouncement')">Cancel</button>
+                </h:form>
+            </div>
             <div class="container-fluid row">
                 <div class="col-md-9">
                     <div class="ancmt">
-                        <ui:repeat value="#{teacherBean.announcements}" var="announcement">
-                        <div class=" ">
-                            <h4>#{announcement.getColumnObject(1)}</h4>
-                            <p>#{announcement.getColumnObject(2)} </p>
-                            <span>#{announcement.getColumnObject(2)}</span>
-                        </div>
+                        <ui:repeat value="#{announcementBean.announcements}" var="announcement">
+                            <div class=" ">
+                                <h4>#{announcement.getColumnObject(1)}</h4>
+                                <p>#{announcement.getColumnObject(2)} </p>
+                                <span>#{announcement.getColumnObject(4)}</span>
+                                <hr />
+                            </div>
                         </ui:repeat>
                         <div class=" ">
-                            <hr />
                             <h4>Bilgisayar mughendisligine giris</h4>
                             <p>summary is going to be here </p>
                             <span>23/07/2021 16pm</span>
+                            <hr />
                         </div>
                         <div class=" ">
-                            <hr />
                             <h4>Bilgisayar mughendisligine giris</h4>
                             <p>summary is going to be here </p>
                             <span>23/07/2021 16pm</span>
+                            <hr />
                         </div>
                     </div>
 
 
                 </div>
+                <div class="col-md-3">
+                    <button class="bg-red-600 p-2 rounded-lg text-white" onclick="showElement('newannouncement')">Create Announcement</button>
+                </div>
 
             </div>
-            </ui:define>
-        </ui:composition>
-    </body>
+        </ui:define>
+    </ui:composition>
+</body>
 
 </html>
