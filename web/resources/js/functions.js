@@ -103,3 +103,8 @@ function hideElementAjax(evt, id){
 function showElement(id){
   document.getElementById(id).style.display = "block";
 }
+function joinedClass(evt){
+  if(evt.status != "success") return;
+  evt.source.value = "Joined";
+  evt.source.disabled = true;
+}

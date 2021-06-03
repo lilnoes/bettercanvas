@@ -29,20 +29,24 @@ import javax.faces.event.ValueChangeEvent;
 public class GradesBean implements Serializable{
     public int currentQuiz = 0;
     public List<String> quizzes;
+    public List<String> quizNames;
     public String action = "edit";
     public String point = "100";
+    public String currentCourse = "";
 
     public GradesBean() {
-//        quizzes = new ArrayList<>();
-//        quizzes.add("quiz 1");
-//        quizzes.add("quiz 2");
+        quizNames = new ArrayList<>();
+        quizNames.add("quiz 1");
+        quizNames.add("quiz 2");
     }
     
     public String getLink() throws UnsupportedEncodingException{
+        String base = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         String action = (String)map.get("action");
-        return String.format("grades.xhtml?faces-redirect=true&quiz=%s&action=%s", URLEncoder.encode(String.valueOf(currentQuiz), "UTF-8"),
-                                                                                    URLEncoder.encode(String.valueOf(action), "UTF-8"));
+        currentCourse = map.get("course");
+        if(currentCourse == null || currentCourse.isEmpty()) currentCourse = "1";
+        return String.format("grades.xhtml?faces-redirect=true&quiz=%s&action=%s&course=%s", currentQuiz, action, currentCourse);
     }
     
 
@@ -51,6 +55,7 @@ public class GradesBean implements Serializable{
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         if(map.isEmpty()) return;
         String action = (String)map.get("quiz");
+        currentCourse = map.get("course");
         quizzes = new ArrayList<>();
         quizzes.add("quiz 1");
         quizzes.add("quiz 2");
@@ -88,6 +93,12 @@ public class GradesBean implements Serializable{
     public List<String> getQuizzes() {
         return quizzes;
     }
+
+    public List<String> getQuizNames() {
+        return quizNames;
+    }
+    
+    
     
     public void setQuiz(AjaxBehaviorEvent evt){
         quizzes = new ArrayList<>();

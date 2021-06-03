@@ -21,20 +21,6 @@
             </ui:define>
 
             <ui:define name="content">
-                <div class="fixed w-full h-full bg-white " id="newannouncement" style="display: none">
-                    <h:form>
-                        <h:outputLabel for="title" value="Title" class="block"/>
-                        <h:inputText value="#{announcementBean.title}" class="block"/>
-                        
-                        <h:outputLabel for="title" value="Content" class="block"/>
-                        <h:inputTextarea value="#{announcementBean.content}" class="block"/>
-                        <h:commandButton value="Create" class="bg-green-600 text-white p-2 rounded-lg">
-                            <f:ajax listener="#{announcementBean.create}" execute="@form"
-                                    onevent="function(evt) {hideElementAjax(evt, 'newannouncement')}"/>
-                        </h:commandButton>
-                        <button type="button" class="bg-red-600 text-white p-2 rounded-lg" onclick="hideElement('newannouncement')">Cancel</button>
-                    </h:form>
-                </div>
                 <div class=" container-fluid">
 
                     <div class="row">
@@ -65,8 +51,8 @@
                         <div class="col-md-3 text-center ">
                             <h4>NEW FEATURE</h4>
                             <hr />
-                            <p><button type="button" class="btn btn-lg button" onclick="showElement('newannouncement')">New announcement</button></p>
-                            <p><button type="button" class="btn btn-lg button">New quizz</button></p>
+                            <p><a class="btn btn-lg button" href="announcement.xhtml">New announcement</a></p>
+                            <p><a class="btn btn-lg button" href="quizzes.xhtml">New quizz</a></p>
                         </div>
 
                     </div>

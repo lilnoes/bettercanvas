@@ -65,17 +65,19 @@
                         <div class="text-red-700 font-bold text-sm mb-3">
                             <label class="block" for="quizname">Quiz name</label>
                             <h:selectOneMenu class="bg-red-50 w-full p-1.5 rounded-lg" value="#{gradesBean.currentQuiz}">
-                                <f:selectItems value="#{gradesBean.quizzes}" var="quiz" itemLabel="#{quiz}" itemValue="1"/>
+                                <f:selectItems value="#{gradesBean.quizNames}" var="quiz" itemLabel="#{quiz}" itemValue="1"/>
                             </h:selectOneMenu>
                         </div>
                         <div id="view101"></div>
                         <div>
                             <h:commandButton action="#{gradesBean.getLink}" class="bg-red-800 text-white p-3 rounded-lg" value="View">
                                 <f:param name="action" value="view" />
+                                <f:param name="course" value="#{param.course}" />
                             </h:commandButton>
 
                             <h:commandButton action="#{gradesBean.getLink}" class="bg-red-800 text-white p-3 rounded-lg" value="Add/Edit">
                                 <f:param name="action" value="edit" />
+                                <f:param name="course" value="#{param.course}" />
                             </h:commandButton>
                         </div>
                     </h:form>

@@ -28,32 +28,44 @@ import utils.DatabaseUtils;
  */
 @ManagedBean(name = "teacherBean", eager = true)
 @SessionScoped
-public class TeacherBean implements Serializable{
+public class TeacherBean implements Serializable {
+
     @ManagedProperty(value = "#{sessionData}")
     private SessionData session;
     private List<Course> courses;
-    private List<Row> announcements;
+    private List<Row> announcements = null;
     public Course currentCourse;
-    
-    public String getName(){return session.getUser().name;}
-    public String getEm(){return session.getEm();}
-    
-    public Course getCurrentCourse(){return currentCourse;}
-    public void setCurrentCourse(int courseID){
+
+    public String getName() {
+        return session.getUser().name;
+    }
+
+    public String getEm() {
+        return session.getEm();
+    }
+
+    public Course getCurrentCourse() {
+        return currentCourse;
+    }
+
+    public void setCurrentCourse(int courseID) {
         currentCourse = Course.fetchById(courseID);
     }
 
-    public List<Course> getCourses(){
-        if(courses != null) return courses;
+    public List<Course> getCourses() {
+        if (courses != null) {
+            return courses;
+        }
 //        courses = Course.fetchByTeacher(session.getUser().userID);
         courses = Course.fetchByTeacher(1);
         return courses;
     }
-    
+
     public List<Row> getAnnouncements() {
-        if (announcements != null) {
-            return announcements;
-        }
+        return announcements;
+    }
+
+    public void setAnnouncements() {
         announcements = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -67,9 +79,8 @@ public class TeacherBean implements Serializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return announcements;
     }
-    
+
     public SessionData getSession() {
         return session;
     }
@@ -77,16 +88,17 @@ public class TeacherBean implements Serializable{
     public void setSession(SessionData session) {
         this.session = session;
     }
-    
-    public String init(){
+
+    public String init() {
         System.out.println("starting view");
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if(map.isEmpty()) return "index";
+        if (map.isEmpty()) {
+            return "index";
+        }
         int courseID = Integer.valueOf(map.get("course"));
         setCurrentCourse(courseID);
         System.out.println("found course " + courseID);
         return null;
     }
-    
-    
+
 }
