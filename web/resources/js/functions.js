@@ -109,13 +109,11 @@ function joinedClass(evt) {
   evt.source.disabled = true;
 }
 
-<<<<<<< HEAD
 
 function changePassWord() {
-    var changePassword = document.getElementsById("changepassword");
+    const changePassword = document.getElementsById("changepassword");
     changePassword.style.display = "block";
 }
-=======
 function setRecipient(elt) {
   window.elt = elt;
   console.log("clicked ", elt);
@@ -156,4 +154,3 @@ function addMessage() {
   document.getElementById("inputText").value = "";
   document.getElementById("inputText").focus();
 }
->>>>>>> e3d75df6a599e283305aa45fadb1c12c8958300c
