@@ -2,393 +2,245 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:p="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-<h:head>
-    <title>Messages</title>
-</h:head>
+    <h:head>
+        <title>Messages</title>
+    </h:head>
 
-<body>
-    <ui:composition template="common.xhtml">
-        <ui:define name="title">
-            <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Messages</h1>
-        </ui:define>
+    <body>
+        <ui:composition template="common.xhtml">
+            <ui:define name="title">
+                <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Messages</h1>
+            </ui:define>
 
 
-        <ui:define name="content">
-            <div class="container mainDiv">
-                <div class="row">
+            <ui:define name="content">
+                <div class="container mainDiv">
+                    <div class="row">
 
-                    <div class="col-md-5  sms mb-2">
-                        <div class="card " style="max-width: 100%;">
-                            <div class="card-header text-center" id="professorTag">
-                                <h4>PROFESSORS</h4>
+                        <div class="col-md-5  sms mb-2">
+                            <div class="card " style="max-width: 100%;">
+                                <div class="card-header text-center" id="professorTag">
+                                    <h4>Professors</h4>
+                                </div>
+                                <div class="card-body text-dark teacherSms">
+                                    <ui:repeat value="#{message.courses1}" var="course">
+                                        <div class="teacherPainel hover:cursor-pointer" onclick="setRecipient(this)">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
+                                                         class="float-start" alt="..." />
+
+                                                    <p class="id hidden">#{course.getColumnObject(1)}</p>
+                                                    <p class="type hidden">#{course.getColumnObject(5)}</p>
+                                                    <p class="name">#{course.getColumnObject(4)}</p>
+                                                    <p class="course"> <small>#{course.getColumnObject(3)} #{course.getColumnObject(2)}</small>
+                                                    </p>
+
+                                                </div>
+
+                                                <div class="col-md-3 text-center">
+                                                    <p><i class="fas fa-sms"></i><span>2</span></p>
+                                                    <small><span>23-10-1999</span></small>
+
+                                                </div>
+
+                                                <hr />
+                                            </div>
+                                        </div>
+                                    </ui:repeat>
+
+                                </div>
                             </div>
-                            <div class="card-body text-dark teacherSms">
-                                <div class="teacherPainel">
-                                    <a href="">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                    class="float-start" alt="..." />
+                        </div>
 
-                                                <p class="name">JOANA KHRIS BOODU</p>
-                                                <p class="course"> <small>Computer Organization</small></p>
 
-                                            </div>
 
-                                            <div class="col-md-3 text-center">
-                                                <p><i class="fas fa-sms"></i><span>2</span></p>
-                                                <small><span>23-10-1999</span></small>
+                        <div class="col-md-7 allDiv">
 
-                                            </div>
-
-                                            <hr />
-                                        </div>
-                                    </a>
+                            <div class="row smsTop" id="smsTop">
+                                <div class="col-md-3" style="margin-top: 10px;">
+                                    <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
+                                         class="mainImg" />
                                 </div>
-
-                                <div class="teacherPainel">
-                                    <a href="">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                    class="float-start" alt="..." />
-
-                                                <p class="name">JOANA KHRIS BOODU</p>
-                                                <p class="course"> <small>Computer Organization</small></p>
-
-                                            </div>
-
-                                            <div class="col-md-3 text-center">
-                                                <p><i class="fas fa-sms"></i><span>2</span></p>
-                                                <small><span>23-10-1999</span></small>
-
-                                            </div>
-
-                                            <hr />
-                                        </div>
-                                    </a>
+                                <div class="col-md-9">
+                                    <br />
+                                    <h5 class="name" id="smsTopName1">JOANA KHRIS BOODU DA SILVA COMPLETO</h5>
+                                    <p class="course" id="smsTopName2"> Computer Organization and design</p>
                                 </div>
-
-
-                                <div class="teacherPainel">
-                                    <a href="">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                    class="float-start" alt="..." />
-
-                                                <p class="name">JOANA KHRIS BOODU</p>
-                                                <p class="course"> <small>Computer Organization</small></p>
-
-                                            </div>
-
-                                            <div class="col-md-3 text-center">
-                                                <p><i class="fas fa-sms"></i><span>2</span></p>
-                                                <small><span>23-10-1999</span></small>
-
-                                            </div>
-
-                                            <hr />
-                                        </div>
-                                    </a>
-                                </div>
-
-
-
-                                <div class="teacherPainel">
-                                    <a href="">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                    class="float-start" alt="..." />
-
-                                                <p class="name">JOANA KHRIS BOODU</p>
-                                                <p class="course"> <small>Computer Organization</small></p>
-
-                                            </div>
-
-                                            <div class="col-md-3 text-center">
-                                                <p><i class="fas fa-sms"></i><span>2</span></p>
-                                                <small><span>23-10-1999</span></small>
-
-                                            </div>
-
-                                            <hr />
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <div class="teacherPainel">
-                                    <a href="">
-                                        <div class="row">
-                                            <div class="col-md-9">
-                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                    class="float-start" alt="..." />
-
-                                                <p class="name">JOANA KHRIS BOODU</p>
-                                                <p class="course"> <small>Computer Organization</small></p>
-
-                                            </div>
-
-                                            <div class="col-md-3 text-center">
-                                                <p><i class="fas fa-sms"></i><span>2</span></p>
-                                                <small><span>23-10-1999</span></small>
-
-                                            </div>
-
-                                            <hr />
-                                        </div>
-                                    </a>
-                                </div>
-
-
                             </div>
+
+                            <div>
+                                <h:panelGroup id="smsPanel">
+                                    <div class="allSms" id="allSms">
+
+                                        <ui:repeat value="#{message.messages1}" var="mess">
+                                            <h:panelGroup rendered="#{mess.getColumnObject(2) != '2'}" >
+                                                <div class="row"
+                                                     style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
+                                                    <div class="col-md-8">
+                                                        <span>#{mess.getColumnObject(4)}</span>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <span class="float-end date" style="margin-top:12px;"><small
+                                                                style="font-size: 10px; color: black; ">#{mess.getColumnObject(5)}</small></span>
+
+                                                    </div>
+
+                                                </div>
+                                            </h:panelGroup>
+
+                                            <h:panelGroup rendered="#{mess.getColumnObject(2) == '2'}" >
+                                                <div>
+                                                    <div class="row float-right"
+                                                         style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
+                                                        <div class="col-md-8">
+                                                            <span>#{mess.getColumnObject(4)}</span>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <span class="float-end date" style="margin-top:12px;"><small
+                                                                    style="font-size: 10px; color: black; ">26-05-2021</small></span>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="clear-right"></div>
+                                                </div>
+                                            </h:panelGroup>
+                                        </ui:repeat>
+
+                                    </div>
+                                </h:panelGroup>
+                                <div class="suButton mb-2">
+                                    <h:form prependId="false">
+                                        <h:inputHidden id="toID" value="#{message.toID}" />
+                                        <h:inputHidden id="type" value="#{message.type}" />
+                                        <h:inputText value="#{message.message}" id="inputText"
+                                                     p:placeholder="Write message here...">
+                                        </h:inputText>
+                                        <h:commandButton type="submit" value="Submit" id="submitButton">
+                                            <f:ajax listener="#{message.send1()}" execute="@form"
+                                                    onevent="function(evt){if(evt.status=='success') addMessage();}" />
+                                        </h:commandButton>
+                                    </h:form>
+                                </div>
+
+                                <h:form prependId="false" class="hidden">
+                                    <h:inputHidden id="toID1" value="#{message.toID}" />
+                                    <h:inputHidden id="type1" value="#{message.type}" />
+                                    <h:commandButton type="submit" value="Submit" id="loadContent">
+                                        <f:ajax render="smsPanel" execute="@form" listener="#{message.test()}" />
+                                    </h:commandButton>
+                                </h:form>
+                            </div>
+
                         </div>
                     </div>
 
 
-
-                    <div class="col-md-7 allDiv">
-
-                        <div class="row smsTop">
-                            <div class="col-md-3" style="margin-top: 10px;">
-                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                    class="mainImg" />
-                            </div>
-                            <div class="col-md-9">
-                                <br />
-                                <h5 class="name">JOANA KHRIS BOODU DA SILVA COMPLETO</h5>
-                                <p class="course"> Computer Organization and design</p>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="allSms" id="allSms">
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row"
-                                    style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                    <div class="col-md-8">
-                                        <span>Edson is trying to send you an sms</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-                            <div class="suButton mb-2">
-                                <form action="">
-                                    <input type="text" name="" id="inputText" placeholder="Write a message..." />
-                                    <input type="submit" name="" id="submitButton" />
-                                </form>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-                        <!--div class="card">
-                                                
-                                                                    <div>
-                                                                        <div class="row" >
-                                                                            <div class="col-md-3">
-                                                                                <img src="https://partnershipla.org/wp-content/uploads/2019/07/Anavelen-Macias-245x300.png"
-                                                                                     alt="...">
-                                                                            </div>
-                                                                            <div class="col-md-9">
-                                                                                <br />
-                                                                                <h5 class="name">JOANA KHRIS BOODU DA SILVA COMPLETO</h5>
-                                                                                <p class="course"> Computer Organization and design</p>
-                                                                            </div>
-                                                                        </div>
-                                                                        <hr />
-                                                                        <div>
-                                                                            <h6>
-                                                                                EDSON CASIMIRO BLA BLA BLA
-                                                                            </h6>
-                                                                            <P>bla bla bla, esta a cuiar</p>
-                                                                        </div>
-                                                
-                                                                    </div>
-                                                                </div-->
-
-
-                    </div>
                 </div>
+            </ui:define>
+
+            <ui:define name="style">
+                <style>
+                    header {
+                        padding-top: 12px;
+                    }
+
+                    #professorTag {
+                        background-color: red;
+                        color: white;
+                    }
+
+                    .teacherPainel img {
+
+                        border-radius: 50%;
+                        width: 20%;
+                        display: block;
+                        height: 80px;
+                        object-fit: cover;
+                    }
+
+                    .name {
+                        font-weight: bold;
+                    }
 
 
-            </div>
-        </ui:define>
-
-        <ui:define name="style">
-            <style>
-                header {
-                    padding-top: 12px;
-                }
-
-                #professorTag {
-                    background-color: red;
-                    color: white;
-                }
-
-                .teacherPainel img {
-
-                    border-radius: 50%;
-                    width: 20%;
-                    display: block;
-                    height: 80px;
-                    object-fit: cover;
-                }
-
-                .name {
-                    font-weight: bold;
-                }
-
-
-                .float-end {
-                    font-size: 25px;
-                    color: rgb(25, 167, 250);
-                }
+                    .float-end {
+                        font-size: 25px;
+                        color: rgb(25, 167, 250);
+                    }
 
 
 
-                .teacherSms {
+                    .teacherSms {
 
-                    margin: 4px, 4px;
-                    padding: 4px;
-                    height: 500px;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    text-align: justify;
-                }
+                        margin: 4px, 4px;
+                        padding: 4px;
+                        height: 500px;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        text-align: justify;
+                    }
 
-                .teacherSms a {
-                    color: black;
-                    text-decoration: none;
-                }
+                    .teacherSms a {
+                        color: black;
+                        text-decoration: none;
+                    }
 
-                .fas {
-                    color: red;
-                }
+                    .fas {
+                        color: red;
+                    }
 
 
-                .mainImg {
-                    border-radius: 100%;
-                    height: 100px;
+                    .mainImg {
+                        border-radius: 100%;
+                        height: 100px;
 
-                }
+                    }
 
-                .smsTop {
-                    color: white;
-                    background-color: red;
-                }
+                    .smsTop {
+                        color: white;
+                        background-color: red;
+                    }
 
-                .allSms {
-                    height: 370px;
-                    margin-bottom: 10px;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    text-align: justify;
-                }
+                    .allSms {
+                        height: 370px;
+                        margin-bottom: 10px;
+                        overflow-x: hidden;
+                        overflow-y: auto;
+                        text-align: justify;
+                    }
 
-                #inputText {
-                    width: 85%;
-                    height: 50px;
-                    border-radius: 50px;
-                    border: 1px solid rgba(255, 0, 0, 0.445);
-                }
+                    .reply {
+                        position: relative;
+                        margin-left: 10px;
+                    }
 
-                #submitButton {
-                    width: 10%;
-                    height: 50px;
-                    border-radius: 50px;
-                    color: white;
-                    background-color: red;
-                }
-            </style>
-        </ui:define>
+                    #inputText {
+                        width: 85%;
+                        height: 50px;
+                        border-radius: 50px;
+                        border: 1px solid rgba(255, 0, 0, 0.445);
+                    }
 
-    </ui:composition>
-    <script>
-        window.onload = () => scrollToBottom();
-    </script>
-</body>
+                    #submitButton {
+                        width: 10%;
+                        height: 50px;
+                        border-radius: 50px;
+                        color: white;
+                        background-color: red;
+                    }
+                </style>
+            </ui:define>
+
+        </ui:composition>
+        <script>
+            window.onload = () => scrollToBottom();
+        </script>
+    </body>
 
 </html>
