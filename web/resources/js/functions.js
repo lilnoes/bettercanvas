@@ -105,7 +105,7 @@ function showElement(id) {
 }
 function joinedClass(evt) {
   if (evt.status != "success") return;
-  evt.source.value = "Joined";
+  evt.source.value = "Waiting for approval...";
   evt.source.disabled = true;
 }
 

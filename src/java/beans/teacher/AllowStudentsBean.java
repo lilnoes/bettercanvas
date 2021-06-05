@@ -28,66 +28,44 @@ import utils.DatabaseUtils;
 @ManagedBean(name = "allowStudentsBean")
 public class AllowStudentsBean implements Serializable{
 
-    CachedRowSetImpl _students;
     List<Row> students;
-    private int currentUserID;
-
-    public void setCurrentUserID(int currentUserID) {
-        this.currentUserID = currentUserID;
+    
+    public void accept(int userID, int courseID) throws SQLException{
+        PreparedStatement stmt = DatabaseUtils.getPreparedStatement("update studentcourses set status='accepted'\n"
+                + "where studentid=? and courseID=?");
+        stmt.setInt(1, userID);
+        stmt.setInt(2, courseID);
+        stmt.executeUpdate();
+        stmt.close();
+        stmt.getConnection().close();
     }
 
-    public int getCurrentUserID() {
-        return currentUserID;
-    }
-    
-    
-    
-    
-
-    public void accept(int index) throws SQLException{
-        _students.absolute(index);
-        _students.updateString(5, "accepted");
-        _students.updateRow();
-        DatabaseUtils.acceptChanges(_students);
-        
-        System.out.println(_students.getObject(5));
-    }
-
-    public void deny(int index) throws SQLException{
-        _students.absolute(index);
-        _students.updateString(5, "rejected");
-        _students.updateRow();
-        DatabaseUtils.acceptChanges(_students);
-        
-        System.out.println(_students.getObject(5));
+    public void deny(int userID, int courseID) throws SQLException {
+        PreparedStatement stmt = DatabaseUtils.getPreparedStatement("update studentcourses set status='rejected'\n"
+                + "where studentid=? and courseID=?");
+        stmt.setInt(1, userID);
+        stmt.setInt(2, courseID);
+        stmt.executeUpdate();
+        stmt.close();
+        stmt.getConnection().close();
     }
 
     public List<Row> getStudents() {
-        if (students != null) {
-            return students;
-        }
         students = new ArrayList<>();
         try {
-            _students = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from studentcourses");
-            _students.populate(stmt.executeQuery());
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name || u.surname, u.SINIF, u.faculty, sc.STUDENTID, sc.COURSEID from studentcourses as sc\n"
+                    + "inner join users as u\n"
+                    + "on u.USERID=sc.STUDENTID\n"
+                    + "where sc.STATUS='waiting'");
+            crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
-            Collection<Row> rows = (Collection<Row>) _students.toCollection();
+            Collection rows = (Collection<Row>) crs.toCollection();
             students.addAll(rows);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return students;
-    }
-
-    public String getID(Row row) {
-        int outcome = 0;
-        try {
-            outcome = (int) row.getColumnObject(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return String.valueOf(outcome);
     }
 }
