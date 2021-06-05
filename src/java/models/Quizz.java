@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -143,6 +144,15 @@ public class Quizz {
             addEntry.setInt(6, duration);
             if (addEntry.executeUpdate() == 0) {
                 throw new AbortProcessingException();
+            }
+            ResultSet rs = addEntry.getGeneratedKeys();
+            if(rs.next()){
+                String sql = String.format("insert into grades\n"
+                        + "(userID, courseID, quizid, grades, range)\n"
+                        + "select sc.STUDENTID, %d, %d, 0, 100 from studentcourses as sc\n"
+                        + "where sc.COURSEID=%d", 1, rs.getInt(1), 1);
+                DatabaseUtils.execute(sql);
+                System.out.println("added 0 grades to yall");
             }
 
             addEntry.close();

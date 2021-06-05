@@ -34,6 +34,7 @@ public class StudentBean implements Serializable {
     private SessionData session;
     private List<Course> courses;
     private List<Row> grades;
+    private List<Row> quizzes;
     private List<Row> announcements = null;
     public Course currentCourse;
 
@@ -86,13 +87,12 @@ public class StudentBean implements Serializable {
         grades = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name, u.title, cc.* from (select c.CREATEDBY, c.ID, c.NAME, s.status, c.SINIF from courses as c\n"
-                    + "left outer join studentcourses as s\n"
-                    + "on c.ID=s.COURSEID and s.STUDENTID=?) as cc\n"
-                    + "join users as u\n"
-                    + "on cc.createdBY=u.USERID\n"
-                    + "where cc.sinif=u.SINIF");
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select q.QUIZZNAME, q.STARTDATE, g.GRADES, g.RANGE from grades as g\n"
+                    + "inner join quizz as q\n"
+                    + "on q.id=g.QUIZID\n"
+                    + "where g.USERID= ?");
             stmt.setInt(1, 2);
+//            stmt.setInt(2, 2);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -102,6 +102,25 @@ public class StudentBean implements Serializable {
             e.printStackTrace();
         }
         return grades;
+    }
+    
+    public List<Row> getQuizzes() {
+        quizzes = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz\n"
+                    + "where courseID = ?");
+            stmt.setInt(1, 1);
+//            stmt.setInt(2, 2);
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            quizzes.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return quizzes;
     }
 
     public SessionData getSession() {

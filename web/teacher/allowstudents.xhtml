@@ -46,22 +46,22 @@
 
                     </h:form>
 
-                    <ui:repeat value="#{allowStudentsBean.students}" var="student" varStatus="status">
+                    <ui:repeat value="#{allowStudentsBean.students}" var="student">
                         <h:form class="student">
                             <tr id="student#{status.index}">
                                 <td>
                                     <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
                                          class="float-start" alt="" />
                                 </td>
-                                <td>Centro joao </td>
-                                <td>1</td>
-                                <td>Computer Engineering - #{status.index}</td>
+                                <td> #{student.getColumnObject(1)}</td>
+                                <td>#{student.getColumnObject(2)}</td>
+                                <td>#{student.getColumnObject(3)}</td>
                                 <td>
                                     <h:commandButton class="text-white bg-green-800 p-2" value="Allow">
-                                        <f:ajax listener="#{allowStudentsBean.accept(status.index)}" onevent="hideStudent"/>
+                                        <f:ajax listener="#{allowStudentsBean.accept(student.getColumnObject(4), student.getColumnObject(5))}" onevent="hideStudent"/>
                                     </h:commandButton>
                                     <h:commandButton class="ml-2 text-white bg-red-600 p-2" value="Deny">
-                                        <f:ajax listener="#{allowStudentsBean.deny(status.index)}" onevent="hideStudent"/>
+                                        <f:ajax listener="#{allowStudentsBean.deny(student.getColumnObject(4), student.getColumnObject(5))}" onevent="hideStudent"/>
                                     </h:commandButton>
                                 </td>
 

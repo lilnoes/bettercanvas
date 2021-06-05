@@ -5,11 +5,15 @@
  */
 package beans.teacher;
 
+import com.sun.rowset.CachedRowSetImpl;
+import com.sun.rowset.internal.Row;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -19,6 +23,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
+import utils.DatabaseUtils;
 
 /**
  *
@@ -27,7 +32,8 @@ import javax.faces.event.ValueChangeEvent;
 @ManagedBean(name = "gradesBean")
 @ViewScoped
 public class GradesBean implements Serializable{
-    public int currentQuiz = 0;
+    public int currentQuiz = 1;
+    public List<Row> grades;
     public List<String> quizzes;
     public List<String> quizNames;
     public String action = "edit";
@@ -98,7 +104,29 @@ public class GradesBean implements Serializable{
         return quizNames;
     }
     
-    
+    public List<Row> getGrades() {
+        grades = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, q.QUIZZNAME, q.STARTDATE, g.GRADES, g.RANGE from studentcourses as sc\n"
+                    + "left join grades as g\n"
+                    + "on sc.STUDENTID=g.USERID\n"
+                    + "join quizz as q\n"
+                    + "on q.ID=g.QUIZID\n"
+                    + "join users as u on u.USERID=sc.STUDENTID\n"
+                    + "where g.QUIZID=? and sc.COURSEID=?");
+            stmt.setInt(1, currentQuiz);
+            stmt.setInt(2, 1);
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            grades.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return grades;
+    }
     
     public void setQuiz(AjaxBehaviorEvent evt){
         quizzes = new ArrayList<>();
