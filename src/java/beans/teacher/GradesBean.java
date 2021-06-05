@@ -32,12 +32,12 @@ import utils.DatabaseUtils;
 @ManagedBean(name = "gradesBean")
 @ViewScoped
 public class GradesBean implements Serializable{
-    public int currentQuiz = 1;
+    public int currentQuiz = 0;
     public List<Row> grades;
-    public List<String> quizzes;
+    public List<Row> quizzes;
     public List<String> quizNames;
-    public String action = "edit";
-    public String point = "100";
+    public String action = "view";
+    public double point = 100;
     public String currentCourse = "";
 
     public GradesBean() {
@@ -59,21 +59,7 @@ public class GradesBean implements Serializable{
     @PostConstruct
     public void init(){
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if(map.isEmpty()) return;
-        String action = (String)map.get("quiz");
-        currentCourse = map.get("course");
-        quizzes = new ArrayList<>();
-        quizzes.add("quiz 1");
-        quizzes.add("quiz 2");
-        System.out.println("hitting here from post construct " + action);
-    }
-    
-    public String getPoint() {
-        return point;
-    }
-
-    public void setPoint(String point) {
-        this.point = point;
+        setQuizzes();
     }
     
     
@@ -84,6 +70,14 @@ public class GradesBean implements Serializable{
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public double getPoint() {
+        return point;
+    }
+
+    public void setPoint(double point) {
+        this.point = point;
     }
     
     
@@ -96,8 +90,24 @@ public class GradesBean implements Serializable{
         this.currentQuiz = currentQuiz;
     }
 
-    public List<String> getQuizzes() {
+    public List<Row> getQuizzes() {
         return quizzes;
+    }
+    
+    public void setQuizzes() {
+        quizzes = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select id, quizzname from quizz where courseID = ?");
+            stmt.setInt(1, 1); //courseID
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            quizzes.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public List<String> getQuizNames() {
@@ -108,15 +118,12 @@ public class GradesBean implements Serializable{
         grades = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, q.QUIZZNAME, q.STARTDATE, g.GRADES, g.RANGE from studentcourses as sc\n"
-                    + "left join grades as g\n"
-                    + "on sc.STUDENTID=g.USERID\n"
-                    + "join quizz as q\n"
-                    + "on q.ID=g.QUIZID\n"
-                    + "join users as u on u.USERID=sc.STUDENTID\n"
-                    + "where g.QUIZID=? and sc.COURSEID=?");
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.userid, u.SURNAME || u.name, q.QUIZZNAME, q.STARTDATE, g.GRADES, g.RANGE from grades as g\n"
+                    + "join quizz as q on g.QUIZID=q.ID\n"
+                    + "join users as u on u.USERID=g.ID\n"
+                    + "where g.QUIZID=? and g.COURSEID=?");
             stmt.setInt(1, currentQuiz);
-            stmt.setInt(2, 1);
+            stmt.setInt(2, 1); //courseID
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -127,20 +134,11 @@ public class GradesBean implements Serializable{
         }
         return grades;
     }
-    
-    public void setQuiz(AjaxBehaviorEvent evt){
-        quizzes = new ArrayList<>();
-        quizzes.add("quiz 1");
-        quizzes.add("quiz 2");
-        String id = evt.getComponent().getId();
-        if(id.equals("valuebutton")) action = "view";
-        else action = "edit";
-        System.out.println("came " + action + " " + point);
-    }
+   
     
     public void updatePoints(AjaxBehaviorEvent evt){
-        getQuizzes().add("quiz ajax "+ point);
-        System.out.println("ajax event" + point);
+//        getQuizzes().add("quiz ajax "+ point);
+        System.out.println("ajax event point");
     }
     
     
