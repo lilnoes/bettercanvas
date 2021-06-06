@@ -154,3 +154,27 @@ function addMessage() {
   document.getElementById("inputText").value = "";
   document.getElementById("inputText").focus();
 }
+
+function sendGrades(elt){
+  console.log("here here");
+  window.elt = elt;
+  const btn = document.getElementById("sendGrades1");
+  document.getElementById("studentID").value = elt.getAttribute("student");
+  document.getElementById("studentPoints").value = elt.value;
+  document.getElementById("studentModel").value = elt.getAttribute("model");
+  btn.click();
+}
+
+function updateTotalPoints(){
+  let count = 0;
+  let sum1 = 0;
+  let sum2 = 0;
+  const points = document.getElementsByClassName("points");
+  const ranges = document.getElementsByClassName("range");
+  for(let point of points){sum1 += parseFloat(point.innerText); count += 1}
+  for(let range of ranges){sum2 += parseFloat(range.innerText);}
+  sum1 /= count;
+  sum2 /= count;
+  document.getElementById("totalPoints").innerText = sum1;
+  document.getElementById("totalRange").innerText = sum2;
+}
