@@ -28,7 +28,11 @@
     </h:head>
     <h:body class="">
         <f:view>
-            <ui:insert name="metadata" />
+            <ui:insert name="metadata">
+                <f:metadata>
+                    <f:viewAction action="#{teacherBean.init()}" />
+                </f:metadata>
+            </ui:insert>
             <div class="w-full fixed h-[70px]">
                 <ui:insert name="title">
                     <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Name of the course</h1>
@@ -37,16 +41,16 @@
             </div>
             <h:panelGroup rendered="#{not empty teacherBean.currentCourse}">
                 <c:set value="#{teacherBean.currentCourse}" var="ccourse"/>
-            <div class="fixed top-[73px] left-0 w-[20%] sidebar">
-                <div class="space-y-6 border-r border-red-800 mx-2">
-                    <a class="text-blue-800 text-2xl underline block" href="home.xhtml?course=#{ccourse.id}">Home</a>
-                    <a class="text-blue-800 text-2xl block" href="announcement.xhtml?course=#{ccourse.id}">Announcements</a>
-                    <a class="text-blue-800 text-2xl block" href="inbox.xhtml?course=#{ccourse.id}">Messages</a>
-                    <a class="text-blue-800 text-2xl block" href="grades.xhtml?course=#{ccourse.id}">Grades</a>
-                    <a class="text-blue-800 text-2xl block" href="people.xhtml?course=#{ccourse.id}">People</a>
-                    <a class="text-blue-800 text-2xl block" href="quizzes.xhtml?course=#{ccourse.id}">Quizzes</a>
+                <div class="fixed top-[73px] left-0 w-[20%] sidebar">
+                    <div class="space-y-6 border-r border-red-800 mx-2">
+                        <a class="text-blue-800 text-2xl underline block" href="home.xhtml?course=#{ccourse.id}">Home</a>
+                        <a class="text-blue-800 text-2xl block" href="announcement.xhtml?course=#{ccourse.id}">Announcements</a>
+                        <a class="text-blue-800 text-2xl block" href="inbox.xhtml?course=#{ccourse.id}">Messages</a>
+                        <a class="text-blue-800 text-2xl block" href="grades.xhtml?course=#{ccourse.id}">Grades</a>
+                        <a class="text-blue-800 text-2xl block" href="people.xhtml?course=#{ccourse.id}">People</a>
+                        <a class="text-blue-800 text-2xl block" href="quizzes.xhtml?course=#{ccourse.id}">Quizzes</a>
+                    </div>
                 </div>
-            </div>
             </h:panelGroup>
 
             <div class="fixed top-[73px] right-0 w-[80%] bottom-[80px] overflow-y-auto content">
