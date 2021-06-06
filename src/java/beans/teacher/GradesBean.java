@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +24,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
+import org.apache.derby.client.am.SqlException;
 import utils.DatabaseUtils;
 
 /**
@@ -31,13 +33,16 @@ import utils.DatabaseUtils;
  */
 @ManagedBean(name = "gradesBean")
 @ViewScoped
-public class GradesBean implements Serializable{
+public class GradesBean implements Serializable {
+
     public int currentQuiz = 0;
     public List<Row> grades;
     public List<Row> quizzes;
     public List<String> quizNames;
     public String action = "view";
-    public double point = 100;
+    public int studentId = 1;
+    public double points = 100;
+    public String model = "points";
     public String currentCourse = "";
 
     public GradesBean() {
@@ -45,24 +50,23 @@ public class GradesBean implements Serializable{
         quizNames.add("quiz 1");
         quizNames.add("quiz 2");
     }
-    
-    public String getLink() throws UnsupportedEncodingException{
+
+    public String getLink() throws UnsupportedEncodingException {
         String base = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String action = (String)map.get("action");
+        String action = (String) map.get("action");
         currentCourse = map.get("course");
-        if(currentCourse == null || currentCourse.isEmpty()) currentCourse = "1";
+        if (currentCourse == null || currentCourse.isEmpty()) {
+            currentCourse = "1";
+        }
         return String.format("grades.xhtml?faces-redirect=true&quiz=%s&action=%s&course=%s", currentQuiz, action, currentCourse);
     }
-    
 
     @PostConstruct
-    public void init(){
+    public void init() {
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
         setQuizzes();
     }
-    
-    
 
     public String getAction() {
         return action;
@@ -72,15 +76,29 @@ public class GradesBean implements Serializable{
         this.action = action;
     }
 
-    public double getPoint() {
-        return point;
+    public double getPoints() {
+        return points;
     }
 
-    public void setPoint(double point) {
-        this.point = point;
+    public void setPoints(double points) {
+        this.points = points;
     }
-    
-    
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
 
     public int getCurrentQuiz() {
         return currentQuiz;
@@ -93,7 +111,7 @@ public class GradesBean implements Serializable{
     public List<Row> getQuizzes() {
         return quizzes;
     }
-    
+
     public void setQuizzes() {
         quizzes = new ArrayList<>();
         try {
@@ -113,7 +131,7 @@ public class GradesBean implements Serializable{
     public List<String> getQuizNames() {
         return quizNames;
     }
-    
+
     public List<Row> getGrades() {
         grades = new ArrayList<>();
         try {
@@ -134,12 +152,19 @@ public class GradesBean implements Serializable{
         }
         return grades;
     }
-   
-    
-    public void updatePoints(AjaxBehaviorEvent evt){
+
+    public void updatePoints(AjaxBehaviorEvent evt) throws SQLException {
+        String sql = "update grades set grades = ? where userid = ? and quizid = ?";
+        PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
+        stmt.setDouble(1, points);
+        stmt.setInt(2, studentId);
+        stmt.setInt(3, currentQuiz);
+        stmt.executeUpdate();
+        stmt.close();
+        stmt.getConnection().close();
 //        getQuizzes().add("quiz ajax "+ point);
         System.out.println("ajax event point");
+        System.out.println("ajax event point");
     }
-    
-    
+
 }

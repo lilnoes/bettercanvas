@@ -28,7 +28,7 @@
                 <div>
                     <h:panelGroup id="gradestable">
                         #{gradesBean.currentQuiz} - #{gradesBean.action}
-                        <h:form>
+                        <h:form prependId="false">
                             <table>
                                 <tr class="font-bold text-2xl p-3 border-b border-gray-600">
                                     <td class="p-3">Student name</td>
@@ -45,22 +45,29 @@
                                         <td class="p-3">#{grade.getColumnObject(3)}</td>
                                         <td class="p-3">#{grade.getColumnObject(4)}</td>
                                         <td class="p-3">
-                                           
-                                            <c:set var="value" value="#{grade.getColumnObject(5)}" />
-                                            <input type="text" jsf:value="#{value}" jsf:disabled="#{gradesBean.action == 'view'}" student="#{grade.getColumnObject(1)}">
+
+                                            <input type="text" value="#{grade.getColumnObject(5)}" jsf:disabled="#{gradesBean.action == 'view'}"
+                                                   student="#{grade.getColumnObject(1)}" onchange="sendGrades(this)">
                                                 <f:passThroughAttribute name="model" value="points"/>
-                                                <f:ajax listener="#{gradesBean.updatePoints(evt)}"/>
                                             </input>
                                         </td>
                                         <td class="p-3">
-                                            <input type="text" value="#{grade.getColumnObject(5)}" jsf:disabled="#{gradesBean.action == 'view'}" student="#{grade.getColumnObject(1)}">
+                                            <input type="text" value="#{grade.getColumnObject(6)}" disabled="true"
+                                                   student="#{grade.getColumnObject(1)}" onchange="sendGrades(this)">
                                                 <f:passThroughAttribute name="model" value="range"/>
-                                                <f:ajax listener="#{gradesBean.updatePoints(evt)}"/>
                                             </input>
                                         </td>
                                     </tr>
                                 </ui:repeat>
                             </table>
+                        </h:form>
+                        <h:form prependId="false">
+                            <h:inputHidden id="studentID" value="#{gradesBean.studentId}" />
+                            <h:inputHidden id="studentPoints" value="#{gradesBean.points}" />
+                            <h:inputHidden id="studentModel" value="#{gradesBean.model}" />
+                            <h:commandButton type="submit" id="sendGrades1" class="hidden">
+                                <f:ajax execute="@form" listener="#{gradesBean.updatePoints}"/>
+                            </h:commandButton>
                         </h:form>
                     </h:panelGroup>
 
