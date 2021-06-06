@@ -1,10 +1,17 @@
 function loadData() {
+  const labels = []
+  const points = []
+  const _points = document.getElementsByClassName("point");
+  for(let point of _points){
+    labels.push(point.getAttribute("name"));
+    points.push(parseFloat(point.getAttribute("points")));
+  }
   const data = {
-    labels: ["quiz 1", "quiz 2", "midterm"],
+    labels: labels,
     datasets: [
       {
         label: "Grades",
-        data: [10, 20, 15],
+        data: points,
         borderColor: "rgb(75, 192, 192)",
         pointBorderWidth: 3,
         pointBackgroundColor: "red",
@@ -12,6 +19,7 @@ function loadData() {
       },
     ],
   };
+  console.log(data);
   const options = { scales: { y: { min: 0, max: 100 } } };
   const config = { type: "line", data: data, options: options };
   const chart = new Chart(document.getElementById("gradesChart"), config);

@@ -2,191 +2,78 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-<h:head>
-    <title>Course - People</title>
-</h:head>
-<h:body>
-    <ui:composition template="common.xhtml">
-        <ui:define name="title">
-            <h4 class="ml-10 p-3 text-4xl font-bold text-red-800"><span class="shortName">BILMU24</span> -
-                <span>PEOPLE</span></h4>
-        </ui:define>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Course - People</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="common.xhtml">
+            <ui:define name="title">
+                <h4 class="ml-10 p-3 text-4xl font-bold text-red-800"><span class="shortName">BILMU24</span> -
+                    <span>PEOPLE</span></h4>
+            </ui:define>
 
-        <ui:define name="content">
-            <div class="container-fluid">
-                <div class="row">
+            <ui:define name="content">
+                <div class="container-fluid">
+                    <div class="row">
 
-                    <div class="col-md-9">
-                        <table class="table">
+                        <div class="col-md-9">
+                            <table class="table">
 
-                            <tr>
-                                <th></th>
-                                <th>NAME</th>
-                                <th>SURNAME</th>
-                                <th>COUNTRY</th>
-                            </tr>
-
-                            <div class="student">
                                 <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
+                                    <th></th>
+                                    <th>NAME</th>
+                                    <th>SURNAME</th>
+                                    <th>COUNTRY</th>
                                 </tr>
 
-                            </div>
+                                <ui:repeat value="#{teacherBean.students}" var="student">
+                                    <div class="student">
+                                        <tr>
+                                            <td>
+                                                <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
+                                                     class="float-start" alt="" />
+                                            </td>
+                                            <td>#{student.getColumnObject(1)}</td>
+                                            <td>#{student.getColumnObject(2)}</td>
+                                            <td>#{student.getColumnObject(3)}</td>
+
+                                        </tr>
+
+                                    </div>
+                                </ui:repeat>
+                            </table>
+                        </div>
 
 
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-                            <div class="student">
-                                <tr>
-                                    <td>
-                                        <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                            class="float-start" alt="" />
-                                    </td>
-                                    <td>Centro joao </td>
-                                    <td>Francisco Chang</td>
-                                    <td>Mexico</td>
-
-                                </tr>
-
-                            </div>
-
-
-                        </table>
                     </div>
-
-
                 </div>
-            </div>
-        </ui:define>
+            </ui:define>
 
-        <ui:define name="style">
-            <style>
-                table {
-                    font-family: arial, sans-serif;
-                    border-collapse: collapse;
-                    width: 100%;
-                    margin-bottom: 2%;
-                }
+            <ui:define name="style">
+                <style>
+                    table {
+                        font-family: arial, sans-serif;
+                        border-collapse: collapse;
+                        width: 100%;
+                        margin-bottom: 2%;
+                    }
 
-                table tr td img {
-                    width: 70px;
-                    height: 70px;
-                    border-radius: 80px;
-                }
+                    table tr td img {
+                        width: 70px;
+                        height: 70px;
+                        border-radius: 80px;
+                    }
 
-                td,
-                th {
-                    border-bottom: 1px solid #dddddd;
-                    text-align: left;
-                    padding: 8px;
-                }
-            </style>
-        </ui:define>
-    </ui:composition>
-</h:body>
+                    td,
+                    th {
+                        border-bottom: 1px solid #dddddd;
+                        text-align: left;
+                        padding: 8px;
+                    }
+                </style>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 
 </html>

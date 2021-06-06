@@ -2,7 +2,8 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Leon Emmanuel ISHIMWE - BetterCanvas</title>
     </h:head>
@@ -12,6 +13,14 @@
                 <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Leon Emmanuel ISHIMWE - Dashboard</h1>
             </ui:define>
             <ui:define name="content">
+                <h:panelGroup class="hidden">
+                <ui:repeat value="#{studentBean.grades}" var="grade">
+                    <h:outputText value="grade" class="point">
+                        <f:passThroughAttribute name="points" value="#{grade.getColumnObject(3)}" />
+                        <f:passThroughAttribute name="name" value="#{grade.getColumnObject(1)}" />
+                    </h:outputText>
+                </ui:repeat>
+                </h:panelGroup>
                 <div class="w-[500px] h-[200px]">
                     <canvas id="gradesChart" width="500" height="200"></canvas>
                 </div>

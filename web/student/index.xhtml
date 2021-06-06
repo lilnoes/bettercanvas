@@ -2,7 +2,8 @@
 <!DOCTYPE html
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" lang="en">
+      xmlns:ui="http://java.sun.com/jsf/facelets" lang="en"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <meta charset="UTF-8" />
@@ -30,7 +31,7 @@
         <title>Leon Emmanuel ISHIMWE - BetterCanvas</title>
 
         <style>
-            
+
             h3 {
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             }
@@ -82,17 +83,20 @@
                     <div class="courses">
                         <!--listing all courses-->
 
-                        <a href="#">
-                            <div class="card mb-3">
-                                <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
-                                     alt="..." />
-                                <div class="card-body">
-                                    <h4 class="card-title text-center text-xl">Introduction to Computer Engineering</h4>
-                                    <p class="card-text text-center "><span>Message</span> &nbsp; <span>next session</span>
-                                    </p>
+                        <ui:repeat value="#{studentBean.courses}" var="course" >
+                            <h:link outcome="/student/home.xhtml?course=#{course.getColumnObject(3)}">
+                                <f:param name="course" value="#{course.getColumnObject(3)}" />
+                                <div class="card mb-3">
+                                    <img src="http://www.clemson.edu/degrees/images/headers/25.jpg" class="card-img-top"
+                                         alt="..." />
+                                    <div class="card-body">
+                                        <h4 class="card-title text-center text-xl">#{course.getColumnObject(1)} - #{course.getColumnObject(2)}</h4>
+                                        <p class="card-text text-center "><span>Message</span> &nbsp; <span>next session</span>
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
+                            </h:link>
+                        </ui:repeat>
 
                         <a href="#">
                             <div class="card mb-3">
@@ -111,15 +115,24 @@
                 <div class="col-md-3">
                     <h3 class=" text-center text-2xl p-3">To do</h3>
                     <hr />
+                    
+                    <div>
+                        <h:link value="Available courses" outcome="availablecourse.xhtml">
+                            
+                        </h:link>
+                    </div>
 
                     <div>
+                        <ui:repeat value="#{studentBean.announcements}" var="announcement">
                         <div class="container todo p-2 mb-6">
-                            <i class="fas fa-volume-up"></i> <a href="#" class="text-blue-700 underline">Title here, for sure</a><br />
+                            <i class="fas fa-volume-up"></i> <a href="#" class="text-blue-700 underline">#{announcement.getColumnObject(1)}</a><br />
                             <ul>
-                                <li><span>Summary is going to be here</span></li>
-                                <li>Apr 27 at 12:23pm</li>
+                                <li><span>(#{announcement.getColumnObject(4)})</span></li>
+                                <li><span>#{announcement.getColumnObject(2)}</span></li>
+                                <li>#{announcement.getColumnObject(3)}</li>
                             </ul>
                         </div>
+                        </ui:repeat>
 
                         <div class="container todo p-2 mb-6">
                             <i class="fas fa-volume-up"></i> <a href="#" class="text-blue-700 underline">Title here, for sure</a><br />
@@ -136,18 +149,6 @@
 
         <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
             <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
-            <div class="overflow-y-auto w-full">
-                <div class="bg-white m-3 p-3 rounded-xl">
-                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
-                    <p>Course shortword</p>
-                </div>
-
-                <div class="bg-white m-3 p-3 rounded-xl">
-                    <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="#">Course 1</a></h1>
-                    <p>Course shortword</p>
-                </div>
-
-            </div>
         </div>
         <ui:include src="footer.xhtml" />
         <h:outputScript library="js" name="functions.js" />
