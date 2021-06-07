@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.annotation.Resource;
+import javax.faces.bean.ManagedBean;
 import javax.sql.DataSource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,9 +25,14 @@ import javax.naming.InitialContext;
  *
  * @author leon
  */
+@ManagedBean(name = "database")
 public class DatabaseUtils {
 
-    private static DataSource dataSource = null;
+    public void m(){
+        main(null);
+    }
+    
+    private static DataSource dataSource;
 
     private static Connection getConnection() {
         try {
@@ -112,6 +119,12 @@ public class DatabaseUtils {
 
     public static void main(String args[]) {
         createUsersTable();
+        createAnnouncementsTable();
+        createCoursesTable();
+        createGradesTable();
+        createQuizzTable();
+        createStudentCoursesTable();
+        createMessagesTable();
     }
 
     public static void createCoursesTable() {

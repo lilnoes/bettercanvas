@@ -180,7 +180,7 @@ public class StudentBean implements Serializable {
     public String init() {
         System.out.println("starting view");
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if (map.isEmpty()) {
+        if (map.isEmpty() || map.get("course") == null) {
             return null;
         }
         int courseID = Integer.valueOf(map.get("course"));
