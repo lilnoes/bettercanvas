@@ -16,6 +16,7 @@ import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import models.User;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
@@ -32,6 +33,8 @@ public class Validators {
         Boolean isTeacher = Pattern.matches(".*@iuc[.]edu[.]tr", email.toString().trim());
         if (!isStudent && !isTeacher)
             throw new ValidatorException(new FacesMessage("email should end in iuc.edu.tr"));
+        if (User.emailVar(email.toString()))
+            throw new ValidatorException(new FacesMessage("email already exists"));
         UserData data = (UserData)context.getExternalContext().getSessionMap().get("userData");
         if(isStudent) data.setType("student");
         else data.setType("teacher");
