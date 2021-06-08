@@ -117,19 +117,13 @@ function joinedClass(evt) {
   evt.source.disabled = true;
 }
 
-<<<<<<< HEAD
 //<<<<<<< HEAD
-=======
->>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c
 
 function changePassWord() {
     const changePassword = document.getElementsById("changepassword");
     changePassword.style.display = "block";
 }
-<<<<<<< HEAD
 //=======
-=======
->>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c
 function setRecipient(elt) {
   window.elt = elt;
   console.log("clicked ", elt);
@@ -170,9 +164,7 @@ function addMessage() {
   document.getElementById("inputText").value = "";
   document.getElementById("inputText").focus();
 }
-<<<<<<< HEAD
 //>>>>>>> e3d75df6a599e283305aa45fadb1c12c8958300c
-=======
 
 function sendGrades(elt){
   console.log("here here");
@@ -197,4 +189,18 @@ function updateTotalPoints(){
   document.getElementById("totalPoints").innerText = sum1;
   document.getElementById("totalRange").innerText = sum2;
 }
->>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c
+
+function openFile(){
+  const btn = document.getElementById("file");
+  btn.click();
+}
+
+function changePicture(evt){
+  console.log(evt);
+  // if(evt.status != "success") return true;
+  const elt = document.getElementById("pic1");
+  const file = document.getElementById("file");
+  if(file.files.length <= 0) return;
+  elt.src = window.URL.createObjectURL(file.files[0]);
+
+}

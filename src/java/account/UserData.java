@@ -5,11 +5,14 @@
  */
 package account;
 
+import beans.student.StudentBean;
 import beans.teacher.TeacherBean;
 import config.SessionData;
 import java.io.File;
 import java.io.Serializable;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +48,7 @@ public class UserData implements Serializable {
     private String newEmailConf = "";
     private String type = "";
     private String title = "";
+    private Part file;
     private int year = 1;
     private Date birthDate;
     private String country = "Turkey";
@@ -52,6 +56,14 @@ public class UserData implements Serializable {
     private String newPassword = "";
     private String confPassword = "";
     private static String UPLOADS = "/mnt/leon/leon/projects/BetterCanvas/web/resources/images";
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
 
     public String getName() {
         return name;
@@ -73,11 +85,10 @@ public class UserData implements Serializable {
         return email;
     }
 
-    
-    
     public void setNewEmail(String newEmail) {
         this.newEmail = newEmail;
     }
+
     public String getNewEmail() {
         return newEmail;
     }
@@ -85,11 +96,10 @@ public class UserData implements Serializable {
     public void setNewEmailConf(String newEmailConf) {
         this.newEmailConf = newEmailConf;
     }
+
     public String getNewEmailConf() {
         return newEmailConf;
     }
-    
-    
 
     public void setEmail(String email) {
         this.email = email;
@@ -158,9 +168,9 @@ public class UserData implements Serializable {
     public void setConfPassword(String confPassword) {
         this.confPassword = confPassword;
     }
-    
-     public String errorSMS(){
-        return"The entered information does not match!";
+
+    public String errorSMS() {
+        return "The entered information does not match!";
     }
 
 //    public void upload(AjaxBehaviorEvent evt){
@@ -230,9 +240,8 @@ public class UserData implements Serializable {
         session.setUser(null);
         return null;
     }
-    
-    
-    public String updateEmail() throws SQLException{
+
+    public String updateEmail() throws SQLException {
         TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
 
         try {
@@ -253,13 +262,35 @@ public class UserData implements Serializable {
                 return "account";
             }
 
-  
-                
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
 
     }
-    
+
+    public String upload(AjaxBehaviorEvent evt) {
+        System.out.println("reached here....");
+        StudentBean studentBean = (StudentBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("studentBean");
+        try {
+            Path path = Files.createTempFile(null, file.getSubmittedFileName());
+            String name = path.getFileName().toString();
+            String base = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("location");
+            Files.copy(file.getInputStream(), Paths.get(base + name));
+            String sql = "update users set picture = ? where userID = ?";
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
+            stmt.setString(1, name);
+            stmt.setInt(2, studentBean.getSession().getUser().userID);
+            stmt.execute();
+            stmt.close();
+            stmt.getConnection().close();
+            System.out.println("file saved successfully");
+        } catch (FileAlreadyExistsException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
