@@ -239,7 +239,7 @@ public class UserData implements Serializable {
             if ((teacherBean.getSession().getUser().email).equals(getEmail())) {
                 System.out.println("good");
                 if ((getNewEmail()).equals(getNewEmailConf())) {
-                    String sql = "UPADATE  USERS SET EMAIL=? WHERE EMAIL=?";
+                    String sql = "UPDATE  USERS SET EMAIL=? WHERE EMAIL=?";
 
                     PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
                     addEntry.setString(1, getNewEmail());  //teacherBean.getSession().getUser().userID

@@ -170,7 +170,7 @@ public class PasswordReset {
         try { //teacherBean.getSession().getUser().getPassword()
             if((teacherBean.getSession().getUser().getPassword()).equals(UserUtils.hashPassword(getActualpassword())) ){
                 if(getNewpassword().equals(getConfpassword() )){
-                    String sql = "UPADATE  USERS SET PASSWORD=? WHERE EMAIL=?";
+                    String sql = "UPDATE  USERS SET PASSWORD=? WHERE EMAIL=?";
                     System.out.printf("good from in " + getNewpassword() );
 
                     PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
