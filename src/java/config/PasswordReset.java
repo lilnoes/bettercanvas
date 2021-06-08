@@ -164,14 +164,14 @@ public class PasswordReset {
     
     
     public String updatePassword() throws SQLException{
-        System.out.println("from out" + getNewpassword() );
+        System.out.printf("from out" + getNewpassword() );
         TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
 
         try { //teacherBean.getSession().getUser().getPassword()
             if((teacherBean.getSession().getUser().getPassword()).equals(UserUtils.hashPassword(getActualpassword())) ){
                 if(getNewpassword().equals(getConfpassword() )){
                     String sql = "UPADATE  USERS SET PASSWORD=? WHERE EMAIL=?";
-                    System.out.println("good from in " + getNewpassword() );
+                    System.out.printf("good from in " + getNewpassword() );
 
                     PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
                     addEntry.setString(1, getNewpassword());  //teacherBean.getSession().getUser().userID

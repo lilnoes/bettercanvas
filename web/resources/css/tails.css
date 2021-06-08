@@ -1,4 +1,5 @@
 * {
+    margin: 0;
     --tw-shadow: 0 0 #0000;
     --tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);
     --tw-ring-offset-width: 0px;
@@ -183,8 +184,38 @@
     height: 200px
 }
 .w-full {
-    width: 100%
+    width: 100%;
+    
+    
 }
+#maindiv{
+    background-image: url("https://blog.obilet.com/wp-content/uploads/2018/09/istanbul-%C3%BCniversitesi-avc%C4%B1lar-kamp%C3%BCs%C3%BC.jpg");
+    background-color: white;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+}
+
+#sifreunutma{
+    background-image: url("https://pbs.twimg.com/media/ElPAQIsWkAAL6Z9.jpg:large");
+    background-color: #cccccc;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+.registImg{
+    background-image: url("https://pbs.twimg.com/media/ElPAQIsWkAAL6Z9.jpg:large");
+    background-color: #cccccc;
+    height: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+}
+
 .w-\[40\%\] {
     width: 40%
 }
