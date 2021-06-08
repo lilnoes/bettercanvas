@@ -28,7 +28,11 @@
     </h:head>
     <h:body class="">
         <f:view>
-            <ui:insert name="metadata" />
+            <ui:insert name="metadata">
+                <f:metadata>
+                    <f:viewAction action="#{studentBean.init()}" />
+                </f:metadata>
+            </ui:insert>
             <div class="w-full fixed h-[70px]">
                 <ui:insert name="title">
                     <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">Name of the course</h1>
@@ -43,7 +47,7 @@
                     <a class="text-blue-800 text-2xl block" href="announcement.xhtml?course=#{ccourse.id}">Announcements</a>
                     <a class="text-blue-800 text-2xl block" href="inbox.xhtml?course=#{ccourse.id}">Messages</a>
                     <a class="text-blue-800 text-2xl block" href="grades.xhtml?course=#{ccourse.id}">Grades</a>
-                    <a class="text-blue-800 text-2xl block" href="quizzes.xhtml?course=#{ccourse.id}">Quizzes</a>
+                    <a class="text-blue-800 text-2xl block" href="quizz.xhtml?course=#{ccourse.id}">Quizzes</a>
                 </div>
             </div>
             </h:panelGroup>
@@ -57,8 +61,8 @@
                 <div class="overflow-y-auto w-full h-[98%]">
                     <ui:repeat value="#{studentBean.courses}" var="course" varStatus="status">
                         <div class="bg-white m-3 p-3 rounded-xl">
-                            <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="home.xhtml?course=#{course.id}">#{course.name}</a></h1>
-                            <p>#{course.shortName}</p>
+                            <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="home.xhtml?course=#{course.getColumnObject(3)}">#{course.getColumnObject(1)}</a></h1>
+                            <p>#{course.getColumnObject(2)}</p>
                         </div>
                     </ui:repeat>
 

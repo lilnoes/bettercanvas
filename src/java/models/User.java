@@ -125,4 +125,25 @@ public class User implements Serializable{
         }
         return user;
     }
+    
+    public static Boolean emailVar(String email) {
+        Boolean ret = true;
+        String sql = "select * from users\n"
+                + "where email = ?"
+                + "fetch first 1 rows only";
+        try {
+            PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
+            statement.setString(1, email);
+            ResultSet res = statement.executeQuery();
+            if (!res.next()) {
+                ret = false;
+            }
+            else{ret = true; }
+            statement.close();
+            statement.getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ret;
+    }
 }

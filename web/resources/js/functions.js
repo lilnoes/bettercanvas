@@ -1,10 +1,17 @@
 function loadData() {
+  const labels = []
+  const points = []
+  const _points = document.getElementsByClassName("point");
+  for(let point of _points){
+    labels.push(point.getAttribute("name"));
+    points.push(parseFloat(point.getAttribute("points")));
+  }
   const data = {
-    labels: ["quiz 1", "quiz 2", "midterm"],
+    labels: labels,
     datasets: [
       {
         label: "Grades",
-        data: [10, 20, 15],
+        data: points,
         borderColor: "rgb(75, 192, 192)",
         pointBorderWidth: 3,
         pointBackgroundColor: "red",
@@ -12,6 +19,7 @@ function loadData() {
       },
     ],
   };
+  console.log(data);
   const options = { scales: { y: { min: 0, max: 100 } } };
   const config = { type: "line", data: data, options: options };
   const chart = new Chart(document.getElementById("gradesChart"), config);
@@ -105,17 +113,23 @@ function showElement(id) {
 }
 function joinedClass(evt) {
   if (evt.status != "success") return;
-  evt.source.value = "Joined";
+  evt.source.value = "Waiting for approval...";
   evt.source.disabled = true;
 }
 
+<<<<<<< HEAD
 //<<<<<<< HEAD
+=======
+>>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c
 
 function changePassWord() {
-    var changePassword = document.getElementsById("changepassword");
+    const changePassword = document.getElementsById("changepassword");
     changePassword.style.display = "block";
 }
+<<<<<<< HEAD
 //=======
+=======
+>>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c
 function setRecipient(elt) {
   window.elt = elt;
   console.log("clicked ", elt);
@@ -156,4 +170,31 @@ function addMessage() {
   document.getElementById("inputText").value = "";
   document.getElementById("inputText").focus();
 }
+<<<<<<< HEAD
 //>>>>>>> e3d75df6a599e283305aa45fadb1c12c8958300c
+=======
+
+function sendGrades(elt){
+  console.log("here here");
+  window.elt = elt;
+  const btn = document.getElementById("sendGrades1");
+  document.getElementById("studentID").value = elt.getAttribute("student");
+  document.getElementById("studentPoints").value = elt.value;
+  document.getElementById("studentModel").value = elt.getAttribute("model");
+  btn.click();
+}
+
+function updateTotalPoints(){
+  let count = 0;
+  let sum1 = 0;
+  let sum2 = 0;
+  const points = document.getElementsByClassName("points");
+  const ranges = document.getElementsByClassName("range");
+  for(let point of points){sum1 += parseFloat(point.innerText); count += 1}
+  for(let range of ranges){sum2 += parseFloat(range.innerText);}
+  sum1 /= count;
+  sum2 /= count;
+  document.getElementById("totalPoints").innerText = sum1;
+  document.getElementById("totalRange").innerText = sum2;
+}
+>>>>>>> a95775470e2f83b49f9e05ae824a4efb2845402c

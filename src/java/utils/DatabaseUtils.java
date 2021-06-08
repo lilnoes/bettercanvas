@@ -15,6 +15,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.annotation.Resource;
+import javax.faces.bean.ManagedBean;
 import javax.sql.DataSource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -23,9 +25,14 @@ import javax.naming.InitialContext;
  *
  * @author leon
  */
+@ManagedBean(name = "database")
 public class DatabaseUtils {
 
-    private static DataSource dataSource = null;
+    public void m(){
+        main(null);
+    }
+    
+    private static DataSource dataSource;
 
     private static Connection getConnection() {
         try {
@@ -68,7 +75,7 @@ public class DatabaseUtils {
     public static PreparedStatement getPreparedStatement(String sql) {
         try {
             Connection conn = getConnection();
-            return conn.prepareStatement(sql);
+            return conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -112,6 +119,12 @@ public class DatabaseUtils {
 
     public static void main(String args[]) {
         createUsersTable();
+        createAnnouncementsTable();
+        createCoursesTable();
+        createGradesTable();
+        createQuizzTable();
+        createStudentCoursesTable();
+        createMessagesTable();
     }
 
     public static void createCoursesTable() {
@@ -201,16 +214,20 @@ public class DatabaseUtils {
     public static void createGradesTable() {
 //create table grades
 //(
-//userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//id INT NOT NULL GENERATED ALWAYS AS IDENTITY,
+//userId int,
 //courseId int,
+//quizId int,
 //grades double,
 //range int
 //)
 
         String sql = "create table grades\n"
                 + "(\n"
-                + "userId INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "id INT NOT NULL GENERATED ALWAYS AS IDENTITY,\n"
+                + "userId int,\n"
                 + "courseId int,\n"
+                + "quizId int,\n"
                 + "grades double,\n"
                 + "range int\n"
                 + ")";

@@ -10,10 +10,12 @@ import com.sun.rowset.internal.Row;
 import config.SessionData;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -34,7 +36,18 @@ public class TeacherBean implements Serializable {
     private SessionData session;
     private List<Course> courses;
     private List<Row> announcements = null;
+    private List<Row> allAnnouncements = null;
+    private List<Row> students = null;
     public Course currentCourse;
+
+    @PostConstruct
+    public void init1() {
+//        setCourses();
+//        setAnnouncements();
+        init();
+        setFallBack();
+        System.out.println("finished setting course");
+    }
 
     public String getName() {
         return session.getUser().name;
@@ -80,6 +93,42 @@ public class TeacherBean implements Serializable {
             e.printStackTrace();
         }
     }
+    
+    public List<Row> getStudents() {
+        students = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, u.surname, u.country from studentcourses as sc\n"
+                    + "join users as u on u.USERID=sc.STUDENTID\n"
+                    + "where sc.COURSEID=?");
+            stmt.setInt(1, 1);
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            students.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return students;
+    }
+
+    public List<Row> getAllAnnouncements() {
+        allAnnouncements = new ArrayList<>();
+        try {
+            CachedRowSetImpl crs = new CachedRowSetImpl();
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select summary from announcements where createdBy = ?");
+            stmt.setInt(1, 2);
+            crs.populate(stmt.executeQuery());
+            stmt.close();
+            stmt.getConnection().close();
+            Collection<Row> rows = (Collection<Row>) crs.toCollection();
+            allAnnouncements.addAll(rows);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return allAnnouncements;
+    }
 
     public SessionData getSession() {
         return session;
@@ -99,6 +148,25 @@ public class TeacherBean implements Serializable {
         setCurrentCourse(courseID);
         System.out.println("found course " + courseID);
         return null;
+    }
+
+    private void setFallBack() {
+        if(currentCourse != null) return;
+        try {
+            String sql = "select id from courses\n"
+                    + "where createdBY = ?"
+                    + "fetch first 1 rows only";
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
+            stmt.setInt(1, 1);
+            ResultSet res = stmt.executeQuery();
+            if (!res.next()) {
+                return;
+            }
+            setCurrentCourse(res.getInt(1));
+        } catch (Exception e) {
+            currentCourse = null;
+        }
+
     }
 
 }

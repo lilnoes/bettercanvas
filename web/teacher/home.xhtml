@@ -21,6 +21,7 @@
             </ui:define>
 
             <ui:define name="content">
+                <ui:include src="allowstudents.xhtml"/>
                 <div class=" container-fluid">
 
                     <div class="row">
@@ -49,10 +50,11 @@
                         </div>
 
                         <div class="col-md-3 text-center ">
-                            <h4>NEW FEATURE</h4>
+                            <h4>FEATURES</h4>
                             <hr />
                             <p><a class="btn btn-lg button" href="announcement.xhtml">New announcement</a></p>
                             <p><a class="btn btn-lg button" href="quizzes.xhtml">New quizz</a></p>
+                            <p><button type="button" class="btn btn-lg button" onclick="showAllowStudents()">Accept/deny students</button></p>
                         </div>
 
                     </div>

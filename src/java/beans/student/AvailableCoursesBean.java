@@ -62,9 +62,9 @@ public class AvailableCoursesBean implements Serializable {
                     + "values\n"
                     + "(?, ?, ?)";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, Integer.valueOf(id)); //current course ID
-            stmt.setInt(2, 2); //current course ID
-            stmt.setString(3, "accepted");
+            stmt.setInt(1, Integer.valueOf(id));
+            stmt.setInt(2, 2); //current studentID
+            stmt.setString(3, "waiting");
             stmt.executeUpdate();
             stmt.close();
             stmt.getConnection().close();
