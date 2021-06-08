@@ -69,8 +69,7 @@ public class TeacherBean implements Serializable {
         if (courses != null) {
             return courses;
         }
-//        courses = Course.fetchByTeacher(session.getUser().userID);
-        courses = Course.fetchByTeacher(1);
+        courses = Course.fetchByTeacher(session.getUser().userID);
         return courses;
     }
 
@@ -83,7 +82,7 @@ public class TeacherBean implements Serializable {
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select title, summary, content, createdAt from announcements where courseID = ?");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, session.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -101,7 +100,7 @@ public class TeacherBean implements Serializable {
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, u.surname, u.country from studentcourses as sc\n"
                     + "join users as u on u.USERID=sc.STUDENTID\n"
                     + "where sc.COURSEID=?");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, session.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -118,7 +117,7 @@ public class TeacherBean implements Serializable {
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select summary from announcements where createdBy = ?");
-            stmt.setInt(1, 2);
+            stmt.setInt(1, session.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -141,7 +140,7 @@ public class TeacherBean implements Serializable {
     public String init() {
         System.out.println("starting view");
         Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if (map.isEmpty()) {
+        if (map.isEmpty() || map.get("course") == null) {
             return "index";
         }
         int courseID = Integer.valueOf(map.get("course"));
@@ -157,7 +156,7 @@ public class TeacherBean implements Serializable {
                     + "where createdBY = ?"
                     + "fetch first 1 rows only";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, 1);
+            stmt.setInt(1, session.getUser().userID);
             ResultSet res = stmt.executeQuery();
             if (!res.next()) {
                 return;

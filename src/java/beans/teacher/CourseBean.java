@@ -5,6 +5,7 @@
  */
 package beans.teacher;
 
+import config.SessionData;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -38,6 +39,7 @@ public class CourseBean implements Serializable{
     private String requirements = "";
 
     public void register(AjaxBehaviorEvent evt) {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         System.out.println("registering");
         String sql = "insert into courses\n"
                 + "(name, shortName, sinif, faculty, description, requirements, creationDate, locked, createdBy, students)\n"
@@ -53,7 +55,7 @@ public class CourseBean implements Serializable{
             statement.setString(6, requirements);
             statement.setTimestamp(7, Timestamp.from(Instant.now()));
             statement.setBoolean(8, false);
-            statement.setInt(9, 1);
+            statement.setInt(9, sessionData.getUser().userID);
             statement.setInt(10, 0);
             int res = statement.executeUpdate();
             if (res == 0) {

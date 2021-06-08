@@ -7,6 +7,7 @@ package beans.teacher;
 
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -51,16 +52,16 @@ public class GradesBean implements Serializable {
         quizNames.add("quiz 2");
     }
 
-    public String getLink() throws UnsupportedEncodingException {
-        String base = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
-        Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        String action = (String) map.get("action");
-        currentCourse = map.get("course");
-        if (currentCourse == null || currentCourse.isEmpty()) {
-            currentCourse = "1";
-        }
-        return String.format("grades.xhtml?faces-redirect=true&quiz=%s&action=%s&course=%s", currentQuiz, action, currentCourse);
-    }
+//    public String getLink() throws UnsupportedEncodingException {
+//        String base = FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
+//        Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+//        String action = (String) map.get("action");
+//        currentCourse = map.get("course");
+//        if (currentCourse == null || currentCourse.isEmpty()) {
+//            currentCourse = "1";
+//        }
+//        return String.format("grades.xhtml?faces-redirect=true&quiz=%s&action=%s&course=%s", currentQuiz, action, currentCourse);
+//    }
 
     @PostConstruct
     public void init() {
@@ -113,11 +114,12 @@ public class GradesBean implements Serializable {
     }
 
     public void setQuizzes() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         quizzes = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select id, quizzname from quizz where courseID = ?");
-            stmt.setInt(1, 1); //courseID
+            stmt.setInt(1, sessionData.currentCourse); //courseID
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -133,6 +135,7 @@ public class GradesBean implements Serializable {
     }
 
     public List<Row> getGrades() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         grades = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -141,7 +144,7 @@ public class GradesBean implements Serializable {
                     + "join users as u on u.USERID=g.ID\n"
                     + "where g.QUIZID=? and g.COURSEID=?");
             stmt.setInt(1, currentQuiz);
-            stmt.setInt(2, 1); //courseID
+            stmt.setInt(2, sessionData.currentCourse); //courseID
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();

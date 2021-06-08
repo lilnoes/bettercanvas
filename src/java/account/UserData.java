@@ -186,9 +186,9 @@ public class UserData implements Serializable {
     public String register() {
         String outcome = "#";
         String sql = "insert into users\n"
-                + "(name, surname, email, password, type, title, sinif, faculty, birthDate, country)\n"
+                + "(name, surname, email, password, type, title, sinif, faculty, birthDate, country, picture)\n"
                 + "values\n"
-                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement statement = DatabaseUtils.getPreparedStatement(sql);
             statement.setString(1, name);
@@ -201,6 +201,7 @@ public class UserData implements Serializable {
             statement.setString(8, faculty);
             statement.setTimestamp(9, new Timestamp(birthDate.getTime()));
             statement.setString(10, country.toLowerCase());
+            statement.setString(11, "placeholder.png");
             int res = statement.executeUpdate();
             if (res == 0) {
                 FacesContext.getCurrentInstance().addMessage("registerform:confpassword", new FacesMessage("Try registering again, error occured"));
@@ -224,7 +225,9 @@ public class UserData implements Serializable {
 
         SessionData session = new SessionData();
         session.setUser(user);
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("session", session);
+        session.currentCourse = 0;
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("sessionData", session);
         if (user.type.equals("teacher")) {
             return "/teacher/index";
         } else {
@@ -233,11 +236,11 @@ public class UserData implements Serializable {
     }
 
     public String logout() {
-        SessionData session = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("session");
-        if (session == null) {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
+        if (sessionData == null) {
             return null;
         }
-        session.setUser(null);
+        sessionData.setUser(null);
         return null;
     }
 
@@ -271,7 +274,7 @@ public class UserData implements Serializable {
 
     public String upload(AjaxBehaviorEvent evt) {
         System.out.println("reached here....");
-        StudentBean studentBean = (StudentBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("studentBean");
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         try {
             Path path = Files.createTempFile(null, file.getSubmittedFileName());
             String name = path.getFileName().toString();
@@ -280,10 +283,11 @@ public class UserData implements Serializable {
             String sql = "update users set picture = ? where userID = ?";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
             stmt.setString(1, name);
-            stmt.setInt(2, studentBean.getSession().getUser().userID);
+            stmt.setInt(2, sessionData.getUser().userID);
             stmt.execute();
             stmt.close();
             stmt.getConnection().close();
+            sessionData.refetch();
             System.out.println("file saved successfully");
         } catch (FileAlreadyExistsException e) {
             e.printStackTrace();

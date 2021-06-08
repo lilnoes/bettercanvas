@@ -19,12 +19,28 @@ import models.User;
 public class SessionData implements Serializable{
     private User user = null;
     private String em = "em";
+    public int currentCourse = 0;
+    
+
+    public int getCurrentCourse() {
+        return currentCourse;
+    }
+
+    public void setCurrentCourse(int currentCourse) {
+        this.currentCourse = currentCourse;
+    }
+    
+    
     
     public String getEm(){return em;}
 
     public User getUser() {
-        if(user == null) user = User.fetchByEmail("ishimwe@ogr.iuc.edu.tr");
         return user;
+//        if(user == null) user = User.fetchByEmail("ishimwe@ogr.iuc.edu.tr");
+//        return user;
+    }
+    public void refetch(){
+        this.user = User.fetchByEmail(this.user.email);
     }
     
     public void setUser(User user){

@@ -39,7 +39,7 @@
                 </ui:insert>
                 <hr class="border-red-800 m-[-10px]" />
             </div>
-            <h:panelGroup rendered="#{not empty studentBean.currentCourse}">
+            <h:panelGroup rendered="#{sessionData.currentCourse != 0}">
                 <c:set value="#{studentBean.currentCourse}" var="ccourse"/>
             <div class="fixed top-[73px] left-0 w-[20%] sidebar">
                 <div class="space-y-6 border-r border-red-800 mx-2">
@@ -61,7 +61,11 @@
                 <div class="overflow-y-auto w-full h-[98%]">
                     <ui:repeat value="#{studentBean.courses}" var="course" varStatus="status">
                         <div class="bg-white m-3 p-3 rounded-xl">
-                            <h1 class="font-bold text-2xl text-red-800 drop-shadow-md"><a href="home.xhtml?course=#{course.getColumnObject(3)}">#{course.getColumnObject(1)}</a></h1>
+                            <h1 class="font-bold text-2xl text-red-800 drop-shadow-md">
+                                <h:link outcome="home.xhtml" value="#{course.getColumnObject(1)}">
+                                    <f:param name="course" value="#{course.getColumnObject(3)}" />
+                                </h:link>
+                            </h1>
                             <p>#{course.getColumnObject(2)}</p>
                         </div>
                     </ui:repeat>
