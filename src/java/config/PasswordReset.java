@@ -194,7 +194,7 @@ public class PasswordReset {
     
     
     
-    public String updateEmail() throws SQLException{
+    /*public String updateEmail() throws SQLException{
         TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
 
         try {
@@ -212,13 +212,11 @@ public class PasswordReset {
                 return errorSMS();
             }
 
-  
-                
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
 
-    }
+    }*/
 
 }
