@@ -8,6 +8,7 @@ package beans.teacher;
 import com.sun.faces.context.SessionMap;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -36,11 +37,12 @@ public class AnnouncementBean implements Serializable {
     private String content = "";
 
     public List<Row> getAnnouncements() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         announcements = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select title, summary, content, createdAt from announcements where courseID = ?");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, sessionData.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -69,6 +71,7 @@ public class AnnouncementBean implements Serializable {
     }
 
     public String create() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         System.out.println(content + " content title " + title);
         try {
             TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
@@ -78,8 +81,8 @@ public class AnnouncementBean implements Serializable {
                     + "values\n"
                     + "(?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, 1); //current course ID
-            stmt.setInt(2, teacherBean.getSession().getUser().userID);
+            stmt.setInt(1, sessionData.currentCourse); //current course ID
+            stmt.setInt(2, sessionData.getUser().userID);
             stmt.setString(3, title);
             stmt.setString(4, content.substring(0, content.length() > 40 ? 40 : content.length()));
             stmt.setString(5, content);

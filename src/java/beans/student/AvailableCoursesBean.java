@@ -8,6 +8,7 @@ package beans.student;
 import com.sun.faces.context.SessionMap;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Timestamp;
@@ -34,6 +35,7 @@ public class AvailableCoursesBean implements Serializable {
 
     public List<Row> getCourses() {
         courses = new ArrayList<>();
+        StudentBean studentBean = (StudentBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("studentBean");
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name, u.title, cc.* from (select c.CREATEDBY, c.ID, c.NAME, s.status, c.SINIF from courses as c\n"
@@ -42,7 +44,7 @@ public class AvailableCoursesBean implements Serializable {
                     + "join users as u\n"
                     + "on cc.createdBY=u.USERID\n"
                     + "where cc.sinif=u.SINIF");
-            stmt.setInt(1, 2);
+            stmt.setInt(1, studentBean.getSession().getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -55,6 +57,7 @@ public class AvailableCoursesBean implements Serializable {
     }
 
     public void join(String id) {
+        StudentBean studentBean = (StudentBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("studentBean");
         try {
             System.out.println("joining class " + id);
             String sql = "insert into studentcourses\n"
@@ -63,7 +66,7 @@ public class AvailableCoursesBean implements Serializable {
                     + "(?, ?, ?)";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
             stmt.setInt(1, Integer.valueOf(id));
-            stmt.setInt(2, 2); //current studentID
+            stmt.setInt(2, studentBean.getSession().getUser().userID); //current studentID
             stmt.setString(3, "waiting");
             stmt.executeUpdate();
             stmt.close();

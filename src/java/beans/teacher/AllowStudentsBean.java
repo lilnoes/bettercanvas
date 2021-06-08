@@ -7,6 +7,7 @@ package beans.teacher;
 
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.TreeMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import utils.DatabaseUtils;
 
@@ -51,13 +53,16 @@ public class AllowStudentsBean implements Serializable{
     }
 
     public List<Row> getStudents() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         students = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name || u.surname, u.SINIF, u.faculty, sc.STUDENTID, sc.COURSEID from studentcourses as sc\n"
-                    + "inner join users as u\n"
+                    + "join courses as c on c.ID=sc.COURSEID\n"
+                    + "join users as u\n"
                     + "on u.USERID=sc.STUDENTID\n"
-                    + "where sc.STATUS='waiting'");
+                    + "where sc.STATUS='waiting' and c.CREATEDBY=?");
+            stmt.setInt(1, sessionData.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();

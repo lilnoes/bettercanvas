@@ -74,7 +74,7 @@ public class StudentBean implements Serializable {
                     + "where studentid = ? and status = 'accepted'\n"
                     + "fetch first 1 rows only";
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, 2);
+            stmt.setInt(1, session.getUser().userID);
             ResultSet res = stmt.executeQuery();
             if(!res.next()) return;
             setCurrentCourse(res.getInt(1));
@@ -91,7 +91,7 @@ public class StudentBean implements Serializable {
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select c.NAME, c.SHORTNAME, c.ID from studentcourses as sc\n"
                     + "join courses as c on c.ID=sc.COURSEID\n"
                     + "where sc.STATUS='accepted' and sc.STUDENTID=?");
-            stmt.setInt(1, 2);
+            stmt.setInt(1, session.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -103,10 +103,12 @@ public class StudentBean implements Serializable {
     }
 
     public List<Row> getCourses() {
+        setCourses();
         return courses;
     }
 
     public List<Row> getAnnouncements() {
+        setAnnouncements();
         return announcements;
     }
 
@@ -118,7 +120,7 @@ public class StudentBean implements Serializable {
                     + "join announcements as a on a.COURSEID=sc.COURSEID\n"
                     + "join courses as c on c.ID=sc.COURSEID\n"
                     + "where sc.STUDENTID=? and sc.STATUS='accepted'");
-            stmt.setInt(1, 2);
+            stmt.setInt(1, session.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -137,8 +139,8 @@ public class StudentBean implements Serializable {
                     + "inner join quizz as q\n"
                     + "on q.id=g.QUIZID\n"
                     + "where g.USERID= ? and g.courseID = ?");
-            stmt.setInt(1, 2);//studentID
-            stmt.setInt(2, 1);//courseID
+            stmt.setInt(1, session.getUser().userID);//studentID
+            stmt.setInt(2, session.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -156,8 +158,7 @@ public class StudentBean implements Serializable {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz\n"
                     + "where courseID = ?");
-            stmt.setInt(1, 1);
-//            stmt.setInt(2, 2);
+            stmt.setInt(1, session.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();

@@ -26,7 +26,7 @@ import models.User;
  * @author leon
  */
 @WebFilter("/student/*")
-public class Uploads implements Filter {
+public class StudentFilter implements Filter {
 
     private Boolean set = false;
 
@@ -42,9 +42,15 @@ public class Uploads implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
-        if(session == null) {chain.doFilter(request, response); return;}
-        SessionData sessionData = (SessionData)session.getAttribute("sessionData");
-
+        if (session == null) {
+            chain.doFilter(request, response);
+            return;
+        }
+        SessionData sessionData = (SessionData) session.getAttribute("sessionData");
+        String course = request.getParameter("course");
+        if (course != null) {
+            sessionData.currentCourse = Integer.valueOf(course);
+        }
 
         chain.doFilter(request, response);
     }
