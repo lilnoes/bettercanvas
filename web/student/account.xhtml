@@ -78,7 +78,7 @@
                                                 
                                                 
                                                 
-                                                    <h:form id="changepassword" >
+                                                    <h:form id="changepassword" style="display:none;" >
                                                         
                                                         <h:panelGrid columns="1"  style="height: 100%; width:456px;">
                                                             <h:outputText value="Actual Password"/>
@@ -105,7 +105,7 @@
                                             <!--change the email-->
                                             <div class="col-md-6">
                                                 <button class="btn" onclick="showElement('changeemail')" type="submit">CHANGE EMAIL ADRESS</button>
-                                                <h:form id="changeemail">
+                                                <h:form id="changeemail" style="display:none;">
                                                     <h:panelGrid columns="1" style="height: 100%; width:456px;">
                                                         <h:outputText value="Actual Email"/>
                                                         <p><h:inputText required="true"  class="inputPassword" value="#{passwordReset.email}"

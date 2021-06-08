@@ -107,21 +107,21 @@
                                                 <h:form id="changeemail" style="display: none">
                                                     <h:panelGrid columns="1" style="height: 100%; width:456px;">
                                                         <h:outputText value="Actual Email"/>
-                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.email}"
                                                                      requiredMessage="Email is required" id="actualemail"/>
                                                         <h:message for="actualemail" />
                                                         
                                                         <h:outputText value="New Email"/>
-                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.newPassword}"
+                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.newEmail}"
                                                                      requiredMessage=" New Email is required" id="newemail"/>
                                                         <h:message for="newemail" />
                                                         
                                                         <h:outputText value="Confirm Email"/>
-                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.confPassword}"
+                                                        <h:inputText required="true"  class="inputPassword" value="#{userData.newEmailConf}"
                                                                      requiredMessage="New Email is required" id="confemail"/>
                                                         <h:message for="confemail" />
                                                     </h:panelGrid>
-                                                    <h:commandButton class="text-center btn" value="Submit"></h:commandButton>
+                                                    <h:commandButton class="text-center btn" action ="#{userData.updateEmail}" value="Submit"></h:commandButton>
                                                     <button type="button" class="text-center btn" onclick="hideElement('changeemail')">Cancel</button>
                                     
                                                 </h:form>

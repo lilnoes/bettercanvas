@@ -5,6 +5,7 @@
  */
 package account;
 
+import beans.teacher.TeacherBean;
 import config.SessionData;
 import java.io.File;
 import java.io.Serializable;
@@ -12,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Properties;
@@ -156,6 +158,10 @@ public class UserData implements Serializable {
     public void setConfPassword(String confPassword) {
         this.confPassword = confPassword;
     }
+    
+     public String errorSMS(){
+        return"The entered information does not match!";
+    }
 
 //    public void upload(AjaxBehaviorEvent evt){
 //        System.out.println("event ajax upload");
@@ -223,6 +229,37 @@ public class UserData implements Serializable {
         }
         session.setUser(null);
         return null;
+    }
+    
+    
+    public String updateEmail() throws SQLException{
+        TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
+
+        try {
+            if ((teacherBean.getSession().getUser().email).equals(getEmail())) {
+                System.out.println("good");
+                if ((getNewEmail()).equals(getNewEmailConf())) {
+                    String sql = "UPADATE  USERS SET EMAIL=? WHERE EMAIL=?";
+
+                    PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
+                    addEntry.setString(1, getNewEmail());  //teacherBean.getSession().getUser().userID
+                    addEntry.setString(2, teacherBean.getSession().getUser().email);  // here is the reciver user!
+                } else {
+                    System.out.println("Not the same, unfortunatelly");
+                    return errorSMS();
+                }
+            } else {
+                System.out.println(" the same but not the user unfortunatelly");
+                return "account";
+            }
+
+  
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+
     }
     
 }

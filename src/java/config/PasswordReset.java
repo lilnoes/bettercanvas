@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Random;
 import config.SessionData;
+import java.sql.SQLException;
 import java.util.stream.IntStream;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -162,22 +163,27 @@ public class PasswordReset {
     }
     
     
-    public String updatePassword() {
+    public String updatePassword() throws SQLException{
+        System.out.println("from out" + getNewpassword() );
         TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
 
         try { //teacherBean.getSession().getUser().getPassword()
-            if(UserUtils.hashPassword(teacherBean.getSession().getUser().getPassword()).equals(UserUtils.hashPassword(getActualpassword())) ){
+            if((teacherBean.getSession().getUser().getPassword()).equals(UserUtils.hashPassword(getActualpassword())) ){
                 if(getNewpassword().equals(getConfpassword() )){
                     String sql = "UPADATE  USERS SET PASSWORD=? WHERE EMAIL=?";
+                    System.out.println("good from in " + getNewpassword() );
 
                     PreparedStatement addEntry = DatabaseUtils.getPreparedStatement(sql);
                     addEntry.setString(1, getNewpassword());  //teacherBean.getSession().getUser().userID
                     addEntry.setString(2, teacherBean.getSession().getUser().email);  // here is the reciver user!
                 } else {
+                    System.out.println("error, impossible to change");
                     return errorSMS();
                 }
             }else{
+                System.out.println("error, impossible to change");
                 return errorSMS();
+                
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,7 +194,7 @@ public class PasswordReset {
     
     
     
-    public String updateEmail() {
+    public String updateEmail() throws SQLException{
         TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
 
         try {
