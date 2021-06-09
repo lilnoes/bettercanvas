@@ -1,8 +1,8 @@
 function loadData() {
-  const labels = []
-  const points = []
+  const labels = [];
+  const points = [];
   const _points = document.getElementsByClassName("point");
-  for(let point of _points){
+  for (let point of _points) {
     labels.push(point.getAttribute("name"));
     points.push(parseFloat(point.getAttribute("points")));
   }
@@ -120,8 +120,8 @@ function joinedClass(evt) {
 //<<<<<<< HEAD
 
 function changePassWord() {
-    const changePassword = document.getElementsById("changepassword");
-    changePassword.style.display = "block";
+  const changePassword = document.getElementsById("changepassword");
+  changePassword.style.display = "block";
 }
 //=======
 function setRecipient(elt) {
@@ -143,7 +143,7 @@ function setRecipient(elt) {
 
 function addMessage() {
   const message = document.getElementById("inputText").value;
-  if(message.length <=0) return;
+  if (message.length <= 0) return;
   const div = document.createElement("div");
   div.innerHTML = `<div>
   <div class="row float-right"
@@ -160,13 +160,15 @@ function addMessage() {
   </div>
   <div class="clear-right"></div>
 </div>`;
-  document.getElementById("allSms").appendChild(div);
+  const t = document.getElementById("allSms");
+  t.appendChild(div);
+  t.scrollTop = t.scrollHeight;
   document.getElementById("inputText").value = "";
   document.getElementById("inputText").focus();
 }
 //>>>>>>> e3d75df6a599e283305aa45fadb1c12c8958300c
 
-function sendGrades(elt){
+function sendGrades(elt) {
   console.log("here here");
   window.elt = elt;
   const btn = document.getElementById("sendGrades1");
@@ -176,31 +178,35 @@ function sendGrades(elt){
   btn.click();
 }
 
-function updateTotalPoints(){
+function updateTotalPoints() {
   let count = 0;
   let sum1 = 0;
   let sum2 = 0;
   const points = document.getElementsByClassName("points");
   const ranges = document.getElementsByClassName("range");
-  for(let point of points){sum1 += parseFloat(point.innerText); count += 1}
-  for(let range of ranges){sum2 += parseFloat(range.innerText);}
+  for (let point of points) {
+    sum1 += parseFloat(point.innerText);
+    count += 1;
+  }
+  for (let range of ranges) {
+    sum2 += parseFloat(range.innerText);
+  }
   sum1 /= count;
   sum2 /= count;
   document.getElementById("totalPoints").innerText = sum1;
   document.getElementById("totalRange").innerText = sum2;
 }
 
-function openFile(){
-  const btn = document.getElementById("file");
+function openFile() {
+  const btn = document.getElementById("file1");
   btn.click();
 }
 
-function changePicture(evt){
+function changePicture(evt) {
   console.log(evt);
   // if(evt.status != "success") return true;
   const elt = document.getElementById("pic1");
-  const file = document.getElementById("file");
-  if(file.files.length <= 0) return;
+  const file = document.getElementById("file1");
+  if (file.files.length <= 0) return;
   elt.src = window.URL.createObjectURL(file.files[0]);
-
 }

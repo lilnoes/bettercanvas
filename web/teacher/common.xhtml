@@ -28,13 +28,11 @@
     </h:head>
     <h:body class="">
         <f:view>
-            <f:metadata>
-                <f:viewAction action="#{teacherBean.init()}" />
-            </f:metadata>
             <ui:insert name="metadata">
                 <f:metadata>
                     <f:viewAction action="#{teacherBean.init()}" />
                 </f:metadata>
+
             </ui:insert>
             <div class="w-full fixed h-[70px]">
                 <ui:insert name="title">
@@ -68,9 +66,9 @@
                             <h1 class="font-bold text-2xl text-red-800 drop-shadow-md">
                                 <h:link outcome="/teacher/home.xhtml" value="#{course.name}">
                                     <f:param name="course" value="#{course.id}" />
-                                   
+
                                 </h:link>
-                                
+
                             </h1>
                             <p>#{course.shortName}</p>
                         </div>

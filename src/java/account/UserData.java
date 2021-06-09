@@ -274,6 +274,8 @@ public class UserData implements Serializable {
         try {
             Path path = Files.createTempFile(null, file.getSubmittedFileName());
             String name = path.getFileName().toString();
+            if(name.length()>45)
+            name = name.substring(20);
             String base = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("location");
             Files.copy(file.getInputStream(), Paths.get(base + name));
             String sql = "update users set picture = ? where userID = ?";
@@ -290,7 +292,7 @@ public class UserData implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return "emma";
     }
 
 }

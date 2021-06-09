@@ -79,7 +79,7 @@
                                     <div class="allSms" id="allSms">
 
                                         <ui:repeat value="#{message.messages1}" var="mess">
-                                            <h:panelGroup rendered="#{mess.getColumnObject(2) != '2'}" >
+                                            <h:panelGroup rendered="#{mess.getColumnObject(2) != sessionData.user.userID}" >
                                                 <div class="row"
                                                      style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
                                                     <div class="col-md-8">
@@ -94,7 +94,7 @@
                                                 </div>
                                             </h:panelGroup>
 
-                                            <h:panelGroup rendered="#{mess.getColumnObject(2) == '2'}" >
+                                            <h:panelGroup rendered="#{mess.getColumnObject(2) eq sessionData.user.userID}" >
                                                 <div>
                                                     <div class="row float-right"
                                                          style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
@@ -112,6 +112,9 @@
                                                 </div>
                                             </h:panelGroup>
                                         </ui:repeat>
+                                        <script>
+                                            document.getElementById("allSms").scrollTop = document.getElementById("allSms").scrollHeight
+                                        </script>
 
                                     </div>
                                 </h:panelGroup>

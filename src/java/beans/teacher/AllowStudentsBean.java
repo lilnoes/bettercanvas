@@ -38,6 +38,9 @@ public class AllowStudentsBean implements Serializable{
         stmt.setInt(1, userID);
         stmt.setInt(2, courseID);
         stmt.executeUpdate();
+        DatabaseUtils.execute(String.format("update courses as c\n"
+                + "set c.STUDENTS=(select count(*) from studentcourses as sc where sc.COURSEID=%d)\n"
+                + "where c.ID=%d", courseID, courseID));
         stmt.close();
         stmt.getConnection().close();
     }
@@ -57,7 +60,7 @@ public class AllowStudentsBean implements Serializable{
         students = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name || u.surname, u.SINIF, u.faculty, sc.STUDENTID, sc.COURSEID from studentcourses as sc\n"
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.name || ' ' || u.surname, u.SINIF, u.faculty, sc.STUDENTID, sc.COURSEID, u.picture from studentcourses as sc\n"
                     + "join courses as c on c.ID=sc.COURSEID\n"
                     + "join users as u\n"
                     + "on u.USERID=sc.STUDENTID\n"

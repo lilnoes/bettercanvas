@@ -3,7 +3,8 @@
     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      >
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
 
@@ -56,9 +57,17 @@
                         <div class="col-md-9">
                             <div class="info">
                                 <div class="row topInfo">
-                                    <div class="col-md-2">
-                                        <img src="https://engineering.nd.edu/wp-content/uploads/2021/05/ngonga-960x533.jpg"
-                                             class="imgInfo" alt="" />
+                                    <div class="col-md-2 relative">
+                                        <h:form prependId="false" enctype="multipart/form-data">
+                                            <h:inputFile class="hidden" id="file1" value="#{userData.file}">
+                                                <f:ajax execute="@this" render="@this" listener="#{userData.upload}" onevent="changePicture"/>
+                                            </h:inputFile>
+                                        </h:form>
+                                        <button class="absolute text-6xl text-gray-400 left-[50px] top-[50px] border-none bg-transparent"
+                                                onclick="openFile()">+</button>
+                                        <h:graphicImage id="pic1" class="imgInfo" library="images" name="#{sessionData.user.picture}"/>
+                                        <!--                                        <img id="pic1" src="https://engineering.nd.edu/wp-content/uploads/2021/05/ngonga-960x533.jpg"
+                                                                                     class="imgInfo" alt="" />-->
                                     </div>
                                     <div class="col-md-10">
                                         <h4 class=" yourName">#{sessionData.user.fullname}'S SETTINGS</h4>
