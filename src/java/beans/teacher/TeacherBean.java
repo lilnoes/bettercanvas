@@ -85,7 +85,7 @@ public class TeacherBean implements Serializable {
         students = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, u.surname, u.country from studentcourses as sc\n"
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.NAME, u.surname, u.country, u.picture from studentcourses as sc\n"
                     + "join users as u on u.USERID=sc.STUDENTID\n"
                     + "where sc.COURSEID=?");
             stmt.setInt(1, session.currentCourse);
@@ -153,12 +153,19 @@ public class TeacherBean implements Serializable {
     }
 
     public String init() {
+        String course = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("course");
+        if(course != null){
+            session.currentCourse = Integer.valueOf(course);
+            setCurrentCourse(session.currentCourse);
+        }
         System.out.println("starting view");
         setCourses();
+        setStudents();
         setAllAnnouncements();
         return null;
     }
     public String initCourses() {
+        init();
         this.setCurrentCourse(session.currentCourse);
         return null;
     }

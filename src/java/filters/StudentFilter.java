@@ -38,20 +38,26 @@ public class StudentFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         System.out.println("filter 1 1 1 1 student");
+        request.setCharacterEncoding("UTF-8");
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         HttpSession session = req.getSession(false);
+        String loginURL = req.getContextPath() + "/account/login.xhtml";
+        String errorURL = req.getContextPath() + "/error.xhtml";
+//        String s = req.getHeader("Faces-Request");
+//        if(s != null && s.contains("ajax")){
+//            chain.doFilter(request, response);
+//            return;
+//        }
         if (session == null) {
             chain.doFilter(request, response);
+            resp.sendRedirect(loginURL);
             return;
         }
         SessionData sessionData = (SessionData) session.getAttribute("sessionData");
-        String course = request.getParameter("course");
-        if (course != null) {
-            sessionData.currentCourse = Integer.valueOf(course);
-        }
-
+        if(sessionData == null || sessionData.getUser() == null) resp.sendRedirect(loginURL);
+        else if (!sessionData.getUser().type.equals("student")) resp.sendRedirect(errorURL);
         chain.doFilter(request, response);
     }
 

@@ -8,6 +8,7 @@ package models;
 import beans.teacher.TeacherBean;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -69,6 +70,7 @@ public class Message {
     }
 
     public List<Row> getCourses() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         courses = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -77,7 +79,7 @@ public class Message {
                     + "on u.USERID=c.CREATEDBY\n"
                     + "where c.CREATEDBY=?\n"
                     + "");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, sessionData.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -90,6 +92,7 @@ public class Message {
     }
 
     public List<Row> getCourses1() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         courses1 = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -98,7 +101,7 @@ public class Message {
                     + "inner join users as u\n"
                     + "on u.USERID=c.CREATEDBY\n"
                     + "where sc.STATUS='accepted' and sc.STUDENTID=?");
-            stmt.setInt(1, 2);
+            stmt.setInt(1, sessionData.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -111,14 +114,15 @@ public class Message {
     }
 
     public List<Row> getSenders() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         senders = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.USERID, u.NAME, u.surname, u.FACULTY, u.SINIF from messages as m\n"
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select distinct u.USERID, u.NAME, u.surname, u.FACULTY, u.SINIF from messages as m\n"
                     + "inner join users u\n"
                     + "on u.USERID=m.FROMUSER\n"
                     + "where m.TOUSER = ?");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, sessionData.getUser().userID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -131,6 +135,7 @@ public class Message {
     }
 
     public List<Row> getMessages() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         messages = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -139,11 +144,13 @@ public class Message {
                 stmt = DatabaseUtils.getPreparedStatement("select * from messages where courseID = ?");
                 stmt.setInt(1, toID);
             } else {
-                stmt = DatabaseUtils.getPreparedStatement("select * from messages where touser = ? and fromuser = ?");
-                stmt.setInt(1, 1);
+                stmt = DatabaseUtils.getPreparedStatement("select * from messages where (touser = ? and fromuser = ?) or\n"
+                        + "(touser = ? and fromuser = ?)");
+                stmt.setInt(1, sessionData.getUser().userID);
                 stmt.setInt(2, toID);
+                stmt.setInt(3, toID);
+                stmt.setInt(4, sessionData.getUser().userID);
             }
-            stmt.setInt(2, toID);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -156,13 +163,14 @@ public class Message {
     }
 
     public List<Row> getMessages1() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         messages1 = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from messages\n"
-                    + "where (fromuser = ? and courseID = ?) or courseID = ?");
-            stmt.setInt(1, 2);
-            stmt.setInt(2, Integer.valueOf(type));
+                    + "where (fromuser = ? and touser = ?) or courseID = ?");
+            stmt.setInt(1, sessionData.getUser().userID);
+            stmt.setInt(2, Integer.valueOf(toID));
             stmt.setInt(3, Integer.valueOf(type));
             crs.populate(stmt.executeQuery());
             stmt.close();
@@ -180,6 +188,7 @@ public class Message {
     }
 
     public void send() throws SQLException {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         System.out.println("ajax recieved");
         if (message.isEmpty()) {
             return;
@@ -193,14 +202,14 @@ public class Message {
                     + "(courseID, fromUSER, message)"
                     + "VALUES (?, ?, ?)");
             addEntry.setInt(1, toID);
-            addEntry.setInt(2, 1);
+            addEntry.setInt(2, sessionData.getUser().userID);
             addEntry.setString(3, message);
         } else {
             addEntry = DatabaseUtils.getPreparedStatement("INSERT INTO messages "
-                    + "(toUSER, fromID, message)"
+                    + "(toUSER, fromuser, message)"
                     + "VALUES (?, ?, ?)");
             addEntry.setInt(1, toID);
-            addEntry.setInt(2, 1);
+            addEntry.setInt(2, sessionData.getUser().userID);
             addEntry.setString(3, message);
         }
 
@@ -214,6 +223,7 @@ public class Message {
     } // end method save
     
     public void send1() throws SQLException {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         System.out.println("ajax recieved");
         if (message.isEmpty()) {
             return;
@@ -225,7 +235,7 @@ public class Message {
                 + "(toUSER, fromUSER, courseID, message)"
                 + "VALUES (?, ?, ?, ?)");
         addEntry.setInt(1, toID);
-        addEntry.setInt(2, 2);
+        addEntry.setInt(2, sessionData.getUser().userID);
         addEntry.setInt(3, Integer.valueOf(type));
         addEntry.setString(4, message);
 

@@ -10,7 +10,7 @@
         <ui:composition template="common.xhtml">
             <ui:define name="title">
                 <h4 class="ml-10 p-3 text-4xl font-bold text-red-800"> 
-                    <span>PEOPLE</span></h4>
+                    <span>#{teacherBean.currentCourse.name} - PEOPLE</span></h4>
                 
             </ui:define>
             <!--  <span class="shortName">BILMU24</span>-->
@@ -33,8 +33,9 @@
                                     <div class="student">
                                         <tr>
                                             <td>
-                                                <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
-                                                     class="float-start" alt="" />
+                                                <h:graphicImage class="float-start" library="images" name="#{student.getColumnObject(4)}"/>
+<!--                                                <img src="https://publichealth.uga.edu/wp-content/uploads/2020/01/Thomas-Cameron_Student_Profile.jpg"
+                                                     class="float-start" alt="" />-->
                                             </td>
                                             <td>#{student.getColumnObject(1)}</td>
                                             <td>#{student.getColumnObject(2)}</td>

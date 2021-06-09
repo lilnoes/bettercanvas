@@ -127,6 +127,11 @@ public class StudentBean implements Serializable {
     }
 
     public String init() {
+        String course = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("course");
+        if (course != null) {
+            session.currentCourse = Integer.valueOf(course);
+            setCurrentCourse(session.currentCourse);
+        }
         setCourses();
         setAnnouncements();
         System.out.println("starting view");
