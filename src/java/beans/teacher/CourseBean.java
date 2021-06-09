@@ -40,6 +40,7 @@ public class CourseBean implements Serializable{
 
     public void register(AjaxBehaviorEvent evt) {
         SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
+        TeacherBean teacherBean = (TeacherBean) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("teacherBean");
         System.out.println("registering");
         String sql = "insert into courses\n"
                 + "(name, shortName, sinif, faculty, description, requirements, creationDate, locked, createdBy, students)\n"
@@ -61,6 +62,7 @@ public class CourseBean implements Serializable{
             if (res == 0) {
                 throw new AbortProcessingException();
             }
+            teacherBean.setCourses();
             FacesContext.getCurrentInstance().getViewRoot().getViewMap().clear();
             statement.close();
             statement.getConnection().close();

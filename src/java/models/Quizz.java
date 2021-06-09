@@ -8,6 +8,7 @@ package models;
 import beans.teacher.TeacherBean;
 import com.sun.rowset.CachedRowSetImpl;
 import com.sun.rowset.internal.Row;
+import config.SessionData;
 import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -50,11 +51,12 @@ public class Quizz {
     public List<Row> quizzes;
 
     public List<Row> getQuizzes() {
+        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
         quizzes = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz where courseID = ?");
-            stmt.setInt(1, 1);
+            stmt.setInt(1, sessionData.currentCourse);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
@@ -136,11 +138,11 @@ public class Quizz {
                     = DatabaseUtils.getPreparedStatement("INSERT INTO QUIZZ (TEACHERID,QUIZZNAME,FILE, STARTDATE, COURSEID, DURATION)"
                             + "VALUES ( ?, ?, ?, ?, ?, ? )");
 
-            addEntry.setInt(1, 1);  //teacherBean.getSession().getUser().userID
+            addEntry.setInt(1, teacherBean.getSession().getUser().userID);  //teacherBean.getSession().getUser().userID
             addEntry.setString(2, quizzName);  // here is the reciver user!
             addEntry.setString(3, filename);
             addEntry.setTimestamp(4, new Timestamp(startDate.getTime()));   //getStartDate()
-            addEntry.setInt(5, 1);   //teacherBean.currentCourse.id
+            addEntry.setInt(5, teacherBean.currentCourse.id);   //teacherBean.currentCourse.id
             addEntry.setInt(6, duration);
             if (addEntry.executeUpdate() == 0) {
                 throw new AbortProcessingException();
@@ -150,7 +152,7 @@ public class Quizz {
                 String sql = String.format("insert into grades\n"
                         + "(userID, courseID, quizid, grades, range)\n"
                         + "select sc.STUDENTID, %d, %d, 0, 100 from studentcourses as sc\n"
-                        + "where sc.COURSEID=%d", 1, rs.getInt(1), 1);
+                        + "where sc.COURSEID=%d", teacherBean.currentCourse.id, rs.getInt(1), teacherBean.currentCourse.id);
                 DatabaseUtils.execute(sql);
                 System.out.println("added 0 grades to yall");
             }
