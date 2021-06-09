@@ -5,12 +5,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Leon Emmanuel ISHIMWE - BetterCanvas</title>
+        <title>#{studentBean.currentCourse.name} - BetterCanvas</title>
     </h:head>
     <h:body class="">
         <ui:composition template="common.xhtml">
+            <ui:define name="metadata">
+                <f:metadata>
+                    <f:viewAction action="#{studentBean.initCourses()}"/>
+                </f:metadata>
+            </ui:define>
             <ui:define name="title">
-                <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">#{sessionData.user.fullname} - Dashboard</h1>
+                <h1 class="ml-10 p-3 text-4xl font-bold text-red-800">#{studentBean.currentCourse.name} - Dashboard</h1>
             </ui:define>
             <ui:define name="content">
                 <h:panelGroup class="hidden">

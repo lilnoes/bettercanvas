@@ -21,9 +21,15 @@
                 <span class="nav__text">Inbox</span>
             </h:link>
 
-            <h:link outcome="/student/account.xhtml" class="nav__link">
-                <i class="material-icons nav__icon"> person</i>
-                <span class="nav__text">Profile</span>
+            <h:link outcome="/student/account.xhtml" class="nav__link relative">
+            <i class="material-icons nav__icon"> person</i>
+            <span class="nav__text">Profile</span>
+            <div class="absolute bg-white text-red-600 bottom-0 right-0">
+                <h:form>
+                <h:commandLink class="bg-white text-red-600" value="out" action="#{userData.logout}">
+                </h:commandLink>
+                </h:form>
+            </div>
             </h:link>
 
         </nav>

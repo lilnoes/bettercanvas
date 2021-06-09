@@ -28,6 +28,9 @@
     </h:head>
     <h:body class="">
         <f:view>
+            <f:metadata>
+                <f:viewAction action="#{teacherBean.init()}" />
+            </f:metadata>
             <ui:insert name="metadata">
                 <f:metadata>
                     <f:viewAction action="#{teacherBean.init()}" />

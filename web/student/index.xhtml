@@ -153,6 +153,19 @@
 
         <div class="fixed w-[30%] bg-red-800 top-0 bottom-[80px] hidden" id="coursesmodal">
             <h1 class="text-3xl font-bold text-white text-center">My Courses</h1>
+            <div class="overflow-y-auto w-full h-[98%]">
+                <ui:repeat value="#{studentBean.courses}" var="course" varStatus="status">
+                    <div class="bg-white m-3 p-3 rounded-xl">
+                        <h1 class="font-bold text-2xl text-red-800 drop-shadow-md">
+                            <h:link outcome="home.xhtml" value="#{course.getColumnObject(1)}">
+                                <f:param name="course" value="#{course.getColumnObject(3)}" />
+                            </h:link>
+                        </h1>
+                        <p>#{course.getColumnObject(2)}</p>
+                    </div>
+                </ui:repeat>
+
+            </div>
         </div>
         <ui:include src="footer.xhtml" />
         <h:outputScript library="js" name="functions.js" />

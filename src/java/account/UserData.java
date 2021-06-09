@@ -236,12 +236,8 @@ public class UserData implements Serializable {
     }
 
     public String logout() {
-        SessionData sessionData = (SessionData) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("sessionData");
-        if (sessionData == null) {
-            return null;
-        }
-        sessionData.setUser(null);
-        return null;
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().clear();
+        return "/account/login.xhtml?faces-redirect=true";
     }
 
     public String updateEmail() throws SQLException {
