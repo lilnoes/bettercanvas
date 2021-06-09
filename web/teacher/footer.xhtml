@@ -22,13 +22,15 @@
                 </h:link>
 
                 <h:link outcome="/teacher/account.xhtml" class="nav__link">
-                <i class="material-icons nav__icon"> person</i>
-                <span class="nav__text">Profile</span>
-            </h:link>
-            <h:link outcome="/teacher/inbox.xhtml" class="nav__link">
-                <i class="material-icons nav__icon"> logout</i>
-                <span class="nav__text">Logout</span>
-            </h:link>
+                    <i class="material-icons nav__icon"> person</i>
+                    <span class="nav__text">Profile</span>
+                </h:link>
+                <h:form>
+                    <h:commandLink action="#{userData.logout()}" class="nav__link">
+                        <i class="material-icons nav__icon"> logout</i>
+                        <span class="nav__text">Logout</span>
+                    </h:commandLink>
+                </h:form>
 
             </nav>
         </ui:composition>
