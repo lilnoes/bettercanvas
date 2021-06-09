@@ -11,7 +11,7 @@
         <ui:composition template="common.xhtml">
             <ui:define name="metadata">
                 <f:metadata>
-                    <f:viewAction action="#{teacherBean.init}"/>
+                    <f:viewAction action="#{teacherBean.initCourses()}"/>
                     <c:set value="#{teacherBean.currentCourse}" var="ccourse"/>
                 </f:metadata>
             </ui:define>

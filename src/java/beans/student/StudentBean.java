@@ -41,15 +41,6 @@ public class StudentBean implements Serializable {
     private List<Row> announcements = null;
     public Course currentCourse;
 
-    @PostConstruct
-    public void init1() {
-        setCourses();
-        setAnnouncements();
-        init();
-        setFallBack();
-        System.out.println("finished setting course");
-    }
-
     public String getName() {
         return session.getUser().name;
     }
@@ -64,24 +55,6 @@ public class StudentBean implements Serializable {
 
     public void setCurrentCourse(int courseID) {
         currentCourse = Course.fetchById(courseID);
-    }
-
-    private void setFallBack() {
-        init();
-        if(currentCourse != null) return;
-        try {
-            String sql = "select id from studentcourses\n"
-                    + "where studentid = ? and status = 'accepted'\n"
-                    + "fetch first 1 rows only";
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement(sql);
-            stmt.setInt(1, session.getUser().userID);
-            ResultSet res = stmt.executeQuery();
-            if(!res.next()) return;
-            setCurrentCourse(res.getInt(1));
-        } catch (Exception e) {
-            currentCourse = null;
-        }
-
     }
 
     public void setCourses() {
@@ -103,11 +76,13 @@ public class StudentBean implements Serializable {
     }
 
     public List<Row> getCourses() {
+        if(courses != null) return courses;
         setCourses();
         return courses;
     }
 
     public List<Row> getAnnouncements() {
+        if(announcements != null) return announcements;
         setAnnouncements();
         return announcements;
     }
@@ -132,6 +107,33 @@ public class StudentBean implements Serializable {
     }
 
     public List<Row> getGrades() {
+        if(grades != null) return grades;
+        setGrades();
+        return grades;
+    }
+
+    public List<Row> getQuizzes() {
+        if(quizzes != null) return quizzes;
+        setQuizzes();
+        return quizzes;
+    }
+
+    public SessionData getSession() {
+        return session;
+    }
+
+    public void setSession(SessionData session) {
+        this.session = session;
+    }
+
+    public String init() {
+        setCourses();
+        setAnnouncements();
+        System.out.println("starting view");
+        return null;
+    }
+
+    private void setGrades() {
         grades = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -149,10 +151,9 @@ public class StudentBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return grades;
     }
 
-    public List<Row> getQuizzes() {
+    private void setQuizzes() {
         quizzes = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
@@ -167,26 +168,10 @@ public class StudentBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return quizzes;
     }
-
-    public SessionData getSession() {
-        return session;
-    }
-
-    public void setSession(SessionData session) {
-        this.session = session;
-    }
-
-    public String init() {
-        System.out.println("starting view");
-        Map<String, String> map = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-        if (map.isEmpty() || map.get("course") == null) {
-            return null;
-        }
-        int courseID = Integer.valueOf(map.get("course"));
-        setCurrentCourse(courseID);
-        System.out.println("found course " + courseID);
+    
+    public String initCourses(){
+        this.setCurrentCourse(session.currentCourse);
         return null;
     }
 
