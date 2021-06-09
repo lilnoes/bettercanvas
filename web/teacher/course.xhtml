@@ -71,7 +71,7 @@
 
                 <div class="flex flex-row text-2xl justify-between">
                     <h:commandButton class="bg-red-600 text-white w-[48%] p-2 rounded-lg" value="Submit">
-                        <f:ajax listener="#{courseBean.register}" onevent="hideNewCourseAjax" render=":coursesmodal1" execute="@form"/>
+                        <f:ajax listener="#{courseBean.register}" onevent="hideNewCourseAjax" render="@form :coursesmodal1" execute="@form"/>
                     </h:commandButton>
                 <button type="button" class="bg-red-600 text-white w-[48%] p-2 rounded-lg" onclick="hideNewCourse()">Cancel</button>
                 </div>
