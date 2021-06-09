@@ -170,6 +170,8 @@ function addMessage() {
 
 function sendGrades(elt) {
   console.log("here here");
+  const elt1 = document.getElementById("disp2");
+  elt1.classList.remove("animate-mine");
   window.elt = elt;
   const btn = document.getElementById("sendGrades1");
   document.getElementById("studentID").value = elt.getAttribute("student");
@@ -209,4 +211,12 @@ function changePicture(evt) {
   const file = document.getElementById("file1");
   if (file.files.length <= 0) return;
   elt.src = window.URL.createObjectURL(file.files[0]);
+}
+
+function showUpdated(evt){
+  console.log("frhfhrfhrhfhrfhrf");
+  const elt = document.getElementById("disp2");
+  elt.classList.remove("hidden");
+  elt.classList.remove("animate-mine");
+  elt.classList.add("animate-mine");
 }

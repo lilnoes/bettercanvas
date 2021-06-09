@@ -89,6 +89,7 @@ public class AnnouncementBean implements Serializable {
             stmt.setTimestamp(6, Timestamp.from(Instant.now()));
             stmt.setString(7, "announcement");
             stmt.executeUpdate();
+            teacherBean.setAnnouncements();
             stmt.close();
             stmt.getConnection().close();
         } catch (Exception e) {

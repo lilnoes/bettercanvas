@@ -65,10 +65,13 @@
                             <h:inputHidden id="studentPoints" value="#{gradesBean.points}" />
                             <h:inputHidden id="studentModel" value="#{gradesBean.model}" />
                             <h:commandButton type="submit" id="sendGrades1" class="hidden">
-                                <f:ajax execute="@form" listener="#{gradesBean.updatePoints}"/>
+                                <f:ajax execute="@form" listener="#{gradesBean.updatePoints}" onevent="showUpdated"/>
                             </h:commandButton>
                         </h:form>
                     </h:panelGroup>
+                    <div id="disp1" class="">
+                        <button id="disp2" class="p-5 font-bold text-6xl text-white bg-green-800 opacity-0 animate-mine hidden">Saved via ajax</button>
+                    </div>
 
 
                     <div class="fixed w-full h-full bg-gray-50 z-10 top-0 newgrades"></div>
