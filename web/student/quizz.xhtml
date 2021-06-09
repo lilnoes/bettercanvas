@@ -25,7 +25,7 @@
                                 <a href="#">
                                     <h5>#{quiz.getColumnObject(3)}</h5>
                                 </a>
-                                Start date:<span>#{quiz.getColumnObject(5)}</span> | Deadline:<span> after #{quiz.getColumnObject(7)}</span> | <span>100</span>pts
+                                Start date:<span>#{generalUtils.format(quiz.getColumnObject(5))}</span> | Deadline:<span> after #{quiz.getColumnObject(7)}</span> | <span>100</span>pts
 
                             </div>
                         </ui:repeat>

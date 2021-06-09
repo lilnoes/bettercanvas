@@ -160,7 +160,7 @@ function addMessage() {
   </div>
   <div class="clear-right"></div>
 </div>`;
-  const t = document.getElementById("allSms");gh
+  const t = document.getElementById("allSms");
   t.appendChild(div);
   t.scrollTop = t.scrollHeight;
   document.getElementById("inputText").value = "";
@@ -216,6 +216,7 @@ function changePicture(evt) {
 function showUpdated(evt){
   console.log("frhfhrfhrhfhrfhrf");
   const elt = document.getElementById("disp2");
+  elt.classList.remove("hidden");
   elt.classList.remove("animate-mine");
   elt.classList.add("animate-mine");
 }
