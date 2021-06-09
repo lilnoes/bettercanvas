@@ -82,14 +82,11 @@
                                             <h:panelGroup rendered="#{mess.getColumnObject(2) != sessionData.user.userID}" >
                                                 <div class="row"
                                                      style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                                    <div class="col-md-8">
-                                                        <span>#{mess.getColumnObject(4)}</span>
+                                                    <div class="col-md-12">
+                                                        <p>#{mess.getColumnObject(4)}</p>
+                                                        <p class="float-end date text-xs text-black">#{generalUtils.format(mess.getColumnObject(5))}</p>
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <span class="float-end date" style="margin-top:12px;"><small
-                                                                style="font-size: 10px; color: black; ">#{mess.getColumnObject(5)}</small></span>
-
-                                                    </div>
+                                                   
 
                                                 </div>
                                             </h:panelGroup>
@@ -98,13 +95,9 @@
                                                 <div>
                                                     <div class="row float-right"
                                                          style="margin-top:10px; width: 50%; background-color: rgba(217, 218, 219, 0.664); border-radius: 20px; padding: 7px;">
-                                                        <div class="col-md-8">
-                                                            <span>#{mess.getColumnObject(4)}</span>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <span class="float-end date" style="margin-top:12px;"><small
-                                                                    style="font-size: 10px; color: black; ">26-05-2021</small></span>
-
+                                                        <div class="col-md-12">
+                                                            <p>#{mess.getColumnObject(4)}</p>
+                                                            <p class="float-end date text-xs text-black">#{generalUtils.format(mess.getColumnObject(5))}</p>
                                                         </div>
 
                                                     </div>

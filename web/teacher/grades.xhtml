@@ -42,7 +42,7 @@
                                     <tr class="text-gray-600 p-3 border-b border-gray-600">
                                         <td class="p-3">#{grade.getColumnObject(2)}</td>
                                         <td class="p-3">#{grade.getColumnObject(3)}</td>
-                                        <td class="p-3">#{grade.getColumnObject(4)}</td>
+                                        <td class="p-3">#{generalUtils.format(grade.getColumnObject(4))}</td>
                                         <td class="p-3">
 
                                             <input type="text" value="#{grade.getColumnObject(5)}" jsf:disabled="#{gradesBean.action == 'view'}"
