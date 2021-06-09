@@ -57,9 +57,9 @@ public class TeacherFilter implements Filter {
         }
         SessionData sessionData = (SessionData) session.getAttribute("sessionData");
         if (sessionData == null || sessionData.getUser() == null) {
-            //resp.sendRedirect(loginURL);
+            resp.sendRedirect(loginURL);
         } else if (!sessionData.getUser().type.equals("teacher")) {
-            //resp.sendRedirect(errorURL);
+           resp.sendRedirect(errorURL);
         }
         chain.doFilter(request, response);
     }

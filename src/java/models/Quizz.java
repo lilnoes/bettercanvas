@@ -55,13 +55,10 @@ public class Quizz {
         quizzes = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-<<<<<<< HEAD
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz where courseID = ? "); 
-            stmt.setInt(1, 1);
-=======
+
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz where courseID = ?");
             stmt.setInt(1, sessionData.currentCourse);
->>>>>>> 2847b7248f4c85d7aaa8a90f9c06d734ae23fe98
+
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();

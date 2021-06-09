@@ -57,9 +57,9 @@ public class TeacherBean implements Serializable {
         currentCourse = Course.fetchById(courseID);
     }
 
-    /*public void setCourses() {
+    public void setCourses() {
         courses = Course.fetchByTeacher(session.getUser().userID);
-    }*/
+    }
 
     public void setAnnouncements(List<Row> announcements) {
         this.announcements = announcements;
@@ -106,7 +106,7 @@ public class TeacherBean implements Serializable {
         if (courses != null) {
             return courses;
         }
-        //setCourses();
+        setCourses();
         return courses;
     }
 
@@ -159,7 +159,7 @@ public class TeacherBean implements Serializable {
             setCurrentCourse(session.currentCourse);
         }
         System.out.println("starting view");
-        //setCourses();
+        setCourses();
         setStudents();
         setAllAnnouncements();
         return null;
