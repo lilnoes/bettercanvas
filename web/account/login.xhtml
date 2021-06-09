@@ -24,14 +24,14 @@
                     <div class="text-red-700">
                         <label for="email" class="block text-white font-bold">Email
                         </label>
-                        <h:inputText required="true" class="w-full h-9 text-xl text-black" id="email"
+                        <h:inputText required="true" class="w-[98%] h-9 text-xl text-black" id="email"
                                      value="#{userData.email}" requiredMessage="Email is required"/>
                         <h:message for="email" class="text-white text-sm relative top-[-5px]" />
                     </div>
 
                     <div class="text-red-700">
                         <h:outputLabel for="password" class="block text-white font-bold" value="Password" />
-                        <h:inputSecret required="true" class="w-full h-9 text-xl text-black" id="password"
+                        <h:inputSecret required="true" class="w-[98%] h-9 text-xl text-black" id="password"
                                        value="#{userData.newPassword}" requiredMessage="Password is required"/>
                         <h:message for="password" class="text-white text-sm relative top-[-5px]" />
                     </div>

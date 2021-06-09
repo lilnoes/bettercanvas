@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 input{
-    @apply focus:outline-none rounded-lg px-2;
+    @apply focus:outline-none rounded-lg;
     border: none;
 
 }
