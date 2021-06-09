@@ -53,13 +53,15 @@ public class Quizz {
         quizzes = new ArrayList<>();
         try {
             CachedRowSetImpl crs = new CachedRowSetImpl();
-            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz where courseID = ?");
+            PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select * from quizz where courseID = ? "); 
             stmt.setInt(1, 1);
             crs.populate(stmt.executeQuery());
             stmt.close();
             stmt.getConnection().close();
             Collection<Row> rows = (Collection<Row>) crs.toCollection();
             quizzes.addAll(rows);
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
