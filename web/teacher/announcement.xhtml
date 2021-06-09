@@ -30,7 +30,7 @@
                     <h:outputLabel for="title" value="Content" class="block" />
                     <h:inputTextarea value="#{announcementBean.content}" class="block" />
                     <h:commandButton value="Create" class="bg-green-600 text-white p-2 rounded-lg">
-                        <f:ajax listener="#{announcementBean.create}" execute="@form"
+                        <f:ajax listener="#{announcementBean.create}" execute="@form" render=":ann1"
                             onevent="function(evt) {hideElementAjax(evt, 'newannouncement')}" />
                     </h:commandButton>
                     <button type="button" class="bg-red-600 text-white p-2 rounded-lg"
@@ -40,6 +40,7 @@
             <div class="container-fluid row">
                 <div class="col-md-9">
                     <div class="ancmt">
+                        <h:panelGroup id="ann1">
                         <ui:repeat value="#{announcementBean.announcements}" var="announcement">
                             <div class=" ">
                                 <h4>#{announcement.getColumnObject(1)}</h4>
@@ -48,6 +49,7 @@
                                 <hr />
                             </div>
                         </ui:repeat>
+                        </h:panelGroup>
 <!--                        <div class=" ">
                             <h4>Bilgisayar mughendisligine giris</h4>
                             <p>summary is going to be here </p>

@@ -141,7 +141,7 @@ public class GradesBean implements Serializable {
             CachedRowSetImpl crs = new CachedRowSetImpl();
             PreparedStatement stmt = DatabaseUtils.getPreparedStatement("select u.userid, u.SURNAME || u.name, q.QUIZZNAME, q.STARTDATE, g.GRADES, g.RANGE from grades as g\n"
                     + "join quizz as q on g.QUIZID=q.ID\n"
-                    + "join users as u on u.USERID=g.ID\n"
+                    + "join users as u on u.USERID=g.userID\n"
                     + "where g.QUIZID=? and g.COURSEID=?");
             stmt.setInt(1, currentQuiz);
             stmt.setInt(2, sessionData.currentCourse); //courseID
