@@ -28,7 +28,7 @@
                     <h:inputText value="#{announcementBean.title}" class="block" />
 
                     <h:outputLabel for="title" value="Content" class="block" />
-                    <h:inputTextarea value="#{announcementBean.content}" class="block" />
+                    <h:inputTextarea value="#{announcementBean.content}" class="block w-[300px] h-[300px]" />
                     <h:commandButton value="Create" class="bg-green-600 text-white p-2 rounded-lg">
                         <f:ajax listener="#{announcementBean.create}" execute="@form" render=":ann1"
                             onevent="function(evt) {hideElementAjax(evt, 'newannouncement')}" />
